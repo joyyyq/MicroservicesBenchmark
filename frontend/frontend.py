@@ -1,13 +1,12 @@
 import time
 
-import redis
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
-    return 'Hello World! I have been seen times.\n'
+def view():
+    return render_template('index.html')
 
 @app.route('/test')
 def test():
