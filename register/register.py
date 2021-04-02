@@ -5,7 +5,7 @@ import grpc
 import studentRegister_pb2_grpc
 from google.protobuf.json_format import MessageToJson
 import bcrypt
-client = pymongo.MongoClient("localhost",27017)
+client = pymongo.MongoClient("mongo",27017)
 db = client.enrollment
 from studentRegister_pb2 import (
     Request,
