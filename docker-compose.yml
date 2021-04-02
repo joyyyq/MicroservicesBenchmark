@@ -1,6 +1,31 @@
 version: "3.9"
 services:
   frontend:
-    build: .
+    build: ./frontend
     ports:
       - "5000:5000"
+    restart: always
+
+  backend:
+    container_name: backend
+    build: ./backend
+    ports:
+      - "5001:5001"
+    restart: always
+
+  register:
+    container_name: register
+    build: ./register
+    ports:
+      - "5002:5002"
+    restart: always
+
+  mongodb-student:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - ./data:/data/db
+      
