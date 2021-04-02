@@ -16,6 +16,8 @@ class regiaterService(
 ):
     def register(self, request, context):
         if( db.studentInfo.count_documents({"userName":request.userName}) > 0 ):
+            Response(success=False)
+            print("failed")
             context.abort(grpc.StatusCode.ALREADY_EXISTS, "user already exist")
         #request = MessageToJson(request)
         salt = bcrypt.gensalt()
@@ -29,7 +31,7 @@ def serve():
     studentRegister_pb2_grpc. add_registerServicer_to_server(
         regiaterService(), server
     )
-    server.add_insecure_port("[::]:50052")
+    server.add_insecure_port("0.0.0.0:5000")
     server.start()
     server.wait_for_termination()
 
