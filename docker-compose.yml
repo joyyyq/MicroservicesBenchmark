@@ -20,6 +20,20 @@ services:
       - "5002:5002"
     restart: always
 
+  proxy:
+      image: envoyproxy/envoy-alpine:v1.14.1
+      build: ./envoy
+      environment:
+        NODE_ENV: development
+        loglevel: debug
+      ports:
+        - 8080:8080
+        - 9901:9901
+      networks:
+        - envoymesh
+      volumes:
+        - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml
+
   mongodb-student:
     container_name: mongo
     image: mongo
@@ -28,4 +42,10 @@ services:
     restart: always
     volumes:
       - ./data:/data/db
+
+
+networks:
+  envoymesh: {}
+
+
       
