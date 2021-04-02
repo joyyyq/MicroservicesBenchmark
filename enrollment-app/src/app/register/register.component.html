@@ -15,23 +15,25 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="password">firstName</label>
-        <input type="password" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Enter your first name</div>
+        <label for="first_name">firstName</label>
+        <input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted }" />
+        <div *ngIf="submitted" class="invalid-feedback">
+            <div>Enter your first name</div>
         </div>
     </div>
     <div class="form-group">
-        <label for="password">lastName</label>
-        <input type="password" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Enter your last name</div>
+        <label for="last_name">lastName</label>
+        <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted }" />
+        <div *ngIf="submitted" class="invalid-feedback">
+            <div>Enter your last name</div>
         </div>
     </div>
     <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">
+        <button type="submit" (click)="onSubmit()" [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            <a routerLink="/register" class="btn btn-link">Register</a>
+            <a  class="btn btn-link">Register</a>
         </button>
     </div>
 </form>
+
+
