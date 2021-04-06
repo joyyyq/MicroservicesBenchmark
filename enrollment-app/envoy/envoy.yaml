@@ -54,7 +54,7 @@ static_resources:
             address:
               socket_address:
                 address: 0.0.0.0
-                port_value: 5000
+                port_value: 5002
     #outlier_detection:      # where amazing happened 😁
     #        consecutive_5xx: 1
     #load_assignment:
