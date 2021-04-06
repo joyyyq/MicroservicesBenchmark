@@ -31,7 +31,7 @@ def serve():
     studentRegister_pb2_grpc. add_registerServicer_to_server(
         registerService(), server
     )
-    server.add_insecure_port("0.0.0.0:5000")
+    server.add_insecure_port("0.0.0.0:5002")
     server.start()
     server.wait_for_termination()
 
