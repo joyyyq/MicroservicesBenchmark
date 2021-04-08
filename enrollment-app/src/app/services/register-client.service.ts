@@ -23,7 +23,7 @@ export class RegisterClientService {
   private client: registerClient;
   //constructor(public service: registerClient) { 'http://localhost:8080' }
   constructor() {this.client = new registerClient(
-    'http://localhost:8080');}
+    'http://localhost:8081');}
   
   static addMessage(message: string, cssClass: string) {
     //$('#first').after($('<div/>').addClass('row').append($('<h2/>').append(

@@ -10,8 +10,11 @@ services:
       NODE_ENV: development
       loglevel: debug
     ports:
-      - 8080:8080
-      - 9901:9901
+      - 8081:8081
+      - 9900:9900
+    extra_hosts: # <---- here
+      - localhost:192.168.205.128
+      - or-vitualhost.local:192.168.205.128
     networks:
       - envoymesh
     volumes:
