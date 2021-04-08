@@ -75,6 +75,6 @@ export class RegisterComponent implements OnInit {
     //             this.alertService.error(error);
     //             this.loading = false;
     //         });
-    this.router.navigate(['/profile']);
+    this.router.navigate(['.']);
   }
 }
