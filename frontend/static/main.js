@@ -138,14 +138,17 @@ const routes = [
         path: 'sign-in',
         loadChildren: () => Promise.all(/*! import() | sign-in-sign-in-module */[__webpack_require__.e("default~dashboard-dashboard-module~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("default~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("sign-in-sign-in-module")]).then(__webpack_require__.bind(null, /*! ./sign-in/sign-in.module */ "FuQ6")).then(m => m.SignInModule)
     },
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+    {
+        path: '',
+        redirectTo: 'sign-up',
+        pathMatch: 'full'
+    }
 ];
 class AppRoutingModule {
 }
 AppRoutingModule.ɵfac = function AppRoutingModule_Factory(t) { return new (t || AppRoutingModule)(); };
 AppRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppRoutingModule });
-AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
+AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(routes, { useHash: true, onSameUrlNavigation: 'reload' })], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
 
 

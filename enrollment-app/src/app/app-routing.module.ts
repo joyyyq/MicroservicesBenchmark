@@ -14,13 +14,16 @@ const routes: Routes = [
     path: 'sign-in', 
     loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInModule) 
   },  
-  // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  {
+    path: '', 
+    redirectTo: 'sign-up', 
+    pathMatch: 'full'
+  }
 ];
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true, onSameUrlNavigation: 'reload'}, )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
