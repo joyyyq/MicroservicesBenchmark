@@ -16,9 +16,9 @@ class registerService(
 ):
     def register(self, request, context):
         if( db.studentInfo.count_documents({"userName":request.userName}) > 0 ):
-            Response(success=False)
             print("failed")
-            context.abort(grpc.StatusCode.ALREADY_EXISTS, "user already exist")
+            #context.abort(grpc.StatusCode.ALREADY_EXISTS, "user already exist")
+            return Response(success=False)
         #request = MessageToJson(request)
         salt = bcrypt.gensalt()
         hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)

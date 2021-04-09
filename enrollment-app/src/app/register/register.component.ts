@@ -44,10 +44,10 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     
     var newProfile: profile = {
-      username: 'Tamzid',
-      password: 'testpass',
-      firstname: 'xccxx',
-      lastname: 'xcxccx'
+      username: '',
+      password: '',
+      firstname: '',
+      lastname: ''
     }
     newProfile.username = this.registerForm.get('username')!.value;
     newProfile.password = this.registerForm.get('password')!.value;
@@ -63,18 +63,10 @@ export class RegisterComponent implements OnInit {
     }
 
     //this.loading = true;
-    this.client.register(newProfile);
+    let response = this.client.register(newProfile);
+    console.log(response)
     this.submitted = true;
-    //this.authenticationService.login(this.f.username.value, this.f.password.value)
-    //    .pipe(first())
-         //.subscribe(
-          //   data => {
-         //        this.router.navigate([this.returnUrl]);
-         //    },
-         //    error => {
-    //             this.alertService.error(error);
-    //             this.loading = false;
-    //         });
-    this.router.navigate(['.']);
+    if (response == false) this.router.navigate(['/register']); // user already exists
+    else this.router.navigate(['.']);
   }
 }

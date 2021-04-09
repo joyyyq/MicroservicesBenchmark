@@ -21,7 +21,6 @@ type profile = {
 })
 export class RegisterClientService {
   private client: registerClient;
-  //constructor(public service: registerClient) { 'http://localhost:8080' }
   constructor() {this.client = new registerClient(
     'http://localhost:8081');}
   
@@ -39,6 +38,7 @@ export class RegisterClientService {
     request.setPassword(newProfile.password);
     request.setFirstname(newProfile.firstname);
     request.setLastname(newProfile.lastname);
+    let result : boolean = true;
     this.client.register(
       request,{'custom-header-1': 'value1'},
       ( err: grpcWeb.Error, response: Response) => {
@@ -47,34 +47,9 @@ export class RegisterClientService {
           (
                 'Error code: ' + err.code + ' "' + err.message + '"');
         } 
+        result = response.getSuccess();
       }
     )
+    return result;
   }
-  /*
-  static ERROR(message: string) {
-    this.addMessage(message, 'label-primary pull-left');
-  }
-  register(newProfile : profile ) {
-    var request = new Request; 
-    request.setUsername(newProfile.username);
-    request.setPassword(newProfile.password);
-    request.setFirstname(newProfile.firstname);
-    request.setLastname(newProfile.lastname);
-    const call = this.service.register(
-      request,{'custom-header-1': 'value1'},
-      ( err: grpcWeb.Error, response: Response) => {
-        if (err) {
-          RegisterClientService.ERROR
-          (
-                'Error code: ' + err.code + ' "' + err.message + '"');
-        } 
-      }
-    );
-    call.on('status', (status: grpcWeb.Status) => {
-      if (status.metadata) {
-        console.log('Received metadata');
-        console.log(status.metadata);
-      }
-    });
-  }*/
 }
