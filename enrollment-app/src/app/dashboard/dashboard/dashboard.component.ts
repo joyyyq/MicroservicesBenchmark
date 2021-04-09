@@ -1,6 +1,7 @@
-import {SelectionModel} from '@angular/cdk/collections';
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
+import {SelectionModel} from '@angular/cdk/collections';
 
 export interface PeriodicElement {
   position: number;
@@ -18,11 +19,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class ProfileComponent{
+export class DashboardComponent {
   // displayedColumns: string[] = ['Class', 'Description', 'Days/Times', 'Room', 'Instructor','Units','Status'];
   displayedColumns: string[] = ['select', 'position', 'id', 'name', 'units', 'status'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);

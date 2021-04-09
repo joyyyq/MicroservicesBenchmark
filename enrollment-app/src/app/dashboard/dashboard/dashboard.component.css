@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+}
+
+button {
+  position: absolute;
+  margin-top: 10px;
+  right:    0;
+}

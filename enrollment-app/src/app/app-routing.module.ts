@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: 'dashboard', 
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) 
+  },
+  {
+    path: 'sign-up', 
+    loadChildren: () => import('./sign-up/sign-up.module').then(m => m.SignUpModule) 
+  },
+  {
+    path: 'sign-in', 
+    loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInModule) 
+  },  
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegisterClientService } from '../services/register-client.service';
+import { RegisterClientService } from '../../services/register-client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 type profile =   {
@@ -10,11 +10,11 @@ type profile =   {
   lastname: string;
 }
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class SignUpComponent implements OnInit {
   registerForm: FormGroup; 
   loading = false;
   submitted = false;
