@@ -1,5 +1,6 @@
 version: "3.9"
 services:
+  
   proxy:
     image: envoyproxy/envoy-alpine:v1.14.1
     environment:
@@ -12,6 +13,7 @@ services:
       - envoymesh
     volumes:
       - ./enrollment-app/envoy/envoy.yaml:/etc/envoy/envoy.yaml
+      
   frontend:
     build: ./frontend
     ports:
@@ -20,18 +22,11 @@ services:
       - envoymesh
     restart: always
 
-  #backend:
-  #  container_name: backend
-  #  build: ./backend
-  #  ports:
-  #    - "5001:5001"
-  #  restart: always
-
   register:
     container_name: register
     build: ./register
     ports:
-      - "5002:5002"
+      - "5001:5001"
     networks:
       - envoymesh
     restart: always

@@ -59,7 +59,7 @@ static_resources:
               socket_address:
                 ipv4_compat: true
                 address: register
-                port_value: 5002
+                port_value: 5001
     #outlier_detection:     
     #        consecutive_5xx: 1
     #load_assignment:
