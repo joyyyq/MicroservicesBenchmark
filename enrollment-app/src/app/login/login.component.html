@@ -15,11 +15,11 @@
         </div>
     </div>
     <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary" routerLink="/login">
+        <button [disabled]="loading" type="submit" class="btn btn-primary" >
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Login
         </button>
-        <button [disabled]="loading" class="btn btn-primary" routerLink="/register">
+        <button [disabled]="loading" class="btn btn-primary" type="button" routerLink="/register">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Register
         </button>

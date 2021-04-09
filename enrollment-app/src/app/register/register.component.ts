@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterClientService } from '../services/register-client.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 type profile =   {
   username: string;
   password: string;
@@ -17,7 +19,12 @@ export class RegisterComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl?: string;
-  constructor(private formBuilder: FormBuilder,private client: RegisterClientService ) { 
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private client: RegisterClientService,
+    private router: Router
+  ) { 
     this.registerForm = this.formBuilder.group({
         username: ['', Validators.required],
         first_name: ['', Validators.required],
@@ -26,8 +33,9 @@ export class RegisterComponent implements OnInit {
     });
     console.log("construct");
   }
-// convenience getter for easy access to form fields
-get f() { return this.registerForm!.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.registerForm!.controls; }
+
   ngOnInit(): void {
     console.log("success");
   }
@@ -46,20 +54,19 @@ get f() { return this.registerForm!.controls; }
     newProfile.firstname = this.registerForm.get('first_name')!.value;
     newProfile.lastname = this.registerForm.get('last_name')!.value;
 
-
     // reset alerts on submit
     // this.alertService.clear();
 
     // stop here if form is invalid
-   // if (this.registerForm!.invalid) {
-    //    return;
-    //}
+    if (this.registerForm!.invalid) {
+        return;
+    }
 
-     //this.loading = true;
-     this.client.register(newProfile);
-     this.submitted = true;
-     //this.authenticationService.login(this.f.username.value, this.f.password.value)
-     //    .pipe(first())
+    //this.loading = true;
+    this.client.register(newProfile);
+    this.submitted = true;
+    //this.authenticationService.login(this.f.username.value, this.f.password.value)
+    //    .pipe(first())
          //.subscribe(
           //   data => {
          //        this.router.navigate([this.returnUrl]);
@@ -68,5 +75,6 @@ get f() { return this.registerForm!.controls; }
     //             this.alertService.error(error);
     //             this.loading = false;
     //         });
+    this.router.navigate(['.']);
   }
 }

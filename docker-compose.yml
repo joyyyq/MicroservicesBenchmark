@@ -1,38 +1,41 @@
 version: "3.9"
+#version: "3.3"
 services:
+  proxy:
+    image: envoyproxy/envoy-alpine:v1.14.1
+    environment:
+      NODE_ENV: development
+      loglevel: debug
+    ports:
+      - 8081:8081
+      - 9900:9900
+    networks:
+      - envoymesh
+    volumes:
+      - ./enrollment-app/envoy/envoy.yaml:/etc/envoy/envoy.yaml
   frontend:
     build: ./frontend
     ports:
       - "5000:5000"
+    networks:
+      - envoymesh
     restart: always
 
-  backend:
-    container_name: backend
-    build: ./backend
-    ports:
-      - "5001:5001"
-    restart: always
+  #backend:
+  #  container_name: backend
+  #  build: ./backend
+  #  ports:
+  #    - "5001:5001"
+  #  restart: always
 
   register:
     container_name: register
     build: ./register
     ports:
       - "5002:5002"
+    networks:
+      - envoymesh
     restart: always
-
-  proxy:
-      image: envoyproxy/envoy-alpine:v1.14.1
-      build: ./envoy
-      environment:
-        NODE_ENV: development
-        loglevel: debug
-      ports:
-        - 8080:8080
-        - 9901:9901
-      networks:
-        - envoymesh
-      volumes:
-        - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml
 
   mongodb-student:
     container_name: mongo
@@ -40,12 +43,10 @@ services:
     ports:
       - "27017:27017"
     restart: always
+    networks:
+      - envoymesh
     volumes:
       - ./data:/data/db
-
-
 networks:
   envoymesh: {}
-
-
       

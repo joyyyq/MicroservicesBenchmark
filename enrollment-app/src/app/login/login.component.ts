@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-
-// import { AlertService, AuthenticationService } from '@/_services';
 
 @Component({ 
     selector: 'app-login',
@@ -19,7 +16,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        private router: Router,
+        private router: Router
         // private authenticationService: AuthenticationService,
         // private alertService: AlertService
     ) {
@@ -33,6 +30,9 @@ export class LoginComponent implements OnInit {
       });
     }
 
+    // convenience getter for easy access to form fields
+    get f() { return this.loginForm!.controls; }
+
     ngOnInit() {
         // this.loginForm = this.formBuilder.group({
         //     username: ['', Validators.required],
@@ -44,12 +44,9 @@ export class LoginComponent implements OnInit {
         // this.router.navigate(['/profile']);
     }
 
-    // convenience getter for easy access to form fields
-    get f() { return this.loginForm!.controls; }
-
-    login(){
-        this.router.navigate(['/profile']);
-    }
+    // login(){
+    //     this.router.navigate(['/profile']);
+    // }
 
     onSubmit() {
         this.submitted = true;
@@ -62,6 +59,7 @@ export class LoginComponent implements OnInit {
             return;
         }
 
+        this.router.navigate(['/profile']);
         // this.loading = true;
         // this.authenticationService.login(this.f.username.value, this.f.password.value)
         //     .pipe(first())
