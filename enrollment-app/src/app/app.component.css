@@ -12,10 +12,10 @@ p {
   }
   
 .header {
-    height: 60px;
+    height: 52px;
     display: flex;
     align-items: center;
-    background-color: red;
+    background-color: #b31b1b;
     color: white;
     font-weight: 600;
 }

@@ -1,6 +1,5 @@
 //import { element } from 'protractor';
 import * as grpcWeb from 'grpc-web';
-import { credentials } from "grpc"
 //import * as $ from 'jquery';
 // Option 2: import_style=typescript
 import {registerClient} from '../../../proto/StudentRegisterServiceClientPb';
