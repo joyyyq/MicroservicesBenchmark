@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  loginForm: FormGroup;
+  signInForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl?: string;
@@ -17,59 +17,25 @@ export class SignInComponent implements OnInit {
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router
-      // private authenticationService: AuthenticationService,
-      // private alertService: AlertService
   ) {
-      // redirect to home if already logged in
-      // if (this.authenticationService.currentUserValue) {
-      //     this.router.navigate(['/']);
-      // }
-      this.loginForm = this.formBuilder.group({
+      this.signInForm = this.formBuilder.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
     });
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm!.controls; }
+  get f() { return this.signInForm!.controls; }
 
   ngOnInit() {
-      // this.loginForm = this.formBuilder.group({
-      //     username: ['', Validators.required],
-      //     password: ['', Validators.required]
-      // });
-
-      // get return url from route parameters or default to '/'
-      // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-      // this.router.navigate(['/profile']);
   }
-
-  // login(){
-  //     this.router.navigate(['/profile']);
-  // }
 
   onSubmit() {
       this.submitted = true;
-
-      // reset alerts on submit
-      // this.alertService.clear();
-
       // stop here if form is invalid
-      if (this.loginForm!.invalid) {
+      if (this.signInForm!.invalid) {
           return;
       }
-
       this.router.navigate(['/dashboard']);
-      // this.loading = true;
-      // this.authenticationService.login(this.f.username.value, this.f.password.value)
-      //     .pipe(first())
-      //     .subscribe(
-      //         data => {
-      //             this.router.navigate([this.returnUrl]);
-      //         },
-      //         error => {
-      //             this.alertService.error(error);
-      //             this.loading = false;
-      //         });
   }
 }

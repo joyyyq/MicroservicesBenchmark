@@ -15,7 +15,7 @@ type profile =   {
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  registerForm: FormGroup; 
+  signUpForm: FormGroup; 
   loading = false;
   submitted = false;
   returnUrl?: string;
@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
     private client: RegisterClientService,
     private router: Router
   ) { 
-    this.registerForm = this.formBuilder.group({
+    this.signUpForm = this.formBuilder.group({
         username: ['', Validators.required],
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
     console.log("construct");
   }
   // convenience getter for easy access to form fields
-  get f() { return this.registerForm!.controls; }
+  get f() { return this.signUpForm!.controls; }
 
   ngOnInit(): void {
     console.log("success");
@@ -49,16 +49,16 @@ export class SignUpComponent implements OnInit {
       firstname: '',
       lastname: ''
     }
-    newProfile.username = this.registerForm.get('username')!.value;
-    newProfile.password = this.registerForm.get('password')!.value;
-    newProfile.firstname = this.registerForm.get('first_name')!.value;
-    newProfile.lastname = this.registerForm.get('last_name')!.value;
+    newProfile.username = this.signUpForm.get('username')!.value;
+    newProfile.password = this.signUpForm.get('password')!.value;
+    newProfile.firstname = this.signUpForm.get('first_name')!.value;
+    newProfile.lastname = this.signUpForm.get('last_name')!.value;
 
     // reset alerts on submit
     // this.alertService.clear();
 
     // stop here if form is invalid
-    if (this.registerForm!.invalid) {
+    if (this.signUpForm!.invalid) {
         return;
     }
 
