@@ -1,6 +1,4 @@
-//import { element } from 'protractor';
 import * as grpcWeb from 'grpc-web';
-//import * as $ from 'jquery';
 // Option 2: import_style=typescript
 import {registerClient} from '../../../proto/StudentRegisterServiceClientPb';
 
@@ -20,8 +18,7 @@ type profile = {
 })
 export class RegisterClientService {
   private client: registerClient;
-  constructor() {this.client = new registerClient(
-    'http://localhost:8081');}
+  constructor() {this.client = new registerClient('http://localhost:8081');}
   
   static addMessage(message: string, cssClass: string) {
     //$('#first').after($('<div/>').addClass('row').append($('<h2/>').append(
@@ -42,9 +39,7 @@ export class RegisterClientService {
       request,{'custom-header-1': 'value1'},
       ( err: grpcWeb.Error, response: Response) => {
         if (err) {
-          RegisterClientService.ERROR
-          (
-                'Error code: ' + err.code + ' "' + err.message + '"');
+          RegisterClientService.ERROR('Error code: ' + err.code + ' "' + err.message + '"');
         } 
         result = response.getSuccess();
       }
