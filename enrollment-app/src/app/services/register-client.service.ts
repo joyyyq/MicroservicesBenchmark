@@ -27,8 +27,13 @@ export class RegisterClientService {
   static ERROR(message: string) {
       this.addMessage(message, 'label-primary pull-left');
   }
-  register(newProfile : profile ) {
-    console.log("service")
+
+  checkUsername(){
+    return "hq38";
+  }
+
+  register(newProfile : profile) {
+    console.log("register service")
     var request = new Request; 
     request.setUsername(newProfile.username);
     request.setPassword(newProfile.password);
