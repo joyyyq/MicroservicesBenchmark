@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AsyncValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AsyncValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { RegisterClientService } from '../../services/register-client.service';
 import { Router } from '@angular/router';
-// import { throwError } from 'rxjs';
 
-type profile =   {
-  username: string;
-  password: string;
-  firstname: string;
-  lastname: string;
-}
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -27,11 +20,10 @@ export class SignUpComponent implements OnInit {
     private router: Router
   ) { 
     this.signUpForm = this.formBuilder.group({
-        // username: ['', Validators.required],
-        username: ['', [Validators.required], [this.validateUsername()]],
-        first_name: ['', Validators.required],
-        last_name: ['', Validators.required],
-        password: ['', Validators.required]
+      username: ['', [Validators.required], [this.validateUsername()]],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      password: ['', Validators.required]
     });
     console.log("construct");
   }
@@ -74,7 +66,7 @@ export class SignUpComponent implements OnInit {
         return;
     }
 
-    //this.loading = true;
+    // this.loading = true;
     var fusername = this.signUpForm.get('username')!.value;
     var fpwd = this.signUpForm.get('password')!.value;
     var ffirstname = this.signUpForm.get('first_name')!.value;
@@ -83,7 +75,7 @@ export class SignUpComponent implements OnInit {
     let response = this.client.register(fusername, fpwd, ffirstname, flastname);
     console.log(response)
     this.submitted = true;
-    if (response == false) { // shouldn't have this error since have already addressed usernameTaken error when user enters a username
+    if (response == false) { // shouldn't have this error since already addressed usernameTaken error when user enters a username
       this.router.navigate(['/register']); 
     }
     else this.router.navigate(['.']);
