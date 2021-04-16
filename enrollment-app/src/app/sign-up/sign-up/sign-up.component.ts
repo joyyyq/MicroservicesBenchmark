@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AsyncValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AsyncValidatorFn, ValidationErrors, AbstractControl, Form } from '@angular/forms';
 import { RegisterClientService } from '../../services/register-client.service';
 import { Router } from '@angular/router';
 
@@ -50,13 +50,25 @@ export class SignUpComponent implements OnInit {
       }
     }
   }
+
+  // used to avoid unnecessary invalids of the username form control
+  // since we have customed validators that can return null. 
+  cleanErrors() {
+    if (!this.showMessage) {
+      if (this.f.username.errors && !this.f.username.errors!.required) {
+        this.f.username.setErrors(null);
+      }
+    }
+  }
+
   ngOnInit(): void {
-    console.log("onInit");
-    console.log(this.f);
+    // console.log("onInit");
+    // console.log(this.f);
   }
 
   onSubmit() {
-    console.log("onSubmit");
+    // console.log(this.f);
+    // console.log("onSubmit");
     this.submitted = true;
 
     // stop here if form is invalid

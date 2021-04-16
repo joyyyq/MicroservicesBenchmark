@@ -37,6 +37,12 @@ p {
   place-content: space-between;
 }
 
+.main {
+  padding-left: 1em;
+  padding-right: 1em;
+
+}
+
 .navbar-item {
 
 }
