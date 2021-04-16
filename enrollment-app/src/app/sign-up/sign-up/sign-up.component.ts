@@ -27,7 +27,8 @@ export class SignUpComponent implements OnInit {
     private router: Router
   ) { 
     this.signUpForm = this.formBuilder.group({
-        username: ['', [Validators.required, this.validateUsername()]],
+        // username: ['', Validators.required],
+        username: ['', [Validators.required], [this.validateUsername()]],
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
         password: ['', Validators.required]
@@ -37,80 +38,49 @@ export class SignUpComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.signUpForm!.controls; }
 
-  checkUsername(event: any) {
-    console.log(event);
-    var newProfile: profile = {
-      username: '',
-      password: '',
-      firstname: '',
-      lastname: ''
-    }
-    newProfile.username = event.target.value; 
-    console.log(event.target.value)
-    let response = this.client.checkUsername(newProfile);
-    console.log(event.target.value)
-    console.log(response)
-    this.showMessage = !response; 
-  }
-  private validateUsername(): ValidatorFn {
-    var newProfile: profile = {
-      username: '',
-      password: '',
-      firstname: '',
-      lastname: ''
-    }
-    
-    return (control: AbstractControl): ValidationErrors | null => {
-      newProfile.username = control.value;
-
-      let response = this.client.checkUsername(newProfile);
+  public validateUsername(): AsyncValidatorFn {
+    return async (control: AbstractControl): Promise<ValidationErrors | null> => {
+      console.log(control.value);
+      if(control.value == "")
+        return null;
+      let response = await this.client.checkUsername(control.value);
       console.log(response);
       
       if(response){
         console.log("response okay");
+        this.showMessage = false;
         return null;
       }
       else{
         console.log("response taken");
+        this.showMessage = true;
         return {'usernameTaken': true};
       }
-    //   if (this.client.checkUsername() == control.value)
-    //     return {'usernameTaken': true};
-    //   else 
-    //     return null;
     }
   }
-
   ngOnInit(): void {
-    console.log("success");
+    console.log("onInit");
     console.log(this.f);
   }
 
   onSubmit() {
-    console.log("success 2");
+    console.log("onSubmit");
     this.submitted = true;
-    
-    var newProfile: profile = {
-      username: '',
-      password: '',
-      firstname: '',
-      lastname: ''
-    }
-    newProfile.username = this.signUpForm.get('username')!.value;
-    newProfile.password = this.signUpForm.get('password')!.value;
-    newProfile.firstname = this.signUpForm.get('first_name')!.value;
-    newProfile.lastname = this.signUpForm.get('last_name')!.value;
-
-    // reset alerts on submit
-    // this.alertService.clear();
 
     // stop here if form is invalid
-    if (this.signUpForm!.invalid) {
+    if (! this.signUpForm.valid) {
+        console.log(this.signUpForm.hasError("usernameTaken"))
+        console.log("form invalid!")
         return;
     }
 
     //this.loading = true;
-    let response = this.client.register(newProfile);
+    var fusername = this.signUpForm.get('username')!.value;
+    var fpwd = this.signUpForm.get('password')!.value;
+    var ffirstname = this.signUpForm.get('first_name')!.value;
+    var flastname = this.signUpForm.get('last_name')!.value;
+    
+    let response = this.client.register(fusername, fpwd, ffirstname, flastname);
     console.log(response)
     this.submitted = true;
     if (response == false) { // shouldn't have this error since have already addressed usernameTaken error when user enters a username

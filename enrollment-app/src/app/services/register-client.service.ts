@@ -6,6 +6,8 @@ import {Request, Response} from '../../../proto/studentRegister_pb';
 
 import { Injectable } from '@angular/core';
 
+const wait=(ms: number)=>new Promise(resolve => setTimeout(resolve, ms))
+
 type profile = {
   username: string;
   password: string;
@@ -33,44 +35,36 @@ export class RegisterClientService {
     this.validationResult = status; 
   }
 
-  checkUsername(newProfile : profile){
-    console.log("check username");
+  async checkUsername(name : string){
+    console.log("check username " + name);
     var request = new Request; 
-    request.setUsername(newProfile.username);
-    var result : boolean = true;
-    // this.validationResult = true;
+    request.setUsername(name);
     var response = this.client.validateUsername(request,{'custom-header-1': 'value1'})
-    response.then((res) => {
-      console.log(res); // 123
-      result = res.getSuccess();
-      console.log("cresult " + result);
+  
+    await response.then((res) => {
+      var result = res.getSuccess();
       this.updateResult(result); 
-      return this.validationResult;
+      console.log("cresult " + this.validationResult);
     })
-    // this.client.validateUsername(
-    //   request,{'custom-header-1': 'value1'},
-    //   ( err: grpcWeb.Error, response: Response) => {
-    //     if (err) {
-    //       RegisterClientService.ERROR('Error code: ' + err.code + ' "' + err.message + '"');
-    //     } 
-    //     result = response.getSuccess();
-    //     this.validationResult = response.getSuccess();
-    //     console.log("cresult " + result);
-    //     return result;
-    //   }
-    // )
+    
+    wait(4*1000).then(() => {
+      console.log("wresult " + this.validationResult);
+      return this.validationResult;
+    }).catch(() => {
+      console.log("Wait is over, callback")
+    });
+  
     console.log("ccresult " + this.validationResult);
-    // return result;
     return this.validationResult;
   }
 
-  register(newProfile : profile) {
+  register(username: string, password: string, firstname: string, lastname: string) {
     console.log("register service");
     var request = new Request; 
-    request.setUsername(newProfile.username);
-    request.setPassword(newProfile.password);
-    request.setFirstname(newProfile.firstname);
-    request.setLastname(newProfile.lastname);
+    request.setUsername(username);
+    request.setPassword(password);
+    request.setFirstname(firstname);
+    request.setLastname(lastname);
     let result : boolean = true;
     this.client.register(
       request,{'custom-header-1': 'value1'},
