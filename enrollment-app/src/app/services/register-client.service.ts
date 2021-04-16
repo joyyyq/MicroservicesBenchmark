@@ -17,6 +17,7 @@ type profile = {
   providedIn: 'root'
 })
 export class RegisterClientService {
+  private validationResult: boolean = false;
   private client: registerClient;
   constructor() {this.client = new registerClient('http://localhost:8081');}
   
@@ -28,12 +29,43 @@ export class RegisterClientService {
       this.addMessage(message, 'label-primary pull-left');
   }
 
-  checkUsername(){
-    return "hq38";
+  updateResult(status: boolean) {
+    this.validationResult = status; 
+  }
+
+  checkUsername(newProfile : profile){
+    console.log("check username");
+    var request = new Request; 
+    request.setUsername(newProfile.username);
+    var result : boolean = true;
+    // this.validationResult = true;
+    var response = this.client.validateUsername(request,{'custom-header-1': 'value1'})
+    response.then((res) => {
+      console.log(res); // 123
+      result = res.getSuccess();
+      console.log("cresult " + result);
+      this.updateResult(result); 
+      return this.validationResult;
+    })
+    // this.client.validateUsername(
+    //   request,{'custom-header-1': 'value1'},
+    //   ( err: grpcWeb.Error, response: Response) => {
+    //     if (err) {
+    //       RegisterClientService.ERROR('Error code: ' + err.code + ' "' + err.message + '"');
+    //     } 
+    //     result = response.getSuccess();
+    //     this.validationResult = response.getSuccess();
+    //     console.log("cresult " + result);
+    //     return result;
+    //   }
+    // )
+    console.log("ccresult " + this.validationResult);
+    // return result;
+    return this.validationResult;
   }
 
   register(newProfile : profile) {
-    console.log("register service")
+    console.log("register service");
     var request = new Request; 
     request.setUsername(newProfile.username);
     request.setPassword(newProfile.password);

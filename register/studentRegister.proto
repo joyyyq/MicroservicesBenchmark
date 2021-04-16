@@ -4,6 +4,7 @@ package register;
 service register {
     // CheckUser returns whether the username and password are correct
     rpc register(Request) returns (Response);
+    rpc validateUsername(Request) returns (Response);
   }
 
 message Request {

@@ -2,10 +2,10 @@
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <input (input)="checkUsername($event)" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
             <div *ngIf="f.username.errors.required">Username is required</div>
-            <div *ngIf="f.username.errors.usernameTaken">Oh no, this username is already taken!</div>
+            <div *ngIf="showMessage">Oh no, this username is already taken!</div>
         </div>
     </div>
     <div class="form-group">

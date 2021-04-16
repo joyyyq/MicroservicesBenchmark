@@ -19,6 +19,11 @@ class registerStub(object):
                 request_serializer=studentRegister__pb2.Request.SerializeToString,
                 response_deserializer=studentRegister__pb2.Response.FromString,
                 )
+        self.validateUsername = channel.unary_unary(
+                '/register.register/validateUsername',
+                request_serializer=studentRegister__pb2.Request.SerializeToString,
+                response_deserializer=studentRegister__pb2.Response.FromString,
+                )
 
 
 class registerServicer(object):
@@ -31,11 +36,22 @@ class registerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def validateUsername(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_registerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'register': grpc.unary_unary_rpc_method_handler(
                     servicer.register,
+                    request_deserializer=studentRegister__pb2.Request.FromString,
+                    response_serializer=studentRegister__pb2.Response.SerializeToString,
+            ),
+            'validateUsername': grpc.unary_unary_rpc_method_handler(
+                    servicer.validateUsername,
                     request_deserializer=studentRegister__pb2.Request.FromString,
                     response_serializer=studentRegister__pb2.Response.SerializeToString,
             ),
@@ -61,6 +77,23 @@ class register(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/register.register/register',
+            studentRegister__pb2.Request.SerializeToString,
+            studentRegister__pb2.Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def validateUsername(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/register.register/validateUsername',
             studentRegister__pb2.Request.SerializeToString,
             studentRegister__pb2.Response.FromString,
             options, channel_credentials,

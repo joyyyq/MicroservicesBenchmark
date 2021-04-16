@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AsyncValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { RegisterClientService } from '../../services/register-client.service';
 import { Router } from '@angular/router';
 // import { throwError } from 'rxjs';
@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl?: string;
-
+  showMessage = false; 
   constructor(
     private formBuilder: FormBuilder,
     private client: RegisterClientService,
@@ -37,17 +37,53 @@ export class SignUpComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.signUpForm!.controls; }
 
+  checkUsername(event: any) {
+    console.log(event);
+    var newProfile: profile = {
+      username: '',
+      password: '',
+      firstname: '',
+      lastname: ''
+    }
+    newProfile.username = event.target.value; 
+    console.log(event.target.value)
+    let response = this.client.checkUsername(newProfile);
+    console.log(event.target.value)
+    console.log(response)
+    this.showMessage = !response; 
+  }
   private validateUsername(): ValidatorFn {
+    var newProfile: profile = {
+      username: '',
+      password: '',
+      firstname: '',
+      lastname: ''
+    }
+    
     return (control: AbstractControl): ValidationErrors | null => {
-      if (this.client.checkUsername() == control.value)
-        return {'usernameTaken': true};
-      else 
+      newProfile.username = control.value;
+
+      let response = this.client.checkUsername(newProfile);
+      console.log(response);
+      
+      if(response){
+        console.log("response okay");
         return null;
+      }
+      else{
+        console.log("response taken");
+        return {'usernameTaken': true};
+      }
+    //   if (this.client.checkUsername() == control.value)
+    //     return {'usernameTaken': true};
+    //   else 
+    //     return null;
     }
   }
 
   ngOnInit(): void {
     console.log("success");
+    console.log(this.f);
   }
 
   onSubmit() {
