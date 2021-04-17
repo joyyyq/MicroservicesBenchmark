@@ -15,12 +15,12 @@ const routes: Routes = [
     loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInModule) 
   },  
   {
-    path: 'home', 
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule) 
+    path: 'roster', 
+    loadChildren: () => import('./roster/roster.module').then(m => m.RosterModule) 
   },
   {
     path: '', 
-    redirectTo: 'home', 
+    redirectTo: 'roster', 
     pathMatch: 'full'
   }
 ];
