@@ -9,7 +9,7 @@ import time
 import requests
 import random
 client = pymongo.MongoClient("localhost",27017)
-db = client.enrollment
+db = client.classlist
 titles = []
 instructors = []
 section = []
