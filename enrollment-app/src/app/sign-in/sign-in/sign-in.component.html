@@ -1,27 +1,34 @@
-<h2>Log In</h2>
-<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
+<div class="flex-row">
+    <div class="flex-col">
+        <div id="identity">
+            <h1>Student Login</h1>
         </div>
+        <mat-card class="sign-in-card">
+            <form class="flex-col" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput type="text" 
+                        formControlName="username" 
+                        autocomplete="off" 
+                        required/>
+                    <mat-error *ngIf="f.username.errors && f.username.errors!.required">Username is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput 
+                        formControlName="password" 
+                        autocomplete="off" 
+                        required/>
+                    <mat-error *ngIf="f.password.errors && f.password.errors!.required">Password is required</mat-error>
+                </mat-form-field>
+
+                <div class="btn">
+                    <button mat-stroked-button color="accent" type="submit" [disabled]="loading" class="btn btn-primary">
+                        <a  class="btn btn-link">Login</a>
+                    </button>
+                </div>
+            </form>
+        </mat-card>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" type="submit" class="btn btn-primary" >
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Log In
-        </button>
-        <button [disabled]="loading" class="btn btn-primary" type="button" routerLink="/sign-up">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Sign Up
-        </button>
-    </div>
-</form>
+</div>

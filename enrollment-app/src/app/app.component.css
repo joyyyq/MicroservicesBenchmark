@@ -32,10 +32,12 @@ p {
 .navbar-flex {
   display: flex;
   flex-direction: row;
-  padding: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   width: 100%;
   place-content: space-between;
 }
+
 
 .main {
   padding-left: 1em;
@@ -43,6 +45,15 @@ p {
 
 }
 
-.navbar-item {
+h1 {
+  margin: 0px; 
+}
 
+button {
+  height: 3em;
+}
+
+.header a {
+  text-decoration: none;
+  color: #ffffff;
 }
