@@ -12,8 +12,8 @@ from studentRegister_pb2 import (
 )
 import studentRegister_pb2_grpc
 
-client = pymongo.MongoClient("mongo",27017)
-db = client.enrollment
+client = pymongo.MongoClient("register_db",27017)
+db = client.register
 
 class registerService(
     studentRegister_pb2_grpc.registerServicer

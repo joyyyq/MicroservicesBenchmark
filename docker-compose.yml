@@ -31,8 +31,17 @@ services:
       - envoymesh
     restart: always
 
-  mongodb-student:
-    container_name: mongo
+  classlist:
+    container_name: classlist
+    build: ./classlist
+    ports:
+      - "5002:5002"
+    networks:
+      - envoymesh
+    restart: always
+
+  mongodb-register:
+    container_name: register_db
     image: mongo
     ports:
       - "27017:27017"
@@ -40,7 +49,19 @@ services:
     networks:
       - envoymesh
     volumes:
-      - ./data:/data/db
+      - ./data/register/:/data/db
+  
+  mongodb-classlist:
+    container_name: classlist_db
+    image: mongo
+    ports:
+      - "27018:27017"
+    restart: always
+    networks:
+      - envoymesh
+    volumes:
+      - ./data/classlist:/data/db
+
 networks:
   envoymesh: {}
       
