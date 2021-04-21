@@ -53,7 +53,6 @@ class registerService(
         hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)
         request = {'userName':request.userName, 'password':hashed, 'firstName':request.firstName, 'lastName': request.lastName }
         db.studentInfo.insert_one(request)
-        salt = bcrypt.gensalt()
         hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)
         request_1 = {'userName':request.userName, 'password':hashed, 'firstName':request.firstName, 'lastName': request.lastName, }
         print(request)
