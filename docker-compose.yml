@@ -1,4 +1,5 @@
 version: "3.9"
+#version: "3.3" // dont remove this
 services:
   
   proxy:
@@ -61,6 +62,26 @@ services:
       - envoymesh
     volumes:
       - ./data/classlist:/data/db
+  mongodb-cart:
+    container_name: cart_db
+    image: mongo
+    ports:
+      - "27019:27017"
+    restart: always
+    networks:
+      - envoymesh
+    volumes:
+      - ./data/cart:/data/db
+  mongodb-wishlist:
+    container_name: wishlist_db
+    image: mongo
+    ports:
+      - "27020:27017"
+    restart: always
+    networks:
+      - envoymesh
+    volumes:
+      - ./data/wishlist:/data/db
 
 networks:
   envoymesh: {}
