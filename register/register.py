@@ -44,13 +44,10 @@ class registerService(
     def register(self, request, context):
         # global client,db
         if( db.studentInfo.count_documents({"userName":request.userName}) > 0 ):
-        # if( not db.studentInfo.find_one({"userName": request.userName}) is None ):
-            print("failed register")
-            # context.abort(grpc.StatusCode.ALREADY_EXISTS, "user already exist")
+            print("failed register: user already exists")
             return Response(success=False)
         hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)
         request1 = {'userName':request.userName, 'password':hashed, 'firstName':request.firstName, 'lastName': request.lastName, }
-        print(request)
         request2 = {'userName':request.userName, 'cart':[],}
         request3 = {'userName':request.userName, 'wishlist':[],}
         db_2.cartInfo.insert_one(request2)
