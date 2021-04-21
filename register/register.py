@@ -33,8 +33,7 @@ class registerService(
     
     def validatePassword(self, request, context):
         pwd = db.studentInfo.find_one({"userName":request.userName})["password"]
-        hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)
-        if( pwd != hashed ):
+        if( not bcrypt.checkpw(request.password,pwd) ):
             print("failed pwd validaion")
             return Response(success=False)
         else:

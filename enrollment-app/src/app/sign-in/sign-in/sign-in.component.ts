@@ -16,6 +16,7 @@ export class SignInComponent implements OnInit {
   returnUrl?: string;
   showMessage = false;
   pwdNotMatch = false;
+  username?: string;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -47,6 +48,8 @@ export class SignInComponent implements OnInit {
       else{
         console.log("userName okay");
         this.showMessage = false;
+        this.username = this.signInForm.controls['username'].value;
+        console.log("userName is " + this.username);
         return null;
       }
     }

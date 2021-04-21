@@ -6,6 +6,7 @@ service register {
     rpc register(Request) returns (Response);
     rpc validateUsername(Request) returns (Response);
     rpc validatePassword(Request) returns (Response);
+    rpc addClass(classRequest) return (classResponse);
   }
 
 message Request {
@@ -15,6 +16,20 @@ message Request {
     string lastName= 4;
   }
 
-  message Response {
-    bool success = 1;
-  }
+message Response {
+  bool success = 1;
+}
+
+message classRequest {
+  string courseCode = 1;
+  string section = 2;
+}
+
+message classResponse {
+  string title = 1;
+  string section = 2;
+  string class_numbers = 3;
+  string days = 4;
+  string instructors = 5;
+  string credit = 6;
+}
