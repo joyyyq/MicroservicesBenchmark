@@ -25,7 +25,7 @@ class registerService(
 ):
     def validateUsername(self, request, context):
         if( db.studentInfo.count_documents({"userName":request.userName}) > 0 ):
-            print("fail name validaion")
+            print("failed name validaion")
             return Response(success=False)
         else:
             print("succeed name validaion")
@@ -34,21 +34,19 @@ class registerService(
     def validatePassword(self, request, context):
         pwd = db.studentInfo.find_one({"userName":request.userName})["password"]
         hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)
-        # if( pwd != request.password ):
-        # if( db.studentInfo.count_documents({"userName":request.userName}) > 0 ):
         if( pwd != hashed ):
-            print("fail pwd validaion")
+            print("failed pwd validaion")
             return Response(success=False)
         else:
             print("succeed pwd validaion")
             return Response(success=True)
 
     def register(self, request, context):
-        #global client,db
+        # global client,db
         if( db.studentInfo.count_documents({"userName":request.userName}) > 0 ):
         # if( not db.studentInfo.find_one({"userName": request.userName}) is None ):
-            print("failed")
-            #context.abort(grpc.StatusCode.ALREADY_EXISTS, "user already exist")
+            print("failed register")
+            # context.abort(grpc.StatusCode.ALREADY_EXISTS, "user already exist")
             return Response(success=False)
         hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)
         request_1 = {'userName':request.userName, 'password':hashed, 'firstName':request.firstName, 'lastName': request.lastName, }
