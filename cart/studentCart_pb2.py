@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11studentCart.proto\x12\x04\x63\x61rt\"3\n\x0c\x63lassRequest\x12\x12\n\ncourseCode\x18\x01 \x01(\t\x12\x0f\n\x07section\x18\x02 \x01(\t\"\x97\x01\n\rclassResponse\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0f\n\x07section\x18\x02 \x01(\t\x12\x13\n\x0b\x63lassNumber\x18\x03 \x01(\t\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\t\x12\x0c\n\x04time\x18\x05 \x01(\t\x12\x12\n\ninstructor\x18\x06 \x01(\t\x12\x0e\n\x06\x63redit\x18\x07 \x01(\x05\x12\x11\n\tavailable\x18\x08 \x01(\x08\x32;\n\x04\x63\x61rt\x12\x33\n\x08\x61\x64\x64\x43lass\x12\x12.cart.classRequest\x1a\x13.cart.classResponseb\x06proto3'
+  serialized_pb=b'\n\x11studentCart.proto\x12\x04\x63\x61rt\"E\n\x0c\x63lassRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x12\n\ncourseCode\x18\x02 \x01(\t\x12\x0f\n\x07section\x18\x03 \x01(\t\"\"\n\rclassResponse\x12\x11\n\tavailable\x18\x01 \x01(\x08\x32;\n\x04\x63\x61rt\x12\x33\n\x08\x61\x64\x64\x43lass\x12\x12.cart.classRequest\x1a\x13.cart.classResponseb\x06proto3'
 )
 
 
@@ -34,15 +34,22 @@ _CLASSREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='courseCode', full_name='cart.classRequest.courseCode', index=0,
+      name='userName', full_name='cart.classRequest.userName', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='section', full_name='cart.classRequest.section', index=1,
+      name='courseCode', full_name='cart.classRequest.courseCode', index=1,
       number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='section', full_name='cart.classRequest.section', index=2,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -60,7 +67,7 @@ _CLASSREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=27,
-  serialized_end=78,
+  serialized_end=96,
 )
 
 
@@ -73,57 +80,8 @@ _CLASSRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='title', full_name='cart.classResponse.title', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='section', full_name='cart.classResponse.section', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='classNumber', full_name='cart.classResponse.classNumber', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='days', full_name='cart.classResponse.days', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='time', full_name='cart.classResponse.time', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='instructor', full_name='cart.classResponse.instructor', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='credit', full_name='cart.classResponse.credit', index=6,
-      number=7, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='available', full_name='cart.classResponse.available', index=7,
-      number=8, type=8, cpp_type=7, label=1,
+      name='available', full_name='cart.classResponse.available', index=0,
+      number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -140,8 +98,8 @@ _CLASSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=81,
-  serialized_end=232,
+  serialized_start=98,
+  serialized_end=132,
 )
 
 DESCRIPTOR.message_types_by_name['classRequest'] = _CLASSREQUEST
@@ -171,8 +129,8 @@ _CART = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=234,
-  serialized_end=293,
+  serialized_start=134,
+  serialized_end=193,
   methods=[
   _descriptor.MethodDescriptor(
     name='addClass',
