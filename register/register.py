@@ -49,13 +49,13 @@ class registerService(
             # context.abort(grpc.StatusCode.ALREADY_EXISTS, "user already exist")
             return Response(success=False)
         hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)
-        request_1 = {'userName':request.userName, 'password':hashed, 'firstName':request.firstName, 'lastName': request.lastName, }
+        request1 = {'userName':request.userName, 'password':hashed, 'firstName':request.firstName, 'lastName': request.lastName, }
         print(request)
-        request_2 = {'userName':request.userName, 'cart':[],}
-        request_2 = {'userName':request.userName, 'wishlist':[],}
-        db_2.cartInfo.insert_one(request_2)
-        db_3.wishlistInfo.insert_one(request_3)
-        db.studentInfo.insert_one(request_1)
+        request2 = {'userName':request.userName, 'cart':[],}
+        request3 = {'userName':request.userName, 'wishlist':[],}
+        db_2.cartInfo.insert_one(request2)
+        db_3.wishlistInfo.insert_one(request3)
+        db.studentInfo.insert_one(request1)
         return Response(success=True)
     
 def serve():
