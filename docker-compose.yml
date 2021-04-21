@@ -1,7 +1,6 @@
 version: "3.9"
-#version: "3.3" // dont remove this
+#version: "3.3"
 services:
-  
   proxy:
     image: envoyproxy/envoy-alpine:v1.14.1
     environment:
@@ -31,16 +30,24 @@ services:
     networks:
       - envoymesh
     restart: always
-
-  classlist:
-    container_name: classlist
-    build: ./classlist
+  # commented out classlist as it is not required to be run everytime, make sure to run classlist for the first time to scrape the website
+  # classlist:
+  #   container_name: classlist
+  #   build: ./classlist
+  #   ports:
+  #     - "5002:5002"
+  #   networks:
+  #     - envoymesh
+  #   restart: always
+  cart:
+    container_name: cart
+    build: ./cart
     ports:
-      - "5002:5002"
+      - "5003:5003"
     networks:
       - envoymesh
     restart: always
-
+  
   mongodb-register:
     container_name: register_db
     image: mongo
@@ -51,7 +58,6 @@ services:
       - envoymesh
     volumes:
       - ./data/register/:/data/db
-  
   mongodb-classlist:
     container_name: classlist_db
     image: mongo

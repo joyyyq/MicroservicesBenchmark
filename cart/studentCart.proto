@@ -1,0 +1,21 @@
+syntax = "proto3";
+package cart;
+
+service cart {
+    rpc addClass(classRequest) returns (classResponse);
+  }
+  
+message classRequest {
+  string courseCode = 1;
+  string section = 2;
+}
+message classResponse {
+  string title = 1;
+  string section = 2;
+  string classNumber = 3;
+  string days = 4;
+  string time = 5;
+  string instructor = 6;
+  int32 credit = 7;
+  bool available = 8;
+}
