@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x15studentRegister.proto\x12\x08register\"R\n\x07Request\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x11\n\tfirstName\x18\x03 \x01(\t\x12\x10\n\x08lastName\x18\x04 \x01(\t\"\x1b\n\x08Response\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32x\n\x08register\x12\x31\n\x08register\x12\x11.register.Request\x1a\x12.register.Response\x12\x39\n\x10validateUsername\x12\x11.register.Request\x1a\x12.register.Responseb\x06proto3'
+  serialized_pb=b'\n\x15studentRegister.proto\x12\x08register\"R\n\x07Request\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x11\n\tfirstName\x18\x03 \x01(\t\x12\x10\n\x08lastName\x18\x04 \x01(\t\"\x1b\n\x08Response\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xb3\x01\n\x08register\x12\x31\n\x08register\x12\x11.register.Request\x1a\x12.register.Response\x12\x39\n\x10validateUsername\x12\x11.register.Request\x1a\x12.register.Response\x12\x39\n\x10validatePassword\x12\x11.register.Request\x1a\x12.register.Responseb\x06proto3'
 )
 
 
@@ -136,8 +136,8 @@ _REGISTER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=148,
-  serialized_end=268,
+  serialized_start=149,
+  serialized_end=328,
   methods=[
   _descriptor.MethodDescriptor(
     name='register',
@@ -153,6 +153,16 @@ _REGISTER = _descriptor.ServiceDescriptor(
     name='validateUsername',
     full_name='register.register.validateUsername',
     index=1,
+    containing_service=None,
+    input_type=_REQUEST,
+    output_type=_RESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='validatePassword',
+    full_name='register.register.validatePassword',
+    index=2,
     containing_service=None,
     input_type=_REQUEST,
     output_type=_RESPONSE,

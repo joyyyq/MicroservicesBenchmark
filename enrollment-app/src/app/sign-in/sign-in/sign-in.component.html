@@ -12,6 +12,7 @@
                         autocomplete="off" 
                         required/>
                     <mat-error *ngIf="f.username.errors && f.username.errors!.required">Username is required</mat-error>
+                    <mat-error *ngIf="showMessage">Username does not exist</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
@@ -21,6 +22,7 @@
                         autocomplete="off" 
                         required/>
                     <mat-error *ngIf="f.password.errors && f.password.errors!.required">Password is required</mat-error>
+                    <mat-error *ngIf="pwdNotMatch">Password does not match username</mat-error>
                 </mat-form-field>
 
                 <div class="btn">

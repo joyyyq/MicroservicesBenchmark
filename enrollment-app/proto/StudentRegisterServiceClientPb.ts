@@ -115,5 +115,45 @@ export class registerClient {
     this.methodInfovalidateUsername);
   }
 
+  methodInfovalidatePassword = new grpcWeb.AbstractClientBase.MethodInfo(
+    studentRegister_pb.Response,
+    (request: studentRegister_pb.Request) => {
+      return request.serializeBinary();
+    },
+    studentRegister_pb.Response.deserializeBinary
+  );
+
+  validatePassword(
+    request: studentRegister_pb.Request,
+    metadata: grpcWeb.Metadata | null): Promise<studentRegister_pb.Response>;
+
+  validatePassword(
+    request: studentRegister_pb.Request,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: studentRegister_pb.Response) => void): grpcWeb.ClientReadableStream<studentRegister_pb.Response>;
+
+  validatePassword(
+    request: studentRegister_pb.Request,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.Error,
+               response: studentRegister_pb.Response) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/register.register/validatePassword',
+        request,
+        metadata || {},
+        this.methodInfovalidatePassword,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/register.register/validatePassword',
+    request,
+    metadata || {},
+    this.methodInfovalidatePassword);
+  }
+
 }
 

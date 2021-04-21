@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AsyncValidatorFn, ValidationErrors, AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegisterClientService } from '../../services/register-client.service';
+
 
 @Component({
   selector: 'app-sign-in',
@@ -12,14 +14,16 @@ export class SignInComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl?: string;
+  showMessage = false;
+  pwdNotMatch = false;
 
   constructor(
       private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
+      private client: RegisterClientService,
       private router: Router
   ) {
       this.signInForm = this.formBuilder.group({
-        username: ['', Validators.required],
+        username: ['', [Validators.required], [this.validateUsername()]],
         password: ['', Validators.required]
     });
   }
@@ -27,15 +31,48 @@ export class SignInComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.signInForm!.controls; }
 
+  validateUsername(): AsyncValidatorFn {
+    return async (control: AbstractControl): Promise<ValidationErrors | null> => {
+      console.log(control.value);
+      if(control.value == "")
+        return null;
+      let response = await this.client.checkUsername(control.value);
+      console.log("validateUsername " + response);
+      
+      if(response){
+        console.log("userName not exists");
+        this.showMessage = true;
+        return {'usernameNotExist': true};
+      }
+      else{
+        console.log("userName okay");
+        this.showMessage = false;
+        return null;
+      }
+    }
+  }
+
   ngOnInit() {
   }
 
-  onSubmit() {
+  async onSubmit() {
       this.submitted = true;
       // stop here if form is invalid
       if (this.signInForm!.invalid) {
           return;
       }
-      this.router.navigate(['/dashboard']);
+
+      var fusername = this.signInForm.get('username')!.value;
+      var fpwd = this.signInForm.get('password')!.value;
+      
+      let response = await this.client.checkPassword(fusername, fpwd);
+      console.log("validatePwd response: " + response);
+      if (response){
+        this.pwdNotMatch = false;
+        this.router.navigate(['/dashboard']);
+      }else{
+        this.pwdNotMatch = true;
+        this.router.navigate(['/sign-in']);
+      }
   }
 }

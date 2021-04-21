@@ -8,18 +8,12 @@ import { Injectable } from '@angular/core';
 
 const wait=(ms: number)=>new Promise(resolve => setTimeout(resolve, ms))
 
-type profile = {
-  username: string;
-  password: string;
-  firstname: string;
-  lastname: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterClientService {
   private validationResult: boolean = false;
+  private validationPwdResult: boolean = false;
   private client: registerClient;
   constructor() {this.client = new registerClient('http://localhost:8081');}
   
@@ -35,6 +29,10 @@ export class RegisterClientService {
     this.validationResult = status; 
   }
 
+  updatePwdResult(status: boolean) {
+    this.validationPwdResult = status; 
+  }
+
   async checkUsername(name : string){
     console.log("check username " + name);
     var request = new Request; 
@@ -44,18 +42,39 @@ export class RegisterClientService {
     await response.then((res) => {
       var result = res.getSuccess();
       this.updateResult(result); 
-      console.log("cresult " + this.validationResult);
     })
     
     wait(4*1000).then(() => {
       console.log("wresult " + this.validationResult);
-      return this.validationResult;
     }).catch(() => {
       console.log("Wait is over, callback")
     });
   
-    console.log("ccresult " + this.validationResult);
+    console.log("ccheckUsername " + this.validationResult);
     return this.validationResult;
+  }
+
+  async checkPassword(name : string, pwd : string){
+    console.log("check password " + name);
+    var request = new Request; 
+    request.setUsername(name);
+    request.setPassword(pwd);
+    var response = this.client.validatePassword(request,{'custom-header-1': 'value1'})
+  
+    await response.then((res) => {
+      var result = res.getSuccess();
+      this.updatePwdResult(result); 
+      console.log("checkPassword result " + this.validationPwdResult);
+    })
+    
+    wait(4*1000).then(() => {
+      console.log("wresult Pwd " + this.validationPwdResult);
+    }).catch(() => {
+      console.log("Wait is over, callback")
+    });
+  
+    console.log("ccheckPassword " + this.validationPwdResult);
+    return this.validationPwdResult;
   }
 
   register(username: string, password: string, firstname: string, lastname: string) {
