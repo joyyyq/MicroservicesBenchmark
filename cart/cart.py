@@ -54,8 +54,8 @@ class cartService(
         return classResponse(success=False)
 
     def getCart(self, request, context):
-        cart = db.classInfo.find({"userName": request.userName})["cart"]
-        return cartResponse(cart)
+        cart = db_2.classInfo.find({"userName": request.userName})["cart"]
+        return cartResponse(list=cart)
     
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=20))

@@ -3,6 +3,7 @@ package cart;
 
 service cart {
     rpc addClass(classRequest) returns (classResponse);
+    rpc dropClass(classRequest) returns (classResponse);
     rpc getCart(cartRequest) returns (cartResponse);
   }
   
