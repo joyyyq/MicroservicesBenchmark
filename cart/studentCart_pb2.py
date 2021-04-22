@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11studentCart.proto\x12\x04\x63\x61rt\"E\n\x0c\x63lassRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x12\n\ncourseCode\x18\x02 \x01(\t\x12\x0f\n\x07section\x18\x03 \x01(\t\" \n\rclassResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32;\n\x04\x63\x61rt\x12\x33\n\x08\x61\x64\x64\x43lass\x12\x12.cart.classRequest\x1a\x13.cart.classResponseb\x06proto3'
+  serialized_pb=b'\n\x11studentCart.proto\x12\x04\x63\x61rt\"E\n\x0c\x63lassRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x12\n\ncourseCode\x18\x02 \x01(\t\x12\x0f\n\x07section\x18\x03 \x01(\t\" \n\rclassResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\x1f\n\x0b\x63\x61rtRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\"6\n\x0c\x63\x61rtResponse\x12&\n\x04list\x18\x01 \x03(\x0b\x32\x18.cart.cartSingleResponse\"\x89\x01\n\x12\x63\x61rtSingleResponse\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0f\n\x07section\x18\x02 \x01(\t\x12\x13\n\x0b\x63lassNumber\x18\x03 \x01(\t\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\t\x12\x0c\n\x04time\x18\x05 \x01(\t\x12\x12\n\ninstructor\x18\x06 \x01(\t\x12\x0e\n\x06\x63redit\x18\x07 \x01(\x03\x32\xa3\x01\n\x04\x63\x61rt\x12\x33\n\x08\x61\x64\x64\x43lass\x12\x12.cart.classRequest\x1a\x13.cart.classResponse\x12\x34\n\tdropClass\x12\x12.cart.classRequest\x1a\x13.cart.classResponse\x12\x30\n\x07getCart\x12\x11.cart.cartRequest\x1a\x12.cart.cartResponseb\x06proto3'
 )
 
 
@@ -102,8 +102,150 @@ _CLASSRESPONSE = _descriptor.Descriptor(
   serialized_end=130,
 )
 
+
+_CARTREQUEST = _descriptor.Descriptor(
+  name='cartRequest',
+  full_name='cart.cartRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='userName', full_name='cart.cartRequest.userName', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=132,
+  serialized_end=163,
+)
+
+
+_CARTRESPONSE = _descriptor.Descriptor(
+  name='cartResponse',
+  full_name='cart.cartResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='list', full_name='cart.cartResponse.list', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=165,
+  serialized_end=219,
+)
+
+
+_CARTSINGLERESPONSE = _descriptor.Descriptor(
+  name='cartSingleResponse',
+  full_name='cart.cartSingleResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='title', full_name='cart.cartSingleResponse.title', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='section', full_name='cart.cartSingleResponse.section', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='classNumber', full_name='cart.cartSingleResponse.classNumber', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='days', full_name='cart.cartSingleResponse.days', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='time', full_name='cart.cartSingleResponse.time', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='instructor', full_name='cart.cartSingleResponse.instructor', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='credit', full_name='cart.cartSingleResponse.credit', index=6,
+      number=7, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=222,
+  serialized_end=359,
+)
+
+_CARTRESPONSE.fields_by_name['list'].message_type = _CARTSINGLERESPONSE
 DESCRIPTOR.message_types_by_name['classRequest'] = _CLASSREQUEST
 DESCRIPTOR.message_types_by_name['classResponse'] = _CLASSRESPONSE
+DESCRIPTOR.message_types_by_name['cartRequest'] = _CARTREQUEST
+DESCRIPTOR.message_types_by_name['cartResponse'] = _CARTRESPONSE
+DESCRIPTOR.message_types_by_name['cartSingleResponse'] = _CARTSINGLERESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 classRequest = _reflection.GeneratedProtocolMessageType('classRequest', (_message.Message,), {
@@ -120,6 +262,27 @@ classResponse = _reflection.GeneratedProtocolMessageType('classResponse', (_mess
   })
 _sym_db.RegisterMessage(classResponse)
 
+cartRequest = _reflection.GeneratedProtocolMessageType('cartRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CARTREQUEST,
+  '__module__' : 'studentCart_pb2'
+  # @@protoc_insertion_point(class_scope:cart.cartRequest)
+  })
+_sym_db.RegisterMessage(cartRequest)
+
+cartResponse = _reflection.GeneratedProtocolMessageType('cartResponse', (_message.Message,), {
+  'DESCRIPTOR' : _CARTRESPONSE,
+  '__module__' : 'studentCart_pb2'
+  # @@protoc_insertion_point(class_scope:cart.cartResponse)
+  })
+_sym_db.RegisterMessage(cartResponse)
+
+cartSingleResponse = _reflection.GeneratedProtocolMessageType('cartSingleResponse', (_message.Message,), {
+  'DESCRIPTOR' : _CARTSINGLERESPONSE,
+  '__module__' : 'studentCart_pb2'
+  # @@protoc_insertion_point(class_scope:cart.cartSingleResponse)
+  })
+_sym_db.RegisterMessage(cartSingleResponse)
+
 
 
 _CART = _descriptor.ServiceDescriptor(
@@ -129,8 +292,8 @@ _CART = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=132,
-  serialized_end=191,
+  serialized_start=362,
+  serialized_end=525,
   methods=[
   _descriptor.MethodDescriptor(
     name='addClass',
@@ -139,6 +302,26 @@ _CART = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CLASSREQUEST,
     output_type=_CLASSRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='dropClass',
+    full_name='cart.cart.dropClass',
+    index=1,
+    containing_service=None,
+    input_type=_CLASSREQUEST,
+    output_type=_CLASSRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='getCart',
+    full_name='cart.cart.getCart',
+    index=2,
+    containing_service=None,
+    input_type=_CARTREQUEST,
+    output_type=_CARTRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

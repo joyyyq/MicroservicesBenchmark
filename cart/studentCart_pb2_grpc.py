@@ -19,12 +19,34 @@ class cartStub(object):
                 request_serializer=studentCart__pb2.classRequest.SerializeToString,
                 response_deserializer=studentCart__pb2.classResponse.FromString,
                 )
+        self.dropClass = channel.unary_unary(
+                '/cart.cart/dropClass',
+                request_serializer=studentCart__pb2.classRequest.SerializeToString,
+                response_deserializer=studentCart__pb2.classResponse.FromString,
+                )
+        self.getCart = channel.unary_unary(
+                '/cart.cart/getCart',
+                request_serializer=studentCart__pb2.cartRequest.SerializeToString,
+                response_deserializer=studentCart__pb2.cartResponse.FromString,
+                )
 
 
 class cartServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def addClass(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def dropClass(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def getCart(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +59,16 @@ def add_cartServicer_to_server(servicer, server):
                     servicer.addClass,
                     request_deserializer=studentCart__pb2.classRequest.FromString,
                     response_serializer=studentCart__pb2.classResponse.SerializeToString,
+            ),
+            'dropClass': grpc.unary_unary_rpc_method_handler(
+                    servicer.dropClass,
+                    request_deserializer=studentCart__pb2.classRequest.FromString,
+                    response_serializer=studentCart__pb2.classResponse.SerializeToString,
+            ),
+            'getCart': grpc.unary_unary_rpc_method_handler(
+                    servicer.getCart,
+                    request_deserializer=studentCart__pb2.cartRequest.FromString,
+                    response_serializer=studentCart__pb2.cartResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +94,39 @@ class cart(object):
         return grpc.experimental.unary_unary(request, target, '/cart.cart/addClass',
             studentCart__pb2.classRequest.SerializeToString,
             studentCart__pb2.classResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def dropClass(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/cart.cart/dropClass',
+            studentCart__pb2.classRequest.SerializeToString,
+            studentCart__pb2.classResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def getCart(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/cart.cart/getCart',
+            studentCart__pb2.cartRequest.SerializeToString,
+            studentCart__pb2.cartResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
