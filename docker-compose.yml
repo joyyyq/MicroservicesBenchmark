@@ -31,15 +31,15 @@ services:
       - envoymesh
     restart: always
 
-  classlist:
-    container_name: classlist
-    build: ./classlist
-    ports:
-      - "5002:5002"
-    networks:
-      - envoymesh
-    restart: always
-    
+  # classlist:
+  #   container_name: classlist
+  #   build: ./classlist
+  #   ports:
+  #     - "5002:5002"
+  #   networks:
+  #     - envoymesh
+  #   restart: always
+
   cart:
     container_name: cart
     build: ./cart

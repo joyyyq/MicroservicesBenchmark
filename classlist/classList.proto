@@ -1,0 +1,36 @@
+syntax = "proto3";
+package classlist;
+
+service classlist {
+  rpc getClassList(classListRequest) returns (classListResponse);
+}
+
+message classListRequest {
+  // year: SP20, FA21,
+  string year = 1;
+}
+
+message classListResponse {
+  repeated Class classes = 1;
+}
+
+message Class {
+  string title   = 1; 
+  string code    = 2; 
+  string subject = 3; 
+  string nbr     = 4; 
+  repeated Section sections = 5; 
+}
+
+message Section {
+  string title   = 1; 
+  string number  = 2; 
+  string instructors = 3; 
+  Time times = 4; 
+  string days = 5;  
+}
+
+message Time {
+  string start = 1; 
+  string end = 2;  
+}
