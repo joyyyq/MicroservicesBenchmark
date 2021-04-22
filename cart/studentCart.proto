@@ -3,6 +3,7 @@ package cart;
 
 service cart {
     rpc addClass(classRequest) returns (classResponse);
+    rpc getCart(cartRequest) returns (cartResponse);
   }
   
 message classRequest {
@@ -12,4 +13,19 @@ message classRequest {
 }
 message classResponse {
   bool success = 1;
+}
+message cartRequest {
+  string userName = 1;
+}
+message cartResponse {
+  repeated cartSingleResponse list = 1;
+}
+message cartSingleResponse {
+  string title = 1;
+  string section = 2;
+  string classNumber = 3;
+  string days = 4;
+  string time = 5;
+  string instructor = 6;
+  int64 credit = 7;
 }
