@@ -11,5 +11,5 @@ message classRequest {
   string section = 3;
 }
 message classResponse {
-  bool available = 1;
+  bool success = 1;
 }

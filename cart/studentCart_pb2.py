@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11studentCart.proto\x12\x04\x63\x61rt\"E\n\x0c\x63lassRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x12\n\ncourseCode\x18\x02 \x01(\t\x12\x0f\n\x07section\x18\x03 \x01(\t\"\"\n\rclassResponse\x12\x11\n\tavailable\x18\x01 \x01(\x08\x32;\n\x04\x63\x61rt\x12\x33\n\x08\x61\x64\x64\x43lass\x12\x12.cart.classRequest\x1a\x13.cart.classResponseb\x06proto3'
+  serialized_pb=b'\n\x11studentCart.proto\x12\x04\x63\x61rt\"E\n\x0c\x63lassRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x12\n\ncourseCode\x18\x02 \x01(\t\x12\x0f\n\x07section\x18\x03 \x01(\t\" \n\rclassResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32;\n\x04\x63\x61rt\x12\x33\n\x08\x61\x64\x64\x43lass\x12\x12.cart.classRequest\x1a\x13.cart.classResponseb\x06proto3'
 )
 
 
@@ -80,7 +80,7 @@ _CLASSRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='available', full_name='cart.classResponse.available', index=0,
+      name='success', full_name='cart.classResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -99,7 +99,7 @@ _CLASSRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=98,
-  serialized_end=132,
+  serialized_end=130,
 )
 
 DESCRIPTOR.message_types_by_name['classRequest'] = _CLASSREQUEST
@@ -129,8 +129,8 @@ _CART = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=134,
-  serialized_end=193,
+  serialized_start=132,
+  serialized_end=191,
   methods=[
   _descriptor.MethodDescriptor(
     name='addClass',

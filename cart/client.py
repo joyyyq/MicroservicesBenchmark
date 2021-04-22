@@ -6,7 +6,19 @@ from studentCart_pb2 import (
     classRequest,
     classResponse,
 )
+# request = classRequest(
+# userName= "ta326" ,courseCode="ECE 2300", section = "LEC 001")
+# response = client.addClass(request)
+# print(response)
+# request = classRequest(
+# userName= "ta326" ,courseCode="ECE 2300", section = "LAB 402")
+# response = client.addClass(request)
+# print(response)
+# request = classRequest(
+# userName= "ta326" ,courseCode="ECE 2300", section = "LAB 403")
+# response = client.addClass(request)
+# print(response)
 request = classRequest(
-courseCode="ECE 4840", section = "LEC 001")
-response = client.addClass(request)
+userName= "ta326" ,courseCode="ECE 2300", section = "LEC 001")
+response = client.dropClass(request)
 print(response)
