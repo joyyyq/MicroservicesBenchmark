@@ -30,15 +30,16 @@ services:
     networks:
       - envoymesh
     restart: always
-  # commented out classlist as it is not required to be run everytime, make sure to run classlist for the first time to scrape the website
-  # classlist:
-  #   container_name: classlist
-  #   build: ./classlist
-  #   ports:
-  #     - "5002:5002"
-  #   networks:
-  #     - envoymesh
-  #   restart: always
+
+  classlist:
+    container_name: classlist
+    build: ./classlist
+    ports:
+      - "5002:5002"
+    networks:
+      - envoymesh
+    restart: always
+    
   cart:
     container_name: cart
     build: ./cart

@@ -10,4 +10,4 @@ RUN pip3 install pymongo
 RUN pip3 install requests
 
 COPY . .
-CMD ["python", "./scrape.py"]
+CMD ["python", "./class_manager.py"]
