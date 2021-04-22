@@ -7,6 +7,8 @@ import grpc
 from studentCart_pb2 import (
     classRequest,
     classResponse,
+    cartRequest,
+    cartResponse,
 )
 import studentCart_pb2_grpc
 
@@ -37,7 +39,7 @@ class cartService(
 
     def dropClass(self, request, context):
         db.classInfo.update_one( {"course_code":request.courseCode}, {"$inc" :{"size":1} } ) # increment size of the class
-        cart = db_2.cart.find_one({"userName":"ta326"})["cart"]
+        cart = db_2.cart.find_one({"userName":request.userName})["cart"]
         i = 0 # used to find the position of the class in the cart which will be removed
         print(cart)
         for Class in cart:
@@ -50,6 +52,10 @@ class cartService(
             else:
                 i+=1
         return classResponse(success=False)
+
+    def getCart(self, request, context):
+        cart = db.classInfo.find({"userName": request.userName})["cart"]
+        return cartResponse(cart)
     
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=20))
