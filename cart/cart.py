@@ -7,6 +7,8 @@ import grpc
 from studentCart_pb2 import (
     classRequest,
     classResponse,
+    cartRequest,
+    cartResponse,
 )
 import studentCart_pb2_grpc
 
@@ -20,7 +22,7 @@ class cartService(
     def addClass(self, request, context):
         size = db.classInfo.find_one({"course_code":request.courseCode})["size"]
         if ( size == 0 ): # class is full
-            return classResponse(available=False)
+            return classResponse(success=False)
         db.classInfo.update_one( {"course_code":request.courseCode}, {"$inc" :{"size":-1} } ) # decrement size of the class
         title = db.classInfo.find_one({"course_code":request.courseCode})["titles"]
         credit = db.classInfo.find_one({"course_code":request.courseCode})["credit"]
@@ -33,7 +35,27 @@ class cartService(
                 cart.append(request_1)
                 db_2.cart.update_one({"username":request.userName}, {"$set" : {"cart" : cart}}) # updating the cart of the user after adding the new class
                 print(db_2.cart.find_one({"username":request.userName}))
-                return classResponse(available=True)
+                return classResponse(success=True)
+
+    def dropClass(self, request, context):
+        db.classInfo.update_one( {"course_code":request.courseCode}, {"$inc" :{"size":1} } ) # increment size of the class
+        cart = db_2.cart.find_one({"userName":request.userName})["cart"]
+        i = 0 # used to find the position of the class in the cart which will be removed
+        print(cart)
+        for Class in cart:
+            if Class["section"] == request.section:
+                cart.pop(i)
+                print(cart)
+                db_2.cart.update_one({"userName":request.userName}, {"$set" : {"cart" : cart}})
+                print(db_2.cart.find_one({"userName":request.userName}))
+                return classResponse(success=True)
+            else:
+                i+=1
+        return classResponse(success=False)
+
+    def getCart(self, request, context):
+        cart = db_2.classInfo.find({"userName": request.userName})["cart"]
+        return cartResponse(list=cart)
     
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=20))

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x15studentRegister.proto\x12\x08register\"R\n\x07Request\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x11\n\tfirstName\x18\x03 \x01(\t\x12\x10\n\x08lastName\x18\x04 \x01(\t\"\x1b\n\x08Response\x12\x0f\n\x07success\x18\x01 \x01(\x08\"3\n\x0c\x63lassRequest\x12\x12\n\ncourseCode\x18\x01 \x01(\t\x12\x0f\n\x07section\x18\x02 \x01(\t\"y\n\rclassResponse\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0f\n\x07section\x18\x02 \x01(\t\x12\x15\n\rclass_numbers\x18\x03 \x01(\t\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\t\x12\x13\n\x0binstructors\x18\x05 \x01(\t\x12\x0e\n\x06\x63redit\x18\x06 \x01(\t2\xf0\x01\n\x08register\x12\x31\n\x08register\x12\x11.register.Request\x1a\x12.register.Response\x12\x39\n\x10validateUsername\x12\x11.register.Request\x1a\x12.register.Response\x12\x39\n\x10validatePassword\x12\x11.register.Request\x1a\x12.register.Response\x12;\n\x08\x61\x64\x64\x43lass\x12\x16.register.classRequest\x1a\x17.register.classResponseb\x06proto3'
+  serialized_pb=b'\n\x15studentRegister.proto\x12\x08register\"R\n\x07Request\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x11\n\tfirstName\x18\x03 \x01(\t\x12\x10\n\x08lastName\x18\x04 \x01(\t\"\x1b\n\x08Response\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xb3\x01\n\x08register\x12\x31\n\x08register\x12\x11.register.Request\x1a\x12.register.Response\x12\x39\n\x10validateUsername\x12\x11.register.Request\x1a\x12.register.Response\x12\x39\n\x10validatePassword\x12\x11.register.Request\x1a\x12.register.Responseb\x06proto3'
 )
 
 
@@ -109,116 +109,8 @@ _RESPONSE = _descriptor.Descriptor(
   serialized_end=146,
 )
 
-
-_CLASSREQUEST = _descriptor.Descriptor(
-  name='classRequest',
-  full_name='register.classRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='courseCode', full_name='register.classRequest.courseCode', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='section', full_name='register.classRequest.section', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=148,
-  serialized_end=199,
-)
-
-
-_CLASSRESPONSE = _descriptor.Descriptor(
-  name='classResponse',
-  full_name='register.classResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='title', full_name='register.classResponse.title', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='section', full_name='register.classResponse.section', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='class_numbers', full_name='register.classResponse.class_numbers', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='days', full_name='register.classResponse.days', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='instructors', full_name='register.classResponse.instructors', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='credit', full_name='register.classResponse.credit', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=201,
-  serialized_end=322,
-)
-
 DESCRIPTOR.message_types_by_name['Request'] = _REQUEST
 DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
-DESCRIPTOR.message_types_by_name['classRequest'] = _CLASSREQUEST
-DESCRIPTOR.message_types_by_name['classResponse'] = _CLASSRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Request = _reflection.GeneratedProtocolMessageType('Request', (_message.Message,), {
@@ -235,20 +127,6 @@ Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Messag
   })
 _sym_db.RegisterMessage(Response)
 
-classRequest = _reflection.GeneratedProtocolMessageType('classRequest', (_message.Message,), {
-  'DESCRIPTOR' : _CLASSREQUEST,
-  '__module__' : 'studentRegister_pb2'
-  # @@protoc_insertion_point(class_scope:register.classRequest)
-  })
-_sym_db.RegisterMessage(classRequest)
-
-classResponse = _reflection.GeneratedProtocolMessageType('classResponse', (_message.Message,), {
-  'DESCRIPTOR' : _CLASSRESPONSE,
-  '__module__' : 'studentRegister_pb2'
-  # @@protoc_insertion_point(class_scope:register.classResponse)
-  })
-_sym_db.RegisterMessage(classResponse)
-
 
 
 _REGISTER = _descriptor.ServiceDescriptor(
@@ -258,8 +136,8 @@ _REGISTER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=325,
-  serialized_end=565,
+  serialized_start=149,
+  serialized_end=328,
   methods=[
   _descriptor.MethodDescriptor(
     name='register',
@@ -288,16 +166,6 @@ _REGISTER = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_REQUEST,
     output_type=_RESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='addClass',
-    full_name='register.register.addClass',
-    index=3,
-    containing_service=None,
-    input_type=_CLASSREQUEST,
-    output_type=_CLASSRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
