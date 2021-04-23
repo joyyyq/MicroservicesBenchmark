@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClasslistClientService } from '../../services/classlist-client.service';
 
 @Component({
   selector: 'app-roster',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RosterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private client: ClasslistClientService) { }
 
   ngOnInit(): void {
+    this.client.getClassList('SP21'); 
+  }
+
+  call() {
+    this.client.getClassList('SP21'); 
   }
 
 }

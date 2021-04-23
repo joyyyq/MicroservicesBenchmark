@@ -191,15 +191,15 @@ const routes = [
     },
     {
         path: 'sign-up',
-        loadChildren: () => __webpack_require__.e(/*! import() | sign-up-sign-up-module */ "sign-up-sign-up-module").then(__webpack_require__.bind(null, /*! ./sign-up/sign-up.module */ "kEuc")).then(m => m.SignUpModule)
+        loadChildren: () => Promise.all(/*! import() | sign-up-sign-up-module */[__webpack_require__.e("default~roster-roster-module~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("default~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("sign-up-sign-up-module")]).then(__webpack_require__.bind(null, /*! ./sign-up/sign-up.module */ "kEuc")).then(m => m.SignUpModule)
     },
     {
         path: 'sign-in',
-        loadChildren: () => __webpack_require__.e(/*! import() | sign-in-sign-in-module */ "sign-in-sign-in-module").then(__webpack_require__.bind(null, /*! ./sign-in/sign-in.module */ "FuQ6")).then(m => m.SignInModule)
+        loadChildren: () => Promise.all(/*! import() | sign-in-sign-in-module */[__webpack_require__.e("default~roster-roster-module~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("default~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("sign-in-sign-in-module")]).then(__webpack_require__.bind(null, /*! ./sign-in/sign-in.module */ "FuQ6")).then(m => m.SignInModule)
     },
     {
         path: 'roster',
-        loadChildren: () => __webpack_require__.e(/*! import() | roster-roster-module */ "roster-roster-module").then(__webpack_require__.bind(null, /*! ./roster/roster.module */ "vgxn")).then(m => m.RosterModule)
+        loadChildren: () => Promise.all(/*! import() | roster-roster-module */[__webpack_require__.e("default~roster-roster-module~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("roster-roster-module")]).then(__webpack_require__.bind(null, /*! ./roster/roster.module */ "vgxn")).then(m => m.RosterModule)
     },
     {
         path: '',

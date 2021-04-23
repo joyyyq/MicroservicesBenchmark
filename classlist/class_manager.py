@@ -21,14 +21,16 @@ from classList_pb2 import (
 )
 import classList_pb2_grpc
 
-# client = pymongo.MongoClient("classlist_db",27017)
-client = pymongo.MongoClient("localhost",27018)
+client = pymongo.MongoClient("classlist_db",27017)
+# client = pymongo.MongoClient("localhost",27018)
 db = client.classlist
 
 class classlistService(
     classList_pb2_grpc.classlistServicer
 ):
     def getClassList(self, request, context):
+        print("HELLLO")
+        db.hello.insert_one({"count": 5})
         classes = []
         for class_ in db.classInfo.find({}):
             temp_class = {}

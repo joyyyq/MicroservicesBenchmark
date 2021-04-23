@@ -20,9 +20,16 @@ static_resources:
             - name: local_service
               domains: ["*"]
               routes:
-              - match: { prefix: "/" }
+              - match: { prefix: "/register.register/" }
                 route:
-                  cluster: echo_service
+                  cluster: register_service
+                  #timeout: 0s
+                  #max_stream_duration:
+                  #  grpc_timeout_header_max: 0s
+                  max_grpc_timeout: 2s
+              - match: { prefix: "/classlist.classlist/" }
+                route:
+                  cluster: classlist_service
                   #timeout: 0s
                   #max_stream_duration:
                   #  grpc_timeout_header_max: 0s
@@ -40,18 +47,14 @@ static_resources:
           - name: envoy.filters.http.router
             typed_config: {}
   clusters:
-  - name: echo_service
+  - name: register_service
     connect_timeout: 1s
     #type: STRICT_DNS
     type: LOGICAL_DNS
     http2_protocol_options: {}
     lb_policy: ROUND_ROBIN
-    #hosts: [{ socket_address: { address: 0.0.0.0, port_value: 50052 }}]
-    #upstream_connection_options:
-    #    tcp_keepalive:
-    #      keepalive_time: 500
     load_assignment:
-      cluster_name: echo_service
+      cluster_name: register_service
       endpoints:
       - lb_endpoints:
         - endpoint:
@@ -60,14 +63,19 @@ static_resources:
                 ipv4_compat: true
                 address: register
                 port_value: 5001
-    #outlier_detection:     
-    #        consecutive_5xx: 1
-    #load_assignment:
-    ##  cluster_name: cluster_0
-    #  endpoints:
-    #    - lb_endpoints:
-    #        - endpoint:
-    #            address:
-    #              socket_address:
-    #                address: loc
-    #                port_value: 9000
+  - name: classlist_service
+    connect_timeout: 1s
+    #type: STRICT_DNS
+    type: LOGICAL_DNS
+    http2_protocol_options: {}
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: classlist_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                ipv4_compat: true
+                address: classlist
+                port_value: 5002
