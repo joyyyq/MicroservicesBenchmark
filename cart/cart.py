@@ -54,7 +54,7 @@ class cartService(
         return classResponse(success=False)
 
     def getCart(self, request, context):
-        cart = db_2.cartInfo.find({"userName": request.userName})["cart"]
+        cart = db_2.cartInfo.find_one({"userName": request.userName})["cart"]
         print(cart)
         return cartResponse(list=cart)
     
