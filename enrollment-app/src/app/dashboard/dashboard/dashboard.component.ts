@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
+import { CartClientService } from '../../services/cart-client.service';
 
 export interface PeriodicElement {
   position: number;
@@ -28,6 +29,20 @@ export class DashboardComponent {
   displayedColumns: string[] = ['select', 'position', 'id', 'name', 'units', 'status'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
+
+  constructor(
+    private client: CartClientService,
+    private router: Router
+  ) {
+    console.log("construct");
+  }
+
+  ngOnInit(): void {
+    console.log("onInit");
+    var username = "ta326";
+    let response = this.client.getCart(username);
+    console.log(response);
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
