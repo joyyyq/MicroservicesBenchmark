@@ -23,17 +23,18 @@ export class CartClientService {
       this.addMessage(message, 'label-primary pull-left');
   }
 
-  getCart(username: string) {
+  async getCart(username: string) {
     console.log("getCart service");
     var request = new cartRequest; 
     request.setUsername(username);
     let result;
-    this.client.getCart(
+    await this.client.getCart(
       request,{'custom-header-1': 'value1'},
       ( err: grpcWeb.Error, response: cartResponse ) => {
         if (err) {
           CartClientService.ERROR('Error code: ' + err.code + ' "' + err.message + '"');
         } 
+        console.log(response);
         result = response;
       }
     )
