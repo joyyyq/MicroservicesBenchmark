@@ -31,10 +31,10 @@ class cartService(
             if course["section"] == request.section:
                 print(course)
                 request_1 = {"title":title,"section":request.section,"classNumber":course["class_numbers"],"days":course["days"],"time":course["times"], "instructor":course["instructors"],"credit":credit}
-                cart = db_2.cartInfo.find_one({"username":request.userName})["cart"]
+                cart = db_2.cartInfo.find_one({"userName":request.userName})["cart"]
                 cart.append(request_1)
-                db_2.cartInfo.update_one({"username":request.userName}, {"$set" : {"cart" : cart}}) # updating the cart of the user after adding the new class
-                print(db_2.cartInfo.find_one({"username":request.userName}))
+                db_2.cartInfo.update_one({"userName":request.userName}, {"$set" : {"cart" : cart}}) # updating the cart of the user after adding the new class
+                print(db_2.cartInfo.find_one({"userName":request.userName}))
                 return classResponse(success=True)
 
     def dropClass(self, request, context):
@@ -55,6 +55,7 @@ class cartService(
 
     def getCart(self, request, context):
         cart = db_2.cartInfo.find({"userName": request.userName})["cart"]
+        print(cart)
         return cartResponse(list=cart)
     
 def serve():
