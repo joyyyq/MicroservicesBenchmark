@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AsyncValidatorFn, ValidationErrors, AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterClientService } from '../../services/register-client.service';
+import { StudentStateService } from '../../services/student-state.service';
 
 
 @Component({
@@ -16,11 +17,12 @@ export class SignInComponent implements OnInit {
   returnUrl?: string;
   showMessage = false;
   pwdNotMatch = false;
-  username?: string;
+  username: string= "";
 
   constructor(
       private formBuilder: FormBuilder,
       private client: RegisterClientService,
+      private studentState: StudentStateService,
       private router: Router
   ) {
       this.signInForm = this.formBuilder.group({
@@ -49,7 +51,6 @@ export class SignInComponent implements OnInit {
         console.log("userName okay");
         this.showMessage = false;
         this.username = this.signInForm.controls['username'].value;
-        console.log("userName is " + this.username);
         return null;
       }
     }
@@ -72,6 +73,8 @@ export class SignInComponent implements OnInit {
       console.log("validatePwd response: " + response);
       if (response){
         this.pwdNotMatch = false;
+        this.studentState.setUsername(this.username);
+        this.studentState.setcurrentUserName(this.username);
         this.router.navigate(['/dashboard']);
       }else{
         this.pwdNotMatch = true;

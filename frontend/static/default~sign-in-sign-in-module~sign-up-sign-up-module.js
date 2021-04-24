@@ -113,7 +113,7 @@ RegisterClientService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵd
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerClient", function() { return registerClient; });
-/* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! grpc-web */ "TxjO");
+/* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! grpc-web */ "UVcI");
 /* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(grpc_web__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _studentRegister_pb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./studentRegister_pb */ "fanR");
 /* harmony import */ var _studentRegister_pb__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_studentRegister_pb__WEBPACK_IMPORTED_MODULE_1__);

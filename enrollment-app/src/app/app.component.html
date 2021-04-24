@@ -5,11 +5,16 @@
     <div class="navbar-items">
       <h1> CORNELL SCHEDULER </h1>
     </div>
-    
-    <button routerLink="sign-in" mat-stroked-button type="submit" class="btn btn-primary">
-      <a class="btn btn-link">Login</a>
-    </button>
-
+    <div *ngIf=" user ==='' ">
+      <button routerLink="sign-in" mat-stroked-button type="submit" class="btn btn-primary">
+        <a class="btn btn-link">Login</a>
+      </button>
+    </div>
+    <div *ngIf=" user != '' ">
+      <button routerLink="sign-out" mat-stroked-button type="submit" class="btn btn-primary">
+        <a class="btn btn-link">Logout</a>
+      </button>
+    </div>
     <button routerLink="sign-up" mat-stroked-button type="submit" class="btn btn-primary">
       <a class="btn btn-link">SignUp</a>
     </button>

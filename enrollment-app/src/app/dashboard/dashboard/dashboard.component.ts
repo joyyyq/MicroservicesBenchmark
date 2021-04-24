@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { CartClientService } from '../../services/cart-client.service';
+import { StudentStateService } from '../../services/student-state.service';
 
 export interface PeriodicElement {
   position: number;
@@ -32,9 +33,12 @@ export class DashboardComponent {
 
   constructor(
     private client: CartClientService,
+    private studentState: StudentStateService,
     private router: Router
   ) {
     console.log("construct");
+    console.log("Username is", studentState.getUsername() );
+
   }
 
   ngOnInit(): void {
