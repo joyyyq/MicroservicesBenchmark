@@ -16,7 +16,7 @@ export class SignOutComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log("user just signed out");
+    console.log("user just signed  out");
     console.log("erasing username")
     this.studentState.setcurrentUserName('');
     this.studentState.setUsername('');
