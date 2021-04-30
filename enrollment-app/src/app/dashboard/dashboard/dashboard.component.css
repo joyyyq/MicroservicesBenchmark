@@ -1,3 +1,7 @@
+.container {
+  width: 100%;
+}
+
 table {
   width: 100%;
 }
@@ -13,7 +17,16 @@ button {
   flex-direction: row;
 }
 
+.container-classes {
+  width: 65%; 
+}
+
 .search {
   width: 35%; 
   padding: 0px 0px 20px 20px;
+}
+
+#identity {
+  padding: 25px 0;
+  background: #fff;
 }

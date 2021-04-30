@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {Class} from '../../../../proto/classList_pb';
 
 @Component({
   selector: 'app-search',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
-  constructor() { }
+  @Input() classes: Class[];
+  values = ''
+  searchResults: Class[] = []; 
+  constructor() { this.classes = [];}
 
   ngOnInit(): void {
   }
 
+  search(event: any) {
+    this.searchResults = []
+    let query = event.target.value; 
+    if (query != '') {
+      this.searchResults = this.classes.filter(
+        class_ => ( class_.getTitle().includes(query) || class_.getCode().includes(query) ));
+    }
+  }
 }
