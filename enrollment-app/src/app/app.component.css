@@ -18,6 +18,7 @@ p {
     background-color: #b31b1b;
     color: white;
     font-weight: 600;
+    justify-content: center;
 }
 
 .content {
@@ -32,17 +33,20 @@ p {
 .navbar-flex {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   padding-left: 15px;
   padding-right: 15px;
-  width: 100%;
+  width: 92%;
+  max-width: 1100px;
   place-content: space-between;
 }
 
 
 .main {
-  padding-left: 1em;
-  padding-right: 1em;
-
+  width: 92%;
+  max-width: 1100px;
+  display: flex;
+  margin: 0 auto;
 }
 
 h1 {
@@ -56,4 +60,8 @@ button {
 .header a {
   text-decoration: none;
   color: #ffffff;
+}
+
+.navbar-items h1 {
+  margin-top: 0.2em;
 }

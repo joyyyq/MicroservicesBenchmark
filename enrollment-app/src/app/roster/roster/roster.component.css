@@ -1,7 +1,14 @@
-.container {
-  padding: 1em;
+#identity {
+  padding: 25px 0;
+  background: #fff;
 }
 
-/* #aria-main {
-  margin: 16px 0px 16px;
-} */
+.bottom-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.roster-search {
+  width: 35%; 
+  padding: 0px 0px 20px 20px;
+}

@@ -1,9 +1,26 @@
 
 <div class="container">
-  <h1 id="aria-main">Electrical &amp; Computer Engineering (ECE)</h1>
-  <div *ngFor="let class of classes">
-
-    <app-roster-card [class]="class"> </app-roster-card>
+  <div id="identity">
+    <h1>Electrical &amp; Computer Engineering (ECE)</h1>
   </div>
 
+  <div class="bottom-container">
+    <div class="roster-lists">
+      <div *ngFor="let class of classes">
+        <app-roster-card [class]="class"> </app-roster-card>
+      </div>  
+    </div>
+  
+    <div class="roster-search">
+      <h2>
+        SEARCH
+      </h2>
+      <mat-form-field appearance="outline">
+          <mat-label>Search</mat-label>
+          <input matInput type="text" 
+              autocomplete="off" 
+              required/>
+      </mat-form-field>
+    </div>
+  </div>
 </div>
