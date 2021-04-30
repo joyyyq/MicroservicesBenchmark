@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import pymongo
 import json
 import pprint
-#import pandas as pd
 import urllib.request
 import time
 import requests
@@ -62,6 +61,7 @@ class classlistService(
 
 # loads only spring 21 classes
 TOTAL_ECE_CLASSES=0
+base_url = "https://classes.cornell.edu/browse/roster/SP21/class/ECE/"
 page = urllib.request.urlopen("https://classes.cornell.edu/browse/roster/SP21/subject/ECE")
 soup = BeautifulSoup(page,'html.parser')
 
@@ -69,6 +69,7 @@ titles = []
 instructors = []
 section = []
 course_code = [] #  ECE 120
+descriptions = []
 data_catalog_nbr =[]  # number part 1210
 data_subject = []    # subject field ECE
 class_numbers = []    # unique number 34343
@@ -100,6 +101,12 @@ def scrape_classes():
         code = node['aria-label'][7:len(node['aria-label'])] # ECE 1210
         subject = node['aria-label'][7:10] # ECE
         nbr = node['aria-label'][11:15] # 1210
+        new_url = base_url + nbr
+        new_page = urllib.request.urlopen(new_url)
+        new_soup = BeautifulSoup(new_page,'html.parser')
+        description = new_soup.find('p',class_='catalog-descr').text.strip()
+        descriptions.append(description)
+        # print(description)
         course_code.append(code)
         data_subject.append(subject)
         data_catalog_nbr.append(nbr)
@@ -169,6 +176,7 @@ def update_db():
         data["subject"] = data_subject[j]
         data["nbr"] = data_catalog_nbr[j]
         data["credit"] = credit[j]
+        data["description"] = descriptions[j]
         course_info = []
         for k in range(0,len(section[j])):
             new_course = {}
