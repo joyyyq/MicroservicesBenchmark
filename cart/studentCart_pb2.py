@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11studentCart.proto\x12\x04\x63\x61rt\"E\n\x0c\x63lassRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x12\n\ncourseCode\x18\x02 \x01(\t\x12\x0f\n\x07section\x18\x03 \x01(\t\" \n\rclassResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\x1f\n\x0b\x63\x61rtRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\"6\n\x0c\x63\x61rtResponse\x12&\n\x04list\x18\x01 \x03(\x0b\x32\x18.cart.cartSingleResponse\"\x89\x01\n\x12\x63\x61rtSingleResponse\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0f\n\x07section\x18\x02 \x01(\t\x12\x13\n\x0b\x63lassNumber\x18\x03 \x01(\t\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\t\x12\x0c\n\x04time\x18\x05 \x01(\t\x12\x12\n\ninstructor\x18\x06 \x01(\t\x12\x0e\n\x06\x63redit\x18\x07 \x01(\x03\x32\xa3\x01\n\x04\x63\x61rt\x12\x33\n\x08\x61\x64\x64\x43lass\x12\x12.cart.classRequest\x1a\x13.cart.classResponse\x12\x34\n\tdropClass\x12\x12.cart.classRequest\x1a\x13.cart.classResponse\x12\x30\n\x07getCart\x12\x11.cart.cartRequest\x1a\x12.cart.cartResponseb\x06proto3'
+  serialized_pb=b'\n\x11studentCart.proto\x12\x04\x63\x61rt\"E\n\x0c\x63lassRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x12\n\ncourseCode\x18\x02 \x01(\t\x12\x0f\n\x07section\x18\x03 \x01(\t\" \n\rclassResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\x1f\n\x0b\x63\x61rtRequest\x12\x10\n\x08userName\x18\x01 \x01(\t\"6\n\x0c\x63\x61rtResponse\x12&\n\x04list\x18\x01 \x03(\x0b\x32\x18.cart.cartSingleResponse\"\x9d\x01\n\x12\x63\x61rtSingleResponse\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0f\n\x07section\x18\x02 \x01(\t\x12\x13\n\x0b\x63lassNumber\x18\x03 \x01(\t\x12\x0c\n\x04\x64\x61ys\x18\x04 \x01(\t\x12\x0c\n\x04time\x18\x05 \x01(\t\x12\x12\n\ninstructor\x18\x06 \x01(\t\x12\x0e\n\x06\x63redit\x18\x07 \x01(\x03\x12\x12\n\ncourseCode\x18\x08 \x01(\t2\xa3\x01\n\x04\x63\x61rt\x12\x33\n\x08\x61\x64\x64\x43lass\x12\x12.cart.classRequest\x1a\x13.cart.classResponse\x12\x34\n\tdropClass\x12\x12.cart.classRequest\x1a\x13.cart.classResponse\x12\x30\n\x07getCart\x12\x11.cart.cartRequest\x1a\x12.cart.cartResponseb\x06proto3'
 )
 
 
@@ -224,6 +224,13 @@ _CARTSINGLERESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='courseCode', full_name='cart.cartSingleResponse.courseCode', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -237,7 +244,7 @@ _CARTSINGLERESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=222,
-  serialized_end=359,
+  serialized_end=379,
 )
 
 _CARTRESPONSE.fields_by_name['list'].message_type = _CARTSINGLERESPONSE
@@ -292,8 +299,8 @@ _CART = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=362,
-  serialized_end=525,
+  serialized_start=382,
+  serialized_end=545,
   methods=[
   _descriptor.MethodDescriptor(
     name='addClass',

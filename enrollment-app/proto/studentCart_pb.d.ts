@@ -106,6 +106,9 @@ export class cartSingleResponse extends jspb.Message {
   getCredit(): number;
   setCredit(value: number): cartSingleResponse;
 
+  getCoursecode(): string;
+  setCoursecode(value: string): cartSingleResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): cartSingleResponse.AsObject;
   static toObject(includeInstance: boolean, msg: cartSingleResponse): cartSingleResponse.AsObject;
@@ -123,6 +126,7 @@ export namespace cartSingleResponse {
     time: string,
     instructor: string,
     credit: number,
+    coursecode: string,
   }
 }
 

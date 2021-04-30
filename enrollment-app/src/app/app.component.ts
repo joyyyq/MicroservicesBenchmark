@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { StudentStateService } from './services/student-state.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'enrollment-app';
+  user = ''
+  constructor(
+    private studentState: StudentStateService,
+  ) {
+  }
+  ngOnInit() {
+    this.studentState.currentUserName.subscribe(val => {
+      this.user = val;
+    });
+  }
 }
