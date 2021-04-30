@@ -10,7 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "classlistClient", function() { return classlistClient; });
-/* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! grpc-web */ "UVcI");
+/* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! grpc-web */ "TxjO");
 /* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(grpc_web__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _classList_pb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./classList_pb */ "s0aR");
 /* harmony import */ var _classList_pb__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_classList_pb__WEBPACK_IMPORTED_MODULE_1__);
@@ -62,30 +62,30 @@ class classlistClient {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClasslistClientService", function() { return ClasslistClientService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _proto_ClassListServiceClientPb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../proto/ClassListServiceClientPb */ "3hIZ");
-/* harmony import */ var _proto_classList_pb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../proto/classList_pb */ "s0aR");
-/* harmony import */ var _proto_classList_pb__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_proto_classList_pb__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _proto_ClassListServiceClientPb__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../proto/ClassListServiceClientPb */ "3hIZ");
+/* harmony import */ var _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../proto/classList_pb */ "s0aR");
+/* harmony import */ var _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 
 
 
 
 class ClasslistClientService {
-    constructor() { this.client = new _proto_ClassListServiceClientPb__WEBPACK_IMPORTED_MODULE_1__["classlistClient"]('http://localhost:8081'); }
+    constructor() { this.client = new _proto_ClassListServiceClientPb__WEBPACK_IMPORTED_MODULE_0__["classlistClient"]('http://localhost:8081'); }
     getClassList(year) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log("Classlist service");
-            var request = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_2__["classListRequest"];
-            request.setYear(year);
-            let result = [];
-            var response = this.client.getClassList(request, { 'custom-header-1': 'value1' });
-            yield response.then((res) => {
-                console.log("Waiting ... ");
-                console.log(res);
-                console.log("Done");
-            });
+        console.log("Classlist service");
+        var request = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["classListRequest"];
+        var result = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]([]);
+        request.setYear(year);
+        this.client.getClassList(request, { 'custom-header-1': 'value1' }, (err, response) => {
+            if (err) {
+                console.log('Error code: ' + err.code + ' "' + err.message + '"');
+            }
+            result.next(response.getClassesList());
+            console.log("response is", result);
         });
+        return result;
     }
 }
 ClasslistClientService.ɵfac = function ClasslistClientService_Factory(t) { return new (t || ClasslistClientService)(); };
@@ -106,28 +106,137 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RosterComponent", function() { return RosterComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _services_classlist_client_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/classlist-client.service */ "9GJm");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _roster_card_roster_card_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../roster-card/roster-card.component */ "STuS");
 
 
+
+
+function RosterComponent_div_3_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "app-roster-card");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const class_r1 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassMap"](class_r1);
+} }
 class RosterComponent {
     constructor(client) {
         this.client = client;
+        this.classes = [];
     }
     ngOnInit() {
-        this.client.getClassList('SP21');
+        this.client.getClassList('SP21').asObservable().subscribe(val => {
+            this.classes = val;
+            console.log(this.classes);
+        });
     }
     call() {
-        this.client.getClassList('SP21');
+        // this.client.getClassList('SP21'); 
     }
 }
 RosterComponent.ɵfac = function RosterComponent_Factory(t) { return new (t || RosterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_classlist_client_service__WEBPACK_IMPORTED_MODULE_1__["ClasslistClientService"])); };
-RosterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RosterComponent, selectors: [["app-roster"]], decls: 3, vars: 0, consts: [[3, "click"], [1, "btn", "btn-link"]], template: function RosterComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function RosterComponent_Template_button_click_0_listener() { return ctx.call(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Login");
+RosterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RosterComponent, selectors: [["app-roster"]], decls: 4, vars: 1, consts: [[1, "container"], ["id", "aria-main"], [4, "ngFor", "ngForOf"]], template: function RosterComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h1", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Electrical & Computer Engineering (ECE)");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, RosterComponent_div_3_Template, 2, 2, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyb3N0ZXIuY29tcG9uZW50LmNzcyJ9 */"] });
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.classes);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"], _roster_card_roster_card_component__WEBPACK_IMPORTED_MODULE_3__["RosterCardComponent"]], styles: [".container[_ngcontent-%COMP%] {\n  padding: 1em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJvc3Rlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsWUFBWTtBQUNkOztBQUVBOztHQUVHIiwiZmlsZSI6InJvc3Rlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XG4gIHBhZGRpbmc6IDFlbTtcbn1cblxuLyogI2FyaWEtbWFpbiB7XG4gIG1hcmdpbjogMTZweCAwcHggMTZweDtcbn0gKi8iXX0= */"] });
+
+
+/***/ }),
+
+/***/ "STuS":
+/*!*************************************************************!*\
+  !*** ./src/app/roster/roster-card/roster-card.component.ts ***!
+  \*************************************************************/
+/*! exports provided: RosterCardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RosterCardComponent", function() { return RosterCardComponent; });
+/* harmony import */ var _proto_classList_pb__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../proto/classList_pb */ "s0aR");
+/* harmony import */ var _proto_classList_pb__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_proto_classList_pb__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/expansion */ "7EHt");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+
+
+
+
+function RosterCardComponent_div_11_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "h3");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "h3");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "h3");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, "Location: TBD");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "h3");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "h3");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const section_r1 = ctx.$implicit;
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate2"]("-- ", section_r1.getNumber(), " -- ", ctx_r0.class.getCredit(), " credits ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](section_r1.getTitle());
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate2"]("", section_r1.getTimes().getStart(), " - ", section_r1.getTimes().getEnd(), "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](section_r1.getInstructors());
+} }
+class RosterCardComponent {
+    constructor() { this.class = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_0__["Class"](); }
+}
+RosterCardComponent.ɵfac = function RosterCardComponent_Factory(t) { return new (t || RosterCardComponent)(); };
+RosterCardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: RosterCardComponent, selectors: [["app-roster-card"]], inputs: { class: "class" }, decls: 12, vars: 4, consts: [[1, "title-container"], [1, "title-code"], ["class", "section-container", 4, "ngFor", "ngForOf"], [1, "section-container"], [1, "section-details"]], template: function RosterCardComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "h3", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "h3");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "mat-accordion");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "mat-expansion-panel");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "mat-expansion-panel-header");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "mat-panel-title");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, " List all sections ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](11, RosterCardComponent_div_11_Template, 12, 6, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx.class.getCode(), " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx.class.getTitle(), " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx.class.getDescription(), " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.class.getSectionsList());
+    } }, directives: [_angular_material_expansion__WEBPACK_IMPORTED_MODULE_2__["MatAccordion"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_2__["MatExpansionPanel"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_2__["MatExpansionPanelHeader"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_2__["MatExpansionPanelTitle"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"]], styles: [".title-container[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  background: #f2f2f2;\n  font-size: 1.18em;\n  font-weight: 300;\n  background: rgba(0,0,0,0.05);\n  border-left: 3px solid #b31b1b;\n  padding: 0.5em 66px 0.5em 0.75em;\n}\n\n.title-code[_ngcontent-%COMP%] {\n  width: 18%;\n  height: 100%;\n  text-align: left;\n  padding-right: 0.5em;\n  font-weight: bold;\n  float: left;\n}\n\n.section-container[_ngcontent-%COMP%] {\n  border: 1px dashed #b31b1b;\n  display: flex;\n  flex-direction: column;\n  background: #f2f2f2;\n  background: rgba(0,0,0,0.05);\n  padding: 0.5em;\n  margin-bottom: 1em;\n}\n\n.section-container[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  margin: 0;\n}\n\n.section-details[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJvc3Rlci1jYXJkLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLG1CQUFtQjtFQUNuQixpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLDRCQUE0QjtFQUM1Qiw4QkFBOEI7RUFDOUIsZ0NBQWdDO0FBQ2xDOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsb0JBQW9CO0VBQ3BCLGlCQUFpQjtFQUNqQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSwwQkFBMEI7RUFDMUIsYUFBYTtFQUNiLHNCQUFzQjtFQUN0QixtQkFBbUI7RUFDbkIsNEJBQTRCO0VBQzVCLGNBQWM7RUFDZCxrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxTQUFTO0FBQ1g7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLDhCQUE4QjtBQUNoQyIsImZpbGUiOiJyb3N0ZXItY2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRpdGxlLWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGJhY2tncm91bmQ6ICNmMmYyZjI7XG4gIGZvbnQtc2l6ZTogMS4xOGVtO1xuICBmb250LXdlaWdodDogMzAwO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsMCwwLDAuMDUpO1xuICBib3JkZXItbGVmdDogM3B4IHNvbGlkICNiMzFiMWI7XG4gIHBhZGRpbmc6IDAuNWVtIDY2cHggMC41ZW0gMC43NWVtO1xufVxuXG4udGl0bGUtY29kZSB7XG4gIHdpZHRoOiAxOCU7XG4gIGhlaWdodDogMTAwJTtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgcGFkZGluZy1yaWdodDogMC41ZW07XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmbG9hdDogbGVmdDtcbn1cblxuLnNlY3Rpb24tY29udGFpbmVyIHtcbiAgYm9yZGVyOiAxcHggZGFzaGVkICNiMzFiMWI7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGJhY2tncm91bmQ6ICNmMmYyZjI7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwwLDAsMC4wNSk7XG4gIHBhZGRpbmc6IDAuNWVtO1xuICBtYXJnaW4tYm90dG9tOiAxZW07XG59XG5cbi5zZWN0aW9uLWNvbnRhaW5lciBoMyB7XG4gIG1hcmdpbjogMDtcbn1cblxuLnNlY3Rpb24tZGV0YWlscyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2Vlbjtcbn1cbiJdfQ== */"] });
 
 
 /***/ }),
@@ -594,7 +703,7 @@ proto.classlist.classListResponse.prototype.clearClassesList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.classlist.Class.repeatedFields_ = [5];
+proto.classlist.Class.repeatedFields_ = [7];
 
 
 
@@ -631,6 +740,8 @@ proto.classlist.Class.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 2, ""),
     subject: jspb.Message.getFieldWithDefault(msg, 3, ""),
     nbr: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    credit: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 6, ""),
     sectionsList: jspb.Message.toObjectList(msg.getSectionsList(),
     proto.classlist.Section.toObject, includeInstance)
   };
@@ -686,6 +797,14 @@ proto.classlist.Class.deserializeBinaryFromReader = function(msg, reader) {
       msg.setNbr(value);
       break;
     case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCredit(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
+      break;
+    case 7:
       var value = new proto.classlist.Section;
       reader.readMessage(value,proto.classlist.Section.deserializeBinaryFromReader);
       msg.addSections(value);
@@ -747,10 +866,24 @@ proto.classlist.Class.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getCredit();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
   f = message.getSectionsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      5,
+      7,
       f,
       proto.classlist.Section.serializeBinaryToWriter
     );
@@ -831,12 +964,48 @@ proto.classlist.Class.prototype.setNbr = function(value) {
 
 
 /**
- * repeated Section sections = 5;
+ * optional string credit = 5;
+ * @return {string}
+ */
+proto.classlist.Class.prototype.getCredit = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.classlist.Class} returns this
+ */
+proto.classlist.Class.prototype.setCredit = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string description = 6;
+ * @return {string}
+ */
+proto.classlist.Class.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.classlist.Class} returns this
+ */
+proto.classlist.Class.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * repeated Section sections = 7;
  * @return {!Array<!proto.classlist.Section>}
  */
 proto.classlist.Class.prototype.getSectionsList = function() {
   return /** @type{!Array<!proto.classlist.Section>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.classlist.Section, 5));
+    jspb.Message.getRepeatedWrapperField(this, proto.classlist.Section, 7));
 };
 
 
@@ -845,7 +1014,7 @@ proto.classlist.Class.prototype.getSectionsList = function() {
  * @return {!proto.classlist.Class} returns this
 */
 proto.classlist.Class.prototype.setSectionsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+  return jspb.Message.setRepeatedWrapperField(this, 7, value);
 };
 
 
@@ -855,7 +1024,7 @@ proto.classlist.Class.prototype.setSectionsList = function(value) {
  * @return {!proto.classlist.Section}
  */
 proto.classlist.Class.prototype.addSections = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.classlist.Section, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 7, opt_value, proto.classlist.Section, opt_index);
 };
 
 
@@ -1317,7 +1486,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common */ "ofXK");
 /* harmony import */ var _roster_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./roster-routing.module */ "aYUR");
 /* harmony import */ var _roster_roster_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./roster/roster.component */ "Nv32");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _roster_card_roster_card_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./roster-card/roster-card.component */ "STuS");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/expansion */ "7EHt");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/button */ "bTqV");
+/* harmony import */ var _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/sidenav */ "XhcP");
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/icon */ "NFeN");
+/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/input */ "qFsG");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/form-field */ "kmnG");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/select */ "d3UM");
+/* harmony import */ var _angular_material_badge__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material/badge */ "TU8p");
+/* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/card */ "Wp6s");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+
+
+// material 
+
+
+
+
+
+
+
 
 
 
@@ -1325,13 +1517,35 @@ __webpack_require__.r(__webpack_exports__);
 class RosterModule {
 }
 RosterModule.ɵfac = function RosterModule_Factory(t) { return new (t || RosterModule)(); };
-RosterModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({ type: RosterModule });
-RosterModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ imports: [[
+RosterModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵdefineNgModule"]({ type: RosterModule });
+RosterModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵdefineInjector"]({ imports: [[
             _angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
-            _roster_routing_module__WEBPACK_IMPORTED_MODULE_1__["RosterRoutingModule"]
+            _roster_routing_module__WEBPACK_IMPORTED_MODULE_1__["RosterRoutingModule"],
+            _angular_material_expansion__WEBPACK_IMPORTED_MODULE_5__["MatExpansionModule"],
+            _angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatButtonModule"],
+            _angular_material_icon__WEBPACK_IMPORTED_MODULE_8__["MatIconModule"],
+            _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_7__["MatSidenavModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"],
+            _angular_material_input__WEBPACK_IMPORTED_MODULE_9__["MatInputModule"],
+            _angular_material_form_field__WEBPACK_IMPORTED_MODULE_10__["MatFormFieldModule"],
+            _angular_material_select__WEBPACK_IMPORTED_MODULE_11__["MatSelectModule"],
+            _angular_material_badge__WEBPACK_IMPORTED_MODULE_12__["MatBadgeModule"],
+            _angular_material_card__WEBPACK_IMPORTED_MODULE_13__["MatCardModule"]
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](RosterModule, { declarations: [_roster_roster_component__WEBPACK_IMPORTED_MODULE_2__["RosterComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
-        _roster_routing_module__WEBPACK_IMPORTED_MODULE_1__["RosterRoutingModule"]] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵsetNgModuleScope"](RosterModule, { declarations: [_roster_roster_component__WEBPACK_IMPORTED_MODULE_2__["RosterComponent"], _roster_card_roster_card_component__WEBPACK_IMPORTED_MODULE_3__["RosterCardComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
+        _roster_routing_module__WEBPACK_IMPORTED_MODULE_1__["RosterRoutingModule"],
+        _angular_material_expansion__WEBPACK_IMPORTED_MODULE_5__["MatExpansionModule"],
+        _angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatButtonModule"],
+        _angular_material_icon__WEBPACK_IMPORTED_MODULE_8__["MatIconModule"],
+        _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_7__["MatSidenavModule"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"],
+        _angular_material_input__WEBPACK_IMPORTED_MODULE_9__["MatInputModule"],
+        _angular_material_form_field__WEBPACK_IMPORTED_MODULE_10__["MatFormFieldModule"],
+        _angular_material_select__WEBPACK_IMPORTED_MODULE_11__["MatSelectModule"],
+        _angular_material_badge__WEBPACK_IMPORTED_MODULE_12__["MatBadgeModule"],
+        _angular_material_card__WEBPACK_IMPORTED_MODULE_13__["MatCardModule"]] }); })();
 
 
 /***/ })

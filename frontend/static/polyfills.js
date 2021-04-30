@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/tamzid/MicroservicesBenchmark/enrollment-app/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/anthonyngoma/Desktop/Spring-21/ECE-5710/Final-Project/MicroservicesBenchmark/enrollment-app/src/polyfills.ts */"hN/g");
 
 
 /***/ }),

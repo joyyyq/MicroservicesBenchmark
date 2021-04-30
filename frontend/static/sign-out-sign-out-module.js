@@ -55,7 +55,7 @@ class SignOutComponent {
         this.router = router;
     }
     ngOnInit() {
-        console.log("user just signed out");
+        console.log("user just signed  out");
         console.log("erasing username");
         this.studentState.setcurrentUserName('');
         this.studentState.setUsername('');

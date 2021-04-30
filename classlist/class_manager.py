@@ -28,7 +28,6 @@ class classlistService(
     classList_pb2_grpc.classlistServicer
 ):
     def getClassList(self, request, context):
-        print("HELLLO")
         db.hello.insert_one({"count": 5})
         classes = []
         for class_ in db.classInfo.find({}):
@@ -37,6 +36,8 @@ class classlistService(
             temp_class['code'] = class_['course_code'] 
             temp_class['subject'] = class_['subject'] 
             temp_class['nbr'] = class_['nbr'] 
+            temp_class['credit'] = str(class_['credit'])
+            temp_class['description'] = class_['description']
             sections = [] 
             for section_ in class_['course_info']:
                 temp_section = {}
@@ -53,8 +54,8 @@ class classlistService(
                 ))
 
             classes.append(Class(title=temp_class['title'],code=temp_class['code'], 
-                    subject=temp_class['subject'], nbr=temp_class['nbr'], 
-                    sections=sections
+                    subject=temp_class['subject'], nbr=temp_class['nbr'], credit=temp_class['credit'], 
+                    description=temp_class['description'],sections=sections
                 ))
 
         return classListResponse(classes=classes)

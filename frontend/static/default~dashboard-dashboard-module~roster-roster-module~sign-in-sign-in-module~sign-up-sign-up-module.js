@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~dashboard-dashboard-module~roster-roster-module~sign-in-sign-in-module~sign-up-sign-up-module"],{
 
-/***/ "UVcI":
-/*!***************************************************!*\
-  !*** /home/tamzid/node_modules/grpc-web/index.js ***!
-  \***************************************************/
+/***/ "TxjO":
+/*!****************************************!*\
+  !*** ./node_modules/grpc-web/index.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

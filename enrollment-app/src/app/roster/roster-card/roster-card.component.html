@@ -6,14 +6,30 @@
   {{ class.getTitle() }} 
 </h3>
 
-<div *ngFor="let section of class.getSectionsList()" class="section-container">
-  <h3>-- {{ section.getNumber() }} -- </h3>
-  <div class="section-details">
-    <h3>{{ section.getTitle() }}</h3> 
-    <h3>Location: TBD</h3>
-    <h3>{{ section.getTimes()!.getStart() }} - {{ section.getTimes()!.getEnd() }}</h3>
-    <h3>{{ section.getInstructors() }}</h3>
-  </div>
-</div>
+<h3>
+  {{ class.getDescription() }} 
+</h3>
+
+<mat-accordion>
+  <mat-expansion-panel class="drop-sections">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        List all sections
+      </mat-panel-title>
+      <!-- <mat-panel-description>
+      Currently I am {{panelOpenState ? 'open' : 'closed'}}
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    <div *ngFor="let section of class.getSectionsList()" class="section-container">
+      <h3>-- {{ section.getNumber() }} -- {{ class.getCredit() }} credits </h3>
+      <div class="section-details">
+        <h3>{{ section.getTitle() }}</h3> 
+        <h3>Location: TBD</h3>
+        <h3>{{ section.getTimes()!.getStart() }} - {{ section.getTimes()!.getEnd() }}</h3>
+        <h3>{{ section.getInstructors() }}</h3>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
 
 <!-- <h3> <b>{{class.getCodse()}}:</b> {{class.getTitle()}} </h3> -->

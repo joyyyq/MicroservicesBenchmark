@@ -420,7 +420,7 @@ proto.classlist.classListResponse.prototype.clearClassesList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.classlist.Class.repeatedFields_ = [5];
+proto.classlist.Class.repeatedFields_ = [7];
 
 
 
@@ -457,6 +457,8 @@ proto.classlist.Class.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 2, ""),
     subject: jspb.Message.getFieldWithDefault(msg, 3, ""),
     nbr: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    credit: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 6, ""),
     sectionsList: jspb.Message.toObjectList(msg.getSectionsList(),
     proto.classlist.Section.toObject, includeInstance)
   };
@@ -512,6 +514,14 @@ proto.classlist.Class.deserializeBinaryFromReader = function(msg, reader) {
       msg.setNbr(value);
       break;
     case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCredit(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
+      break;
+    case 7:
       var value = new proto.classlist.Section;
       reader.readMessage(value,proto.classlist.Section.deserializeBinaryFromReader);
       msg.addSections(value);
@@ -573,10 +583,24 @@ proto.classlist.Class.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getCredit();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
   f = message.getSectionsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      5,
+      7,
       f,
       proto.classlist.Section.serializeBinaryToWriter
     );
@@ -657,12 +681,48 @@ proto.classlist.Class.prototype.setNbr = function(value) {
 
 
 /**
- * repeated Section sections = 5;
+ * optional string credit = 5;
+ * @return {string}
+ */
+proto.classlist.Class.prototype.getCredit = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.classlist.Class} returns this
+ */
+proto.classlist.Class.prototype.setCredit = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string description = 6;
+ * @return {string}
+ */
+proto.classlist.Class.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.classlist.Class} returns this
+ */
+proto.classlist.Class.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * repeated Section sections = 7;
  * @return {!Array<!proto.classlist.Section>}
  */
 proto.classlist.Class.prototype.getSectionsList = function() {
   return /** @type{!Array<!proto.classlist.Section>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.classlist.Section, 5));
+    jspb.Message.getRepeatedWrapperField(this, proto.classlist.Section, 7));
 };
 
 
@@ -671,7 +731,7 @@ proto.classlist.Class.prototype.getSectionsList = function() {
  * @return {!proto.classlist.Class} returns this
 */
 proto.classlist.Class.prototype.setSectionsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+  return jspb.Message.setRepeatedWrapperField(this, 7, value);
 };
 
 
@@ -681,7 +741,7 @@ proto.classlist.Class.prototype.setSectionsList = function(value) {
  * @return {!proto.classlist.Section}
  */
 proto.classlist.Class.prototype.addSections = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.classlist.Section, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 7, opt_value, proto.classlist.Section, opt_index);
 };
 
 

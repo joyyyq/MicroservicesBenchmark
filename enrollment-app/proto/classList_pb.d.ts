@@ -53,6 +53,12 @@ export class Class extends jspb.Message {
   getNbr(): string;
   setNbr(value: string): Class;
 
+  getCredit(): string;
+  setCredit(value: string): Class;
+
+  getDescription(): string;
+  setDescription(value: string): Class;
+
   getSectionsList(): Array<Section>;
   setSectionsList(value: Array<Section>): Class;
   clearSectionsList(): Class;
@@ -72,6 +78,8 @@ export namespace Class {
     code: string,
     subject: string,
     nbr: string,
+    credit: string,
+    description: string,
     sectionsList: Array<Section.AsObject>,
   }
 }
