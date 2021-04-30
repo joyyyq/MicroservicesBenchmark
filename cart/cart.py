@@ -30,7 +30,7 @@ class cartService(
         for course in course_info:
             if course["section"] == request.section:
                 print(course)
-                request_1 = {"title":title,"section":request.section,"classNumber":course["class_numbers"],"days":course["days"],"time":course["times"], "instructor":course["instructors"],"credit":credit}
+                request_1 = {"courseCode":request.courseCode,"title":title,"section":request.section,"classNumber":course["class_numbers"],"days":course["days"],"time":course["times"], "instructor":course["instructors"],"credit":credit}
                 cart = db_2.cartInfo.find_one({"userName":request.userName})["cart"]
                 cart.append(request_1)
                 db_2.cartInfo.update_one({"userName":request.userName}, {"$set" : {"cart" : cart}}) # updating the cart of the user after adding the new class

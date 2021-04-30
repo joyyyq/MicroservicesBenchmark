@@ -2,7 +2,7 @@ import * as grpcWeb from 'grpc-web';
 // Option 2: import_style=typescript
 import { cartClient } from '../../../proto/StudentCartServiceClientPb';
 
-import { classRequest, classResponse, cartRequest, cartResponse, cartSingleResponse } from '../../../proto/studentCart_pb';
+import { cartRequest, cartResponse, cartSingleResponse } from '../../../proto/studentCart_pb';
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

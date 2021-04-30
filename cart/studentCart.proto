@@ -29,4 +29,5 @@ message cartSingleResponse {
   string time = 5;
   string instructor = 6;
   int64 credit = 7;
+  string courseCode = 8;
 }

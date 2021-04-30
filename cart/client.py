@@ -21,7 +21,7 @@ from studentCart_pb2 import (
 # response = client.addClass(request)
 # print(response)
 print("hello")
-request = classRequest(userName= "ta326" ,courseCode="ECE 2300", section = "LEC 001")
+request = classRequest(userName= "ta326" ,courseCode="ECE 5710", section = "LEC 001")
 response = client.addClass(request)
 print(response)
 cart_request = cartRequest(userName = "ta326")

@@ -773,7 +773,8 @@ proto.cart.cartSingleResponse.toObject = function(includeInstance, msg) {
     days: jspb.Message.getFieldWithDefault(msg, 4, ""),
     time: jspb.Message.getFieldWithDefault(msg, 5, ""),
     instructor: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    credit: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    credit: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    coursecode: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -837,6 +838,10 @@ proto.cart.cartSingleResponse.deserializeBinaryFromReader = function(msg, reader
     case 7:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCredit(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCoursecode(value);
       break;
     default:
       reader.skipField();
@@ -913,6 +918,13 @@ proto.cart.cartSingleResponse.serializeBinaryToWriter = function(message, writer
   if (f !== 0) {
     writer.writeInt64(
       7,
+      f
+    );
+  }
+  f = message.getCoursecode();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -1042,6 +1054,24 @@ proto.cart.cartSingleResponse.prototype.getCredit = function() {
  */
 proto.cart.cartSingleResponse.prototype.setCredit = function(value) {
   return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional string courseCode = 8;
+ * @return {string}
+ */
+proto.cart.cartSingleResponse.prototype.getCoursecode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.cart.cartSingleResponse} returns this
+ */
+proto.cart.cartSingleResponse.prototype.setCoursecode = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
