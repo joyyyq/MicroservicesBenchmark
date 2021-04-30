@@ -79,7 +79,10 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </div>
-<!-- <div> -->
-  <button>Next</button>
-<!-- </div> -->
+
+</div>
+<div class="btn">
+  <button mat-stroked-button color="accent" type="submit" [disabled]="loading" class="btn btn-primary" (click)="buttonSubmit()">
+      <a  class="btn btn-link">Drop</a>
+  </button>
 </div>

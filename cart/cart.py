@@ -43,7 +43,7 @@ class cartService(
         i = 0 # used to find the position of the class in the cart which will be removed
         print(cart)
         for Class in cart:
-            if Class["section"] == request.section:
+            if Class["courseCode"] == request.courseCode:
                 cart.pop(i)
                 print(cart)
                 db_2.cartInfo.update_one({"userName":request.userName}, {"$set" : {"cart" : cart}})
