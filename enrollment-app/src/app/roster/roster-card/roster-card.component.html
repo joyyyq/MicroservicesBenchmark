@@ -1,0 +1,19 @@
+
+<h3 class="title-container"> 
+  <div class="title-code">
+    {{ class.getCode() }} 
+  </div>
+  {{ class.getTitle() }} 
+</h3>
+
+<div *ngFor="let section of class.getSectionsList()" class="section-container">
+  <h3>-- {{ section.getNumber() }} -- </h3>
+  <div class="section-details">
+    <h3>{{ section.getTitle() }}</h3> 
+    <h3>Location: TBD</h3>
+    <h3>{{ section.getTimes()!.getStart() }} - {{ section.getTimes()!.getEnd() }}</h3>
+    <h3>{{ section.getInstructors() }}</h3>
+  </div>
+</div>
+
+<!-- <h3> <b>{{class.getCodse()}}:</b> {{class.getTitle()}} </h3> -->

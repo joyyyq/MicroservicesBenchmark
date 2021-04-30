@@ -1,7 +1,9 @@
 
+<div class="container">
+  <h1 id="aria-main">Electrical &amp; Computer Engineering (ECE)</h1>
+  <div *ngFor="let class of classes">
 
+    <app-roster-card [class]="class"> </app-roster-card>
+  </div>
 
-
-<button (click)=call()>
-  <a  class="btn btn-link">Login</a>
-</button>
+</div>
