@@ -18,11 +18,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 
+// Shared 
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [RosterComponent, RosterCardComponent],
   imports: [
     CommonModule,
     RosterRoutingModule,
+    SharedModule, 
     MatExpansionModule, 
     MatButtonModule, 
     MatIconModule, 

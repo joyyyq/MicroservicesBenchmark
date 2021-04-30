@@ -36,22 +36,22 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {
     console.log("construct");
-    console.log("Username is", studentState.getUsername());
+    // console.log("Username is", studentState.getUsername());
   }
 
   ngOnInit(): void {
     console.log("onInit");
-    var username = this.studentState.getUsername();
-    console.log("getting response");
-    this.client.getCart(username).asObservable().subscribe(val =>  {
-      this.cart = val;
-      for (let i=0; i<this.cart.length; i++) {
-        var element : PeriodicElement = { position:i+1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), status: "Enrolled",
-         number: this.cart[i].getClassnumber(), days: this.cart[i].getDays(), time: this.cart[i].getTime(), instructor:this.cart[i].getInstructor() } ;
-        this.ELEMENT_DATA.push(element);
-      }
-      console.log("cart after subscribing is is", this.cart);
-    });
+    // var username = this.studentState.getUsername();
+    // console.log("getting response");
+    // this.client.getCart(username).asObservable().subscribe(val =>  {
+    //   this.cart = val;
+    //   for (let i=0; i<this.cart.length; i++) {
+    //     var element : PeriodicElement = { position:i+1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), status: "Enrolled",
+    //      number: this.cart[i].getClassnumber(), days: this.cart[i].getDays(), time: this.cart[i].getTime(), instructor:this.cart[i].getInstructor() } ;
+    //     this.ELEMENT_DATA.push(element);
+    //   }
+    //   console.log("cart after subscribing is is", this.cart);
+    // });
   }
   
   /** Whether the number of selected elements matches the total number of rows. */
