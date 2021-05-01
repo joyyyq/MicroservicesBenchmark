@@ -9,11 +9,22 @@
             required/>
     </mat-form-field>
     <mat-card *ngIf="searchResults.length != 0">
-      <a (click)="visitClass(class.getNbr())"
-        class="search-card" 
-        *ngFor="let class of searchResults">
-        <strong>{{class.getCode()}} </strong>{{class.getTitle()}}
-      </a>
-    </mat-card>
+      <div *ngIf="isRoster;else search_dashboard">
+        <a (click)="visitClass(class.getNbr())"
+          class="search-card" 
+          *ngFor="let class of searchResults">
+          <strong>{{class.getCode()}} </strong>{{class.getTitle()}}
+        </a>
+      </div>
 
+      <ng-template #search_dashboard>
+        <a (click)="visitClass(class.getNbr())"
+          class="search-card" 
+          *ngFor="let class of searchResults">
+          <strong>{{class.getCode()}} </strong>{{class.getTitle()}}
+        </a>
+      </ng-template>
+
+
+    </mat-card>
 </div>

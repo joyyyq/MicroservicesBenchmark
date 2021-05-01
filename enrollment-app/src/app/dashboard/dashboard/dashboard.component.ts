@@ -5,6 +5,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { CartClientService } from '../../services/cart-client.service';
 import { StudentStateService } from '../../services/student-state.service';
 import { cartSingleResponse } from '../../../../proto/studentCart_pb';
+import { Class } from '../../../../proto/classList_pb';
+import { ClasslistClientService } from '../../services/classlist-client.service';
 
 export interface PeriodicElement {
   position: number;
@@ -24,6 +26,7 @@ export interface PeriodicElement {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  classes: Class[] = []
   public cart:cartSingleResponse[] = [];
   public dropList:string[] = [];
   ELEMENT_DATA: PeriodicElement[] = [];
@@ -34,7 +37,8 @@ export class DashboardComponent implements OnInit {
   submitted = false;
 
   constructor(
-    private client: CartClientService,
+    private cartClient: CartClientService,
+    private classlistClient: ClasslistClientService,
     private studentState: StudentStateService,
     private router: Router
   ) {
@@ -46,7 +50,7 @@ export class DashboardComponent implements OnInit {
     console.log("onInit");
     var username = this.studentState.getUsername();
     console.log("getting response");
-    this.client.getCart(username).asObservable().subscribe(val =>  {
+    this.cartClient.getCart(username).asObservable().subscribe(val =>  {
       this.cart = val;
       for (let i=0; i<this.cart.length; i++) {
         var element : PeriodicElement = { position:i+1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), status: "Enrolled",
@@ -55,6 +59,8 @@ export class DashboardComponent implements OnInit {
       }
       console.log("cart after subscribing is is", this.cart);
     });
+    // fetch all classes 
+    this.classlistClient.classCollections['SP21'] = this.classes;
   }
   
   /** Whether the number of selected elements matches the total number of rows. */
@@ -83,9 +89,9 @@ export class DashboardComponent implements OnInit {
 
   buttonSubmit() {
     for (let item of this.selection.selected) {
-        this.client.dropClass(this.studentState.getUsername(),item.course)      
+        this.cartClient.dropClass(this.studentState.getUsername(),item.course)      
     }
-    this.client.getCart(this.studentState.getUsername()).asObservable().subscribe(val =>  {
+    this.cartClient.getCart(this.studentState.getUsername()).asObservable().subscribe(val =>  {
       this.ELEMENT_DATA = [];
       this.cart = val;
       for (let i=0; i<this.cart.length; i++) {

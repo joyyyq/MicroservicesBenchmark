@@ -2329,17 +2329,17 @@ class DashboardComponent {
     }
     ngOnInit() {
         console.log("onInit");
-        // var username = this.studentState.getUsername();
-        // console.log("getting response");
-        // this.client.getCart(username).asObservable().subscribe(val =>  {
-        //   this.cart = val;
-        //   for (let i=0; i<this.cart.length; i++) {
-        //     var element : PeriodicElement = { position:i+1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), status: "Enrolled",
-        //      number: this.cart[i].getClassnumber(), days: this.cart[i].getDays(), time: this.cart[i].getTime(), instructor:this.cart[i].getInstructor() } ;
-        //     this.ELEMENT_DATA.push(element);
-        //   }
-        //   console.log("cart after subscribing is is", this.cart);
-        // });
+        var username = this.studentState.getUsername();
+        console.log("getting response");
+        this.client.getCart(username).asObservable().subscribe(val => {
+            this.cart = val;
+            for (let i = 0; i < this.cart.length; i++) {
+                var element = { position: i + 1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), status: "Enrolled",
+                    number: this.cart[i].getClassnumber(), days: this.cart[i].getDays(), time: this.cart[i].getTime(), instructor: this.cart[i].getInstructor() };
+                this.ELEMENT_DATA.push(element);
+            }
+            console.log("cart after subscribing is is", this.cart);
+        });
     }
     /** Whether the number of selected elements matches the total number of rows. */
     isAllSelected() {
@@ -2365,6 +2365,18 @@ class DashboardComponent {
         for (let item of this.selection.selected) {
             this.client.dropClass(this.studentState.getUsername(), item.course);
         }
+        this.client.getCart(this.studentState.getUsername()).asObservable().subscribe(val => {
+            this.ELEMENT_DATA = [];
+            this.cart = val;
+            for (let i = 0; i < this.cart.length; i++) {
+                var element = { position: i + 1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), status: "Enrolled",
+                    number: this.cart[i].getClassnumber(), days: this.cart[i].getDays(), time: this.cart[i].getTime(), instructor: this.cart[i].getInstructor() };
+                this.ELEMENT_DATA.push(element);
+            }
+            this.dataSource.data = this.ELEMENT_DATA;
+            //this.changeDetectorRefs.detectChanges();
+            console.log("element data after re subscribing is", this.ELEMENT_DATA);
+        });
     }
 }
 DashboardComponent.ɵfac = function DashboardComponent_Factory(t) { return new (t || DashboardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_services_cart_client_service__WEBPACK_IMPORTED_MODULE_3__["CartClientService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_services_student_state_service__WEBPACK_IMPORTED_MODULE_4__["StudentStateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"])); };

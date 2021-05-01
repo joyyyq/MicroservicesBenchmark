@@ -9,9 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
   @Input() classes: Class[];
+  @Input() isRoster: boolean;
+
   values = ''
   searchResults: Class[] = []; 
-  constructor(private router: Router, private route: ActivatedRoute) { this.classes = [];}
+  constructor(private router: Router, private route: ActivatedRoute) { this.classes = []; this.isRoster = false}
 
   ngOnInit(): void {
   }
