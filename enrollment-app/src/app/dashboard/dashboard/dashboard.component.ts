@@ -25,10 +25,13 @@ export interface PeriodicElement {
 })
 export class DashboardComponent implements OnInit {
   public cart:cartSingleResponse[] = [];
+  public dropList:string[] = [];
   ELEMENT_DATA: PeriodicElement[] = [];
   displayedColumns: string[] = ['select', 'position', 'course', 'name', 'units', 'number', 'days', 'time', 'instructor', 'status'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
+  loading = false;
+  submitted = false;
 
   constructor(
     private client: CartClientService,
@@ -66,6 +69,8 @@ export class DashboardComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
+      this.dropList.push()
+    
   }
 
   /** The label for the checkbox on the passed row */
@@ -76,4 +81,9 @@ export class DashboardComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
+  buttonSubmit() {
+    for (let item of this.selection.selected) {
+        this.client.dropClass(this.studentState.getUsername(),item.course)      
+    }
+  }
 }

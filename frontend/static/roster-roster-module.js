@@ -132,46 +132,11 @@ class RosterComponent {
         this.classes = [];
     }
     ngOnInit() {
-        // let a: Class = new Class();
-        // a.setCode("ECE 2300");
-        // a.setNbr("2300");
-        // a.setTitle("The Computing Technology Inside Your Smartphone");
-        // a.setDescription('The organization of the computer system found within devices used in everyday living, such as smartphones and tablets. Computer systems are presented in a bottom up fashion, from bits to digital logic, computer organization, instruction sets, assembly language, and the connection to high-level languages. Discussion of the computing engines found in smart phones, tablets, and wearables.');
-        // a.setCredit('3');
-        // let b: Section = new Section();
-        // b.setNumber("11324");
-        // b.setTitle("LEC 001");
-        // b.setInstructors("David Albonesi (dha7)");
-        // b.getInstructors
-        // b.setDays("TR");
-        // let d: Section = new Section();
-        // d.setNumber("1135");
-        // d.setTitle("LEC 002");
-        // d.setInstructors("David Albonesi (dha7)");
-        // d.getInstructors
-        // d.setDays("TR");
-        // let c: Time = new Time();
-        // c.setStart("11:225PM");
-        // c.setEnd("12:40PM");
-        // b.setTimes(c);
-        // d.setTimes(c);
-        // a.addSections(b);
-        // a.addSections(d);
-        // this.classes.push(a);
-        // this.classes.push(a);
-        // this.classes.push(a);
-        // this.classes.push(a);
-        // let DD = JSON.stringify(a.toObject()); 
-        // let DD = a.serializeBinary()
-        // console.log(DD);
-        // let x = Class.deserializeBinary(DD);
-        // console.log(x.getDescription());
         this.client.getClassList('SP21').asObservable().subscribe(val => {
             this.classes = val;
             console.log(this.classes);
             this.client.classCollections['SP21'] = this.classes;
         });
-        // this.client.classCollections['SP21'] = this.classes;
     }
 }
 RosterComponent.ɵfac = function RosterComponent_Factory(t) { return new (t || RosterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_classlist_client_service__WEBPACK_IMPORTED_MODULE_1__["ClasslistClientService"])); };

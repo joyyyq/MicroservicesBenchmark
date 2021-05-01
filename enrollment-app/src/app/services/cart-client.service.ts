@@ -2,7 +2,7 @@ import * as grpcWeb from 'grpc-web';
 // Option 2: import_style=typescript
 import { cartClient } from '../../../proto/StudentCartServiceClientPb';
 
-import { cartRequest, cartResponse, cartSingleResponse } from '../../../proto/studentCart_pb';
+import { cartRequest, cartResponse, cartSingleResponse, classRequest,classResponse } from '../../../proto/studentCart_pb';
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -51,6 +51,24 @@ export class CartClientService {
     }).catch(() => {
       console.log("Wait is over, callback")
     });
+    return result;
+  }
+  dropClass(username:string,coursecode: string) {
+    console.log("dropClass service");
+    var request = new classRequest; 
+    request.setUsername(username);
+    request.setCoursecode(coursecode);
+    request.setSection("");
+    let result : boolean = true;
+    this.client.dropClass(
+      request,{'custom-header-1': 'value1'},
+      ( err: grpcWeb.Error, response: classResponse) => {
+        if (err) {
+          CartClientService.ERROR('Error code: ' + err.code + ' "' + err.message + '"');
+        } 
+        result = response.getSuccess();
+      }
+    )
     return result;
   }
 }
