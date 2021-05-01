@@ -85,5 +85,17 @@ export class DashboardComponent implements OnInit {
     for (let item of this.selection.selected) {
         this.client.dropClass(this.studentState.getUsername(),item.course)      
     }
+    this.client.getCart(this.studentState.getUsername()).asObservable().subscribe(val =>  {
+      this.ELEMENT_DATA = [];
+      this.cart = val;
+      for (let i=0; i<this.cart.length; i++) {
+        var element : PeriodicElement = { position:i+1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), status: "Enrolled",
+         number: this.cart[i].getClassnumber(), days: this.cart[i].getDays(), time: this.cart[i].getTime(), instructor:this.cart[i].getInstructor() } ;
+        this.ELEMENT_DATA.push(element);
+      }
+      this.dataSource.data = this.ELEMENT_DATA;
+      //this.changeDetectorRefs.detectChanges();
+      console.log("element data after re subscribing is", this.ELEMENT_DATA);
+    });
   }
 }
