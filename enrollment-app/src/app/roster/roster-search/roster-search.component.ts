@@ -3,17 +3,15 @@ import {Class} from '../../../../proto/classList_pb';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: 'app-roster-search',
+  templateUrl: './roster-search.component.html',
+  styleUrls: ['./roster-search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class RosterSearchComponent implements OnInit {
   @Input() classes: Class[];
-  @Input() isRoster: boolean;
-
   values = ''
   searchResults: Class[] = []; 
-  constructor(private router: Router, private route: ActivatedRoute) { this.classes = []; this.isRoster = false}
+  constructor(private router: Router, private route: ActivatedRoute) { this.classes = [];}
 
   ngOnInit(): void {
   }

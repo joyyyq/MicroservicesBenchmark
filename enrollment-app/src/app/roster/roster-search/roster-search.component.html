@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>
+    SEARCH
+  </h2>
+    <mat-form-field style=" margin-bottom: -1.25em" appearance="outline">
+        <mat-label>Search</mat-label>
+        <input (input)="search($event)" matInput type="text"
+            autocomplete="off" 
+            required/>
+    </mat-form-field>
+    <mat-card *ngIf="searchResults.length != 0">
+      <a (click)="visitClass(class.getNbr())"
+        class="search-card" 
+        *ngFor="let class of searchResults">
+        <strong>{{class.getCode()}} </strong>{{class.getTitle()}}
+      </a>
+    </mat-card>
+
+</div>

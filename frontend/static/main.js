@@ -258,7 +258,7 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: 'dashboard',
-        loadChildren: () => Promise.all(/*! import() | dashboard-dashboard-module */[__webpack_require__.e("default~dashboard-dashboard-module~roster-roster-module~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("common"), __webpack_require__.e("dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./dashboard/dashboard.module */ "TDBs")).then(m => m.DashboardModule)
+        loadChildren: () => Promise.all(/*! import() | dashboard-dashboard-module */[__webpack_require__.e("default~dashboard-dashboard-module~roster-roster-module~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("default~dashboard-dashboard-module~roster-roster-module"), __webpack_require__.e("dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./dashboard/dashboard.module */ "TDBs")).then(m => m.DashboardModule)
     },
     {
         path: 'sign-up',
@@ -274,7 +274,7 @@ const routes = [
     },
     {
         path: 'roster',
-        loadChildren: () => Promise.all(/*! import() | roster-roster-module */[__webpack_require__.e("default~dashboard-dashboard-module~roster-roster-module~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("common"), __webpack_require__.e("roster-roster-module")]).then(__webpack_require__.bind(null, /*! ./roster/roster.module */ "vgxn")).then(m => m.RosterModule)
+        loadChildren: () => Promise.all(/*! import() | roster-roster-module */[__webpack_require__.e("default~dashboard-dashboard-module~roster-roster-module~sign-in-sign-in-module~sign-up-sign-up-module"), __webpack_require__.e("default~dashboard-dashboard-module~roster-roster-module"), __webpack_require__.e("roster-roster-module")]).then(__webpack_require__.bind(null, /*! ./roster/roster.module */ "vgxn")).then(m => m.RosterModule)
     },
     {
         path: '',

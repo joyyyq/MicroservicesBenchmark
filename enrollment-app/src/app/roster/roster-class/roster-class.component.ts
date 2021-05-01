@@ -13,15 +13,18 @@ export class RosterClassComponent implements OnInit {
   group: string = ''; 
   classNum: string = ''; 
   class_: Class = new Class(); 
-
-  constructor(private client: ClasslistClientService, private router: Router, private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
+  classes: Class[] = []; 
+  constructor(private client: ClasslistClientService, private route: ActivatedRoute) {
     this.semester = this.route.snapshot.url[1].path; 
     this.group    = this.route.snapshot.url[2].path; 
     this.classNum    = this.route.snapshot.url[3].path; 
-    let classes = this.client.classCollections[this.semester]; 
-    this.class_ = classes.filter(temp => temp.getCode() == (this.group + " " + this.classNum))[0];
+    this.route.data.subscribe((r) => console.log(r));
+    this.classes = this.route.snapshot.data['classes'];
+    console.log(this.classes);
+    this.class_ = this.classes.filter(temp => temp.getCode() == (this.group + " " + this.classNum))[0];
+  }
+
+  ngOnInit(): void {  
   }
 
 }

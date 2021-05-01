@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RosterComponent } from './roster/roster.component'; 
 import { RosterClassComponent } from './roster-class/roster-class.component';
+import { RosterClassResolver } from './roster-class/rester-class.resolver';
 
 const routes: Routes = [
   {
@@ -11,12 +12,14 @@ const routes: Routes = [
   {
     path: 'class/:year/ECE/:code', 
     component: RosterClassComponent,
-    data : {class : {}}
+    resolve: {
+      classes: RosterClassResolver
+    }
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule], 
 })
 export class RosterRoutingModule { }

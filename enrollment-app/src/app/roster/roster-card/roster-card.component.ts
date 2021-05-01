@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import {Class, Section, Time, classListRequest, classListResponse} from '../../../../proto/classList_pb';
 
@@ -8,9 +8,12 @@ import {Class, Section, Time, classListRequest, classListResponse} from '../../.
   styleUrls: ['./roster-card.component.css']
 })
 
-export class RosterCardComponent {
+export class RosterCardComponent implements OnInit {
   @Input() class: Class;
 
-  constructor() { this.class = new Class(); }
+  constructor() { this.class = new Class();}
 
+  ngOnInit(): void {
+    console.log(this.class); 
+  }
 }

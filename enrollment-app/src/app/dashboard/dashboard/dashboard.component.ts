@@ -59,8 +59,6 @@ export class DashboardComponent implements OnInit {
       }
       console.log("cart after subscribing is is", this.cart);
     });
-    // fetch all classes 
-    this.classlistClient.classCollections['SP21'] = this.classes;
   }
   
   /** Whether the number of selected elements matches the total number of rows. */
