@@ -17,7 +17,7 @@ export class RosterComponent implements OnInit {
     this.client.getClassList('SP21').asObservable().subscribe(val =>  {
       this.classes = val;
       console.log(this.classes);
-    }
-    )
+      this.client.classCollections['SP21'] = this.classes;
+    })    
   }
 }

@@ -9,7 +9,9 @@
             required/>
     </mat-form-field>
     <mat-card *ngIf="searchResults.length != 0">
-      <a href="#" class="search-card"*ngFor="let class of searchResults">
+      <a (click)="visitClass(class.getNbr())"
+        class="search-card" 
+        *ngFor="let class of searchResults">
         <strong>{{class.getCode()}} </strong>{{class.getTitle()}}
       </a>
     </mat-card>

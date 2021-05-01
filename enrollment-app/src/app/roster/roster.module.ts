@@ -20,9 +20,10 @@ import { MatCardModule } from '@angular/material/card';
 
 // Shared 
 import { SharedModule } from '../shared/shared.module';
+import { RosterClassComponent } from './roster-class/roster-class.component';
 
 @NgModule({
-  declarations: [RosterComponent, RosterCardComponent],
+  declarations: [RosterComponent, RosterCardComponent, RosterClassComponent],
   imports: [
     CommonModule,
     RosterRoutingModule,

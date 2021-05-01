@@ -16,6 +16,7 @@ mat-card {
   border-left: 3px solid #b31b1b;
   background: #f2f2f2;
   background: rgba(0,0,0,0.05);
+  cursor: pointer;
 }
 
 :not(mat-card:hover) > .search-card:first-child {
@@ -24,3 +25,9 @@ mat-card {
   background: rgba(0,0,0,0.05);
 }
 
+/* :not(matInput:focus) > mat-card {
+  display: none;
+}
+matInput:focus > mat-card {
+  display: block;
+} */

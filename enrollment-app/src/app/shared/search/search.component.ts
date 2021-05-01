@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Class} from '../../../../proto/classList_pb';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -10,7 +11,7 @@ export class SearchComponent implements OnInit {
   @Input() classes: Class[];
   values = ''
   searchResults: Class[] = []; 
-  constructor() { this.classes = [];}
+  constructor(private router: Router, private route: ActivatedRoute) { this.classes = [];}
 
   ngOnInit(): void {
   }
@@ -22,5 +23,11 @@ export class SearchComponent implements OnInit {
       this.searchResults = this.classes.filter(
         class_ => ( class_.getTitle().includes(query) || class_.getCode().includes(query) ));
     }
+  }
+
+  visitClass(classNum: any) {
+    this.router.navigate(
+      ['class/SP21/ECE/'+classNum], { relativeTo: this.route },
+    );
   }
 }

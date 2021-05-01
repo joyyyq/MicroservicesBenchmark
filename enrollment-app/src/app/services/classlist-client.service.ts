@@ -13,6 +13,8 @@ import { BehaviorSubject } from 'rxjs';
 export class ClasslistClientService {
 
   private client: classlistClient;
+  classCollections: {[val: string]: Class[]} = {};
+
   constructor() {this.client = new classlistClient('http://localhost:8081');}
   
   getClassList(year: string): BehaviorSubject<Class[]> {
