@@ -1,9 +1,9 @@
 # Microservices Benchmark
-The application implements a student class enrollment service, build with Go and Python, and starting from the open-source project https://github.com/harlow/go-micro-services. 
+The application implements a student class enrollment service consisting of several microservices including roster/login/signup/student dashboard/recommendation. The frontend is built with Angular, backend built with mongoDb, communicate between services built with gRPC. Finally we used Docker to build the applications. 
 
-Supported actions: 
-- search the classes they are interested in by multiple ways (class number, class name, class field, etc.)
-- add courses to the enrollment cart  if the added class is not full
-- finish enrollment at checkout
-- leave reviews/comments for class taken 
-- get class recommendation based on students' preference and graduation requirement
+Supported actions:
+- create a student account
+- search for the classes users are interested in by multiple ways (class number, class name, class field, etc.)
+- get class recommendation based on students' preference
+- enroll in a courses given the new added class is not at fully capacity and does not conflict with any existing ones
+- check reviews/comments from previous stduents who took the class
