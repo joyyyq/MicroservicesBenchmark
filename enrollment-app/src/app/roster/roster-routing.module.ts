@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RosterComponent } from './roster/roster.component'; 
 import { RosterClassComponent } from './roster-class/roster-class.component';
-import { RosterClassResolver } from './roster-class/rester-class.resolver';
+import { RosterClassResolver } from './roster-class/roster-class.resolver';
 
 const routes: Routes = [
   {

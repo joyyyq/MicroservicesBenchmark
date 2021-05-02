@@ -1,5 +1,37 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["roster-roster-module"],{
 
+/***/ "6pfS":
+/*!**************************************************************!*\
+  !*** ./src/app/roster/roster-class/roster-class.resolver.ts ***!
+  \**************************************************************/
+/*! exports provided: RosterClassResolver */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RosterClassResolver", function() { return RosterClassResolver; });
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _services_classlist_client_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/classlist-client.service */ "9GJm");
+
+
+
+class RosterClassResolver {
+    constructor(client) {
+        this.client = client;
+    }
+    resolve(route, state) {
+        let ob = this.client.getClassList("SP21").asObservable();
+        ob.subscribe(x => console.log(x));
+        return ob.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["take"])(2));
+    }
+}
+RosterClassResolver.ɵfac = function RosterClassResolver_Factory(t) { return new (t || RosterClassResolver)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_services_classlist_client_service__WEBPACK_IMPORTED_MODULE_2__["ClasslistClientService"])); };
+RosterClassResolver.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: RosterClassResolver, factory: RosterClassResolver.ɵfac, providedIn: 'root' });
+
+
+/***/ }),
+
 /***/ "Nv32":
 /*!***************************************************!*\
   !*** ./src/app/roster/roster/roster.component.ts ***!
@@ -63,7 +95,7 @@ RosterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.classes);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("classes", ctx.classes);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"], _roster_search_roster_search_component__WEBPACK_IMPORTED_MODULE_3__["RosterSearchComponent"], _roster_card_roster_card_component__WEBPACK_IMPORTED_MODULE_4__["RosterCardComponent"]], styles: ["#identity[_ngcontent-%COMP%] {\n  padding: 25px 0;\n  background: #fff;\n}\n\n.content[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n}\n\n.search[_ngcontent-%COMP%] {\n  width: 35%; \n  padding: 0px 0px 20px 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJvc3Rlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZUFBZTtFQUNmLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsMEJBQTBCO0FBQzVCIiwiZmlsZSI6InJvc3Rlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2lkZW50aXR5IHtcbiAgcGFkZGluZzogMjVweCAwO1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG4uY29udGVudCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG59XG5cbi5zZWFyY2gge1xuICB3aWR0aDogMzUlOyBcbiAgcGFkZGluZzogMHB4IDBweCAyMHB4IDIwcHg7XG59XG4iXX0= */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"], _roster_search_roster_search_component__WEBPACK_IMPORTED_MODULE_3__["RosterSearchComponent"], _roster_card_roster_card_component__WEBPACK_IMPORTED_MODULE_4__["RosterCardComponent"]], styles: ["#identity[_ngcontent-%COMP%] {\n  padding: 25px 0;\n  background: #fff;\n}\n\n.content[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n}\n\n.search[_ngcontent-%COMP%] {\n  width: 15%; \n  padding: 0px 0px 20px 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJvc3Rlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZUFBZTtFQUNmLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsMEJBQTBCO0FBQzVCIiwiZmlsZSI6InJvc3Rlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2lkZW50aXR5IHtcbiAgcGFkZGluZzogMjVweCAwO1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG4uY29udGVudCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG59XG5cbi5zZWFyY2gge1xuICB3aWR0aDogMTUlOyBcbiAgcGFkZGluZzogMHB4IDBweCAyMHB4IDIwcHg7XG59XG4iXX0= */"] });
 
 
 /***/ }),
@@ -121,6 +153,9 @@ function RosterCardComponent_div_11_Template(rf, ctx) { if (rf & 1) {
 } }
 class RosterCardComponent {
     constructor() { this.class = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_0__["Class"](); }
+    ngOnInit() {
+        // console.log(this.class); 
+    }
 }
 RosterCardComponent.ɵfac = function RosterCardComponent_Factory(t) { return new (t || RosterCardComponent)(); };
 RosterCardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: RosterCardComponent, selectors: [["app-roster-card"]], inputs: { class: "class" }, decls: 12, vars: 4, consts: [[1, "title-container"], [1, "title-code"], [1, "drop-sections"], ["class", "section-container", 4, "ngFor", "ngForOf"], [1, "section-container"], [1, "section-details"]], template: function RosterCardComponent_Template(rf, ctx) { if (rf & 1) {
@@ -170,7 +205,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var _roster_roster_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./roster/roster.component */ "Nv32");
 /* harmony import */ var _roster_class_roster_class_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./roster-class/roster-class.component */ "gy0x");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _roster_class_roster_class_resolver__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./roster-class/roster-class.resolver */ "6pfS");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -184,15 +221,17 @@ const routes = [
     {
         path: 'class/:year/ECE/:code',
         component: _roster_class_roster_class_component__WEBPACK_IMPORTED_MODULE_2__["RosterClassComponent"],
-        data: { class: {} }
+        resolve: {
+            classes: _roster_class_roster_class_resolver__WEBPACK_IMPORTED_MODULE_3__["RosterClassResolver"]
+        }
     }
 ];
 class RosterRoutingModule {
 }
 RosterRoutingModule.ɵfac = function RosterRoutingModule_Factory(t) { return new (t || RosterRoutingModule)(); };
-RosterRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({ type: RosterRoutingModule });
-RosterRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](RosterRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
+RosterRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineNgModule"]({ type: RosterRoutingModule });
+RosterRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵsetNgModuleScope"](RosterRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
 
 
 /***/ }),
@@ -219,29 +258,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class RosterClassComponent {
-    constructor(client, router, route) {
+    constructor(client, route) {
         this.client = client;
-        this.router = router;
         this.route = route;
         this.semester = '';
         this.group = '';
         this.classNum = '';
         this.class_ = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_0__["Class"]();
         this.classes = [];
-    }
-    ngOnInit() {
         this.semester = this.route.snapshot.url[1].path;
         this.group = this.route.snapshot.url[2].path;
         this.classNum = this.route.snapshot.url[3].path;
-        this.client.getClassList("SP21").asObservable().subscribe(val => {
-            this.classes = val;
-            console.log("amigo");
-            console.log(this.classes);
-            this.class_ = this.classes.filter(temp => temp.getCode() == (this.group + " " + this.classNum))[0];
-        });
+        this.route.data.subscribe((r) => console.log(r));
+        this.classes = this.route.snapshot.data['classes'];
+        console.log(this.classes);
+        this.class_ = this.classes.filter(temp => temp.getCode() == (this.group + " " + this.classNum))[0];
+    }
+    ngOnInit() {
     }
 }
-RosterClassComponent.ɵfac = function RosterClassComponent_Factory(t) { return new (t || RosterClassComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_classlist_client_service__WEBPACK_IMPORTED_MODULE_2__["ClasslistClientService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"])); };
+RosterClassComponent.ɵfac = function RosterClassComponent_Factory(t) { return new (t || RosterClassComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_classlist_client_service__WEBPACK_IMPORTED_MODULE_2__["ClasslistClientService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"])); };
 RosterClassComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: RosterClassComponent, selectors: [["app-roster-class"]], decls: 1, vars: 2, template: function RosterClassComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "app-roster-card");
     } if (rf & 2) {

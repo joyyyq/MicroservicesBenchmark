@@ -71,4 +71,22 @@ export class CartClientService {
     )
     return result;
   }
+  addClass(username:string,coursecode: string, section:string ) {
+    console.log("addClass service");
+    var request = new classRequest; 
+    request.setUsername(username);
+    request.setCoursecode(coursecode);
+    request.setSection(section);
+    let result : boolean = true;
+    this.client.addClass(
+      request,{'custom-header-1': 'value1'},
+      ( err: grpcWeb.Error, response: classResponse) => {
+        if (err) {
+          CartClientService.ERROR('Error code: ' + err.code + ' "' + err.message + '"');
+        } 
+        result = response.getSuccess();
+      }
+    )
+    return result;
+  }
 }

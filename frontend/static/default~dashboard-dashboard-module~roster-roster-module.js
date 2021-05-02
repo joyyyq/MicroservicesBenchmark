@@ -72,30 +72,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class ClasslistClientService {
-    constructor() { this.client = new _proto_ClassListServiceClientPb__WEBPACK_IMPORTED_MODULE_0__["classlistClient"]('http://localhost:8081'); }
+    constructor() {
+        this.classCollections = {};
+        this.client = new _proto_ClassListServiceClientPb__WEBPACK_IMPORTED_MODULE_0__["classlistClient"]('http://localhost:8081');
+    }
     getClassList(year) {
-        return this.fakeClass();
-        /**
+        // if (this.classCollections[year] == undefined) {
+        //   this.classCollections[year] = this.fakeClass();
+        // } 
         console.log("Classlist service");
-        var request = new classListRequest;
-        var result = new BehaviorSubject<Class[]>([]);
+        var request = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["classListRequest"];
+        var result = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]([]);
         request.setYear(year);
-        this.client.getClassList(
-          request,{'custom-header-1': 'value1'},
-          ( err: grpcWeb.Error, response: classListResponse ) => {
+        this.client.getClassList(request, { 'custom-header-1': 'value1' }, (err, response) => {
             if (err) {
-              console.log('Error code: ' + err.code + ' "' + err.message + '"');
+                console.log('Error code: ' + err.code + ' "' + err.message + '"');
             }
             result.next(response.getClassesList());
             console.log("response is", result);
-          }
-        )
-        return result;*/
+        });
+        return result;
+        //return this.classCollections[year]; 
     }
     fakeClass() {
         let a = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["Class"]();
         a.setCode("ECE 2300");
-        a.setNbr("11324");
+        a.setNbr("2300");
         a.setTitle("The Computing Technology Inside Your Smartphone");
         a.setDescription('The organization of the computer system found within devices used in everyday living, such as smartphones and tablets. Computer systems are presented in a bottom up fashion, from bits to digital logic, computer organization, instruction sets, assembly language, and the connection to high-level languages. Discussion of the computing engines found in smart phones, tablets, and wearables.');
         a.setCredit('3');
@@ -138,6 +140,9 @@ class ClasslistClientService {
         a.addSections(bbb);
         a.addSections(eee);
         let aList = [];
+        aList.push(a);
+        aList.push(a);
+        aList.push(a);
         aList.push(a);
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](aList);
     }

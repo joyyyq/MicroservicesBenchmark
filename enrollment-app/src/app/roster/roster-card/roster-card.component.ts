@@ -14,6 +14,6 @@ export class RosterCardComponent implements OnInit {
   constructor() { this.class = new Class();}
 
   ngOnInit(): void {
-    console.log(this.class); 
+    // console.log(this.class); 
   }
 }

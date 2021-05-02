@@ -1,0 +1,59 @@
+<div class="dialog">
+  <h1>Adding <strong>{{data.getCode()}}</strong> to your cart:</h1>
+
+  <mat-form-field *ngIf="this.lecs.length > 0" appearance="fill">
+    <mat-label>Select a lecture</mat-label>
+    <mat-select [(value)]="selectedLec">
+      <mat-option [value]="lec.getTitle()" *ngFor="let lec of lecs">
+        {{lec.getTitle()}}  / {{lec.getTimes()!.getStart()}}-{{lec.getTimes()!.getEnd()}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="this.labs.length > 0" appearance="fill">
+    <mat-label>Select a lab</mat-label>
+    <mat-select [(value)]="selectedLab">
+      <mat-option [value]="lab.getTitle()" *ngFor="let lab of labs">
+        {{lab.getTitle()}}  / {{lab.getTimes()!.getStart()}}-{{lab.getTimes()!.getEnd()}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="this.discs.length > 0" appearance="fill">
+    <mat-label>Select a disc</mat-label>
+    <mat-select [(value)]="selectedDis">
+      <mat-option [value]="disc.getTitle()" *ngFor="let disc of discs">
+        {{disc.getTitle()}}  / {{disc.getTimes()!.getStart()}}-{{disc.getTimes()!.getEnd()}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button color="accent" mat-stroked-button  (click)="onSubmit()">
+      Add course
+    </button>
+    <button color="accent" mat-stroked-button (click)="onNoClick()">Close</button>
+  </div>
+
+<!-- <div *ngFor="let lab of labs" >
+  {{lab.getTitle()}}
+</div>
+
+<div *ngFor="let dis of discs" >
+  {{dis.getTitle()}}
+</div> -->
+
+
+<!-- <h1 mat-dialog-title>Hi {{data.getTitle()}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->
+</div>

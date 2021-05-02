@@ -18,11 +18,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
-import { DashboardSearchComponent } from './dashboard-search/dashboard-search.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DashboardSearchComponent, DialogSearch } from './dashboard-search/dashboard-search.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, DashboardSearchComponent],
+  declarations: [DashboardComponent, DashboardSearchComponent, DialogSearch],
   imports: [
     CommonModule,
     DashboardRoutingModule, 
@@ -38,7 +39,8 @@ import { DashboardSearchComponent } from './dashboard-search/dashboard-search.co
     MatFormFieldModule, 
     MatSelectModule, 
     MatBadgeModule, 
-    MatCardModule
+    MatCardModule, 
+    MatDialogModule
   ]
 })
 export class DashboardModule { }

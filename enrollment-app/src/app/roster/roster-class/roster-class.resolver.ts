@@ -14,6 +14,8 @@ export class RosterClassResolver implements Resolve<Class[]> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Class[]> {
-    return this.client.getClassList("SP21").asObservable().pipe(take(1)); 
+    let ob = this.client.getClassList("SP21").asObservable(); 
+    ob.subscribe(x => console.log(x));
+    return ob.pipe(take(2)); 
   }
 }
