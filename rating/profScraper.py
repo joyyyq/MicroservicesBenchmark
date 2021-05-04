@@ -1,6 +1,6 @@
 from selenium import webdriver
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.action_chains import ActionChains
+# from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from scipy.stats import describe
 from sklearn.feature_extraction.text import CountVectorizer
@@ -61,22 +61,26 @@ def get_data():
     return stripped_reviews_lst
 
 def get_terms_and_TFs(data):
-    # TODO: get rid of useless top common words such as class, prof, etc. (current thought is set a max ratio threshold like .8)
+    # TODO: improve on getting rid of useless common words such as class, prof. 
+    # current way is to set a max ratio threshold like .8 with scope per prof
+    # need to incorporate global info
     vectorizer = CountVectorizer(stop_words='english')
-
     doc_term_TF_matrix = vectorizer.fit_transform(data).toarray()
     term_doc_TF_matrix = doc_term_TF_matrix.T
 
     # TF <=> term frequency <=> number of documents each term is in
     terms_TF = np.sum(term_doc_TF_matrix, axis=1)
     terms = vectorizer.get_feature_names()
-    return (terms, terms_TF)
+    num_docs = len(data)
+    terms_TF_lst = terms_TF.tolist()
+    useful_terms = [terms[i] for i in range(num_docs) if terms_TF_lst[i] < 0.5 * num_docs]
+    return (useful_terms, terms_TF[terms_TF < 0.5 * num_docs])
 
 def produce_plot(data, terms, terms_TF):
     terms_terms_TF_tuple = list(zip(terms, terms_TF))
     terms_terms_TF_tuple_sorted = sorted(terms_terms_TF_tuple, key=lambda x: -x[1])
-
-    num_top_terms = 50
+ 
+    num_top_terms = 20
     # reverse the array so bars are from longest to shortest in the plot
     top_terms_and_term_counts = terms_terms_TF_tuple_sorted[:num_top_terms][::-1]
     top_term_counts = [term_and_count[1] for term_and_count in top_terms_and_term_counts]
@@ -89,11 +93,13 @@ def produce_plot(data, terms, terms_TF):
     plt.ylabel("Top Terms")
     plt.title("RateMyProfessor Rating Comment Term Frequencies of the Top " + str(num_top_terms) + " Terms")
     plt.show()
+    return top_terms
 
 def main():
     data = get_data()
     (terms, terms_TF) = get_terms_and_TFs(data)
-    produce_plot(data, terms, terms_TF)
+    top_terms = produce_plot(data, terms, terms_TF)
+    print(top_terms)
 
 if __name__ == "__main__":
     main()
