@@ -14,14 +14,13 @@ import matplotlib.pyplot as plt
 from links_prof import *
 
 def get_data():
-    url_list = prof_list
-    # Csv writing setup
-
     csv_file = open("prof.csv", "w", encoding='utf-8')
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(['name', 'rating', 'wouldTakeAgain', 'levelOfDifficulty', 'reviews'])
 
     br = webdriver.Firefox()
+
+    url_list = prof_list
     for url in url_list:
         br.get(url)
         html = br.page_source
@@ -62,25 +61,16 @@ def get_data():
     return stripped_reviews_lst
 
 def get_terms_and_TFs(data):
-    vectorizer = CountVectorizer(stop_words='english')  # don't use stop words
+    # TODO: get rid of useless top common words such as class, prof, etc. (current thought is set a max ratio threshold like .8)
+    vectorizer = CountVectorizer(stop_words='english')
 
     doc_term_TF_matrix = vectorizer.fit_transform(data).toarray()
     term_doc_TF_matrix = doc_term_TF_matrix.T
 
-    # getting an array of the number of documents each term is in,
-    # where each element corresponds to a term
-    terms_TF = np.sum(term_doc_TF_matrix, axis=1)  # the TF of the terms
-
-    terms = vectorizer.get_feature_names()  # the terms
-
-    num_terms = len(terms)
-    print("Number of terms among comments:", num_terms)
-
-    num_terms_mult_occ = len(terms_TF) - sum(terms_TF == 1)
-    print("Number of terms that occur more than once:", num_terms_mult_occ)
-
+    # TF <=> term frequency <=> number of documents each term is in
+    terms_TF = np.sum(term_doc_TF_matrix, axis=1)
+    terms = vectorizer.get_feature_names()
     return (terms, terms_TF)
-
 
 def produce_plot(data, terms, terms_TF):
     terms_terms_TF_tuple = list(zip(terms, terms_TF))
@@ -92,8 +82,8 @@ def produce_plot(data, terms, terms_TF):
     top_term_counts = [term_and_count[1] for term_and_count in top_terms_and_term_counts]
     top_terms = [term_and_count[0] for term_and_count in top_terms_and_term_counts]
 
-    # The plot
-    plt.rc('ytick', labelsize=5)  # for smaller font size for labels for each bar
+    # TODO: store and render plot in prof's page
+    plt.rc('ytick', labelsize=5)
     plt.barh(top_terms, top_term_counts)
     plt.xlabel("Term Frequency")
     plt.ylabel("Top Terms")
