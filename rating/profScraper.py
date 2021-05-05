@@ -1,13 +1,10 @@
 from selenium import webdriver
-# from selenium.webdriver.common.action_chains import ActionChains
-# from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from scipy.stats import describe
 from sklearn.feature_extraction.text import CountVectorizer
 import re
 import requests
 import csv
-import time
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -16,7 +13,7 @@ from links_prof import *
 def get_data():
     csv_file = open("prof.csv", "w", encoding='utf-8')
     csv_writer = csv.writer(csv_file)
-    csv_writer.writerow(['name', 'rating', 'wouldTakeAgain', 'levelOfDifficulty', 'reviews'])
+    csv_writer.writerow(['name', 'rating', 'wouldTakeAgain', 'levelOfDifficulty', 'reviews', 'num_reviews'])
 
     br = webdriver.Firefox()
 
@@ -52,10 +49,12 @@ def get_data():
             reviews_lst = soup.findAll('div', class_="Comments__StyledComments-dzzyvm-0 gRjWel")[1:]
             stripped_reviews_lst = [r.text.strip() for r in reviews_lst]
             reviews = '; '.join(stripped_reviews_lst)
+            num_reviews = len(reviews_lst)
         except:
             reviews = "N/A"
-        
-        csv_writer.writerow([name, rating, wouldTakeAgain, levelOfDifficulty, reviews])
+            num_reviews = 0
+
+        csv_writer.writerow([name, rating, wouldTakeAgain, levelOfDifficulty, reviews, num_reviews])
 
     csv_file.close()
     return stripped_reviews_lst
@@ -97,9 +96,10 @@ def produce_plot(data, terms, terms_TF):
 
 def main():
     data = get_data()
-    (terms, terms_TF) = get_terms_and_TFs(data)
-    top_terms = produce_plot(data, terms, terms_TF)
-    print(top_terms)
+    print(len(data))
+    # (terms, terms_TF) = get_terms_and_TFs(data)
+    # top_terms = produce_plot(data, terms, terms_TF)
+    # print(top_terms)
 
 if __name__ == "__main__":
     main()
