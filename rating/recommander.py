@@ -5,7 +5,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import normalize
 
-'''Disclaimer: large chunk of the codes are reused from my CS4300 projects. I have made changes to avoid leaking out codes and violate AI'''
+"""Disclaimer: large chunk of the codes are reused from my CS4300 projects. I have made changes to avoid code leaks and AI violation"""
 
 tfidf_vectorizer = build_vectorizer()
 course_term_tfidf_matrix = tfidf_vectorizer.fit_transform([d['script'] for d in data]).toarray()

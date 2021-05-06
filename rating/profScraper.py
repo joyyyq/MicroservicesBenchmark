@@ -8,12 +8,14 @@ import csv
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from links_prof import *
+from prof_links import *
+
+base_url = "https://www.ratemyprofessors.com/"
 
 def get_data():
     csv_file = open("prof.csv", "w", encoding='utf-8')
     csv_writer = csv.writer(csv_file)
-    csv_writer.writerow(['name', 'rating', 'wouldTakeAgain', 'levelOfDifficulty', 'reviews', 'num_reviews'])
+    csv_writer.writerow(['name', 'rating', 'wouldTakeAgain', 'levelOfDifficulty', 'topTags', 'similarProfs', 'reviews', 'num_reviews'])
 
     br = webdriver.Firefox()
 
@@ -46,6 +48,28 @@ def get_data():
             levelOfDifficulty = "N/A"
 
         try:
+            top_tags = soup.findAll('span', class_="Tag-bs9vf4-0 hHOVKF")
+            top_tags = [tag.text.strip() for tag in top_tags]
+        except:
+            top_tags = []
+
+        try:
+            similar_profs = []
+            similar_profs_ul = soup.find('ul', class_="SimilarProfessors__StyledSimilarProfessorsList-zg1hrt-1 byOnik")
+            similar_profs_li = similar_profs_ul.findAll('li')
+            for prof in similar_profs_li:
+                href = base_url + prof.find('a')['href']
+                prof_rating = prof.findAll('span')[0].text
+                prof_name = prof.findAll('span')[1].text
+                similar_prof = []
+                similar_prof.append(prof_rating)
+                similar_prof.append(prof_name) 
+                similar_prof.append(href)
+                similar_profs.append(similar_prof)
+        except:
+            similar_profs = []              
+
+        try:
             reviews_lst = soup.findAll('div', class_="Comments__StyledComments-dzzyvm-0 gRjWel")[1:]
             stripped_reviews_lst = [r.text.strip() for r in reviews_lst]
             reviews = '; '.join(stripped_reviews_lst)
@@ -54,7 +78,7 @@ def get_data():
             reviews = "N/A"
             num_reviews = 0
 
-        csv_writer.writerow([name, rating, wouldTakeAgain, levelOfDifficulty, reviews, num_reviews])
+        csv_writer.writerow([name, rating, wouldTakeAgain, levelOfDifficulty, top_tags, similar_profs, reviews, num_reviews])
 
     csv_file.close()
     return stripped_reviews_lst
@@ -96,7 +120,7 @@ def produce_plot(data, terms, terms_TF):
 
 def main():
     data = get_data()
-    print(len(data))
+    # print(len(data))
     # (terms, terms_TF) = get_terms_and_TFs(data)
     # top_terms = produce_plot(data, terms, terms_TF)
     # print(top_terms)
