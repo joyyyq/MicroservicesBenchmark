@@ -1,7 +1,7 @@
 import * as grpcWeb from 'grpc-web';
 // Option 2: import_style=typescript
 import { cartClient } from '../../../proto/StudentCartServiceClientPb';
-import { cartRequest, cartResponse, cartSingleResponse, classRequest, classResponse } from '../../../proto/studentCart_pb';
+import { cartRequest, cartResponse, cartSingleResponse, classRequest, classResponse, section } from '../../../proto/studentCart_pb';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -56,7 +56,6 @@ export class CartClientService {
     var request = new classRequest; 
     request.setUsername(username);
     request.setCoursecode(coursecode);
-    request.setSection("");
     let result : boolean = true;
     this.client.dropClass(
       request,{'custom-header-1': 'value1'},
@@ -69,12 +68,16 @@ export class CartClientService {
     )
     return result;
   }
-  addClass(username:string,coursecode: string, section:string ) {
+  addClass(username:string,coursecode: string, section:section []) {
     console.log("addClass service");
     var request = new classRequest; 
     request.setUsername(username);
     request.setCoursecode(coursecode);
-    request.setSection(section);
+    var sectionList:section[] = [];
+    for (let i=0; i<section.length; i++) {
+      sectionList[i] = section[i];
+    }
+    request.setSectionlistList(section);
     let result : boolean = true;
     this.client.addClass(
       request,{'custom-header-1': 'value1'},

@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CartClientService } from '../../services/cart-client.service';
 import { StudentStateService } from '../../services/student-state.service';
-import { cartSingleResponse } from '../../../../proto/studentCart_pb';
+import { cartSingleResponse,section } from '../../../../proto/studentCart_pb';
 import { Class } from '../../../../proto/classList_pb';
 import { ClasslistClientService } from '../../services/classlist-client.service';
 
@@ -78,9 +78,10 @@ export class DashboardComponent implements OnInit {
 
   dropSubmit() {
     console.log(this.selection.selected.length)
+    //var sectionList:section[] = [];
     for (let item of this.selection.selected) {
       console.log(item)
-        this.cartClient.dropClass(this.studentState.getUsername(),item.course)      
+      this.cartClient.dropClass(this.studentState.getUsername(),item.course)      
     }
 
     if(this.selection.selected != undefined && this.selection.selected != []) this.loadCart();

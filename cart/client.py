@@ -7,6 +7,7 @@ from studentCart_pb2 import (
     classResponse,
     cartRequest,
     cartResponse,
+    section,
 )
 # request = classRequest(
 # userName= "ta326" ,courseCode="ECE 2300", section = "LEC 001")
@@ -21,13 +22,17 @@ from studentCart_pb2 import (
 # response = client.addClass(request)
 # print(response)
 print("hello")
-request = classRequest(userName= "ta326" ,courseCode="ECE 3150", section = "LEC 001")
+#response = client.dropClass(request)
+#print(response)
+#cart_response = client.getCart(cart_request)
+#print(cart_response)
+request = classRequest()
+request.userName = "ta326"
+request.courseCode = "ECE 3150"
+request.sectionList.extend([section(sec="LEC 001"), section(sec="LAB 401")])
+#request.sectionList.sec.extend(["LEC 001", 'LAB 401'])
 response = client.addClass(request)
 print(response)
 cart_request = cartRequest(userName = "ta326")
 cart_response = client.getCart(cart_request)
 print(cart_response)
-#response = client.dropClass(request)
-#print(response)
-#cart_response = client.getCart(cart_request)
-#print(cart_response)

@@ -10,10 +10,13 @@ service cart {
 message classRequest {
   string userName = 1;
   string courseCode = 2;
-  string section = 3;
+  repeated section sectionList = 3;
 }
 message classResponse {
   bool success = 1;
+}
+message section {
+  string sec = 1;
 }
 message cartRequest {
   string userName = 1;

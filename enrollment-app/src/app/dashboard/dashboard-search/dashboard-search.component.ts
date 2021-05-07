@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialo
 import {Class, Section} from '../../../../proto/classList_pb';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartClientService } from '../../services/cart-client.service';
+import { cartSingleResponse,section } from '../../../../proto/studentCart_pb';
 import { StudentStateService } from '../../services/student-state.service';
 
 @Component({
@@ -82,18 +83,39 @@ export class DialogSearch {
   }
 
   onSubmit() {
-    if( this.selectedLec != '') this.lecSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLec );
+    var sectionList:section[] = [];
+    //if( this.selectedLec != '') this.lecSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLec );
+    let i=0
+    if( this.selectedLec != '') {
+      var newsection:section = new section();
+      newsection.setSec(this.selectedLec);
+      sectionList[i] = newsection;
+      i++;
+    } 
+    if( this.selectedLab != '') {
+      var newsection:section = new section();
+      newsection.setSec(this.selectedLab);
+      sectionList[i] = newsection;
+      i++;
+    } 
+    if( this.selectedDis != '') {
+      var newsection:section = new section();
+      newsection.setSec(this.selectedDis);
+      sectionList[i] = newsection;
+      i++;
+    } 
+    this.cartClient.addClass(this.student.getUsername(), this.data.getCode(),sectionList );
     // add disc and lab only if the lec succeeds
-    console.log('lecsuccess is ', this.lecSuccess)
-    if (this.lecSuccess == true) {
-      if( this.selectedLab != '') this.labSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLab );
-      if (this.labSuccess == true) {
-        if( this.selectedDis != '') this.discSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedDis );
-      }
-    }
-    this.lecSuccess= true; 
-    this.discSuccess = true;
-    this.labSuccess = true;
+    //console.log('lecsuccess is ', this.lecSuccess)
+    //if (this.lecSuccess == true) {
+    //  if( this.selectedLab != '') this.labSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLab );
+    //  if (this.labSuccess == true) {
+    //    if( this.selectedDis != '') this.discSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedDis );
+    //  }
+    //}
+    //this.lecSuccess= true; 
+    //this.discSuccess = true;
+    //this.labSuccess = true;
     
     // alert main component about the dialog result. 
     this.dialogRef.close(this.selectedLec != ''||this.selectedLec != ''||this.selectedLec != '');

@@ -9,8 +9,10 @@ export class classRequest extends jspb.Message {
   getCoursecode(): string;
   setCoursecode(value: string): classRequest;
 
-  getSection(): string;
-  setSection(value: string): classRequest;
+  getSectionlistList(): Array<section>;
+  setSectionlistList(value: Array<section>): classRequest;
+  clearSectionlistList(): classRequest;
+  addSectionlist(value?: section, index?: number): section;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): classRequest.AsObject;
@@ -24,7 +26,7 @@ export namespace classRequest {
   export type AsObject = {
     username: string,
     coursecode: string,
-    section: string,
+    sectionlistList: Array<section.AsObject>,
   }
 }
 
@@ -43,6 +45,24 @@ export class classResponse extends jspb.Message {
 export namespace classResponse {
   export type AsObject = {
     success: boolean,
+  }
+}
+
+export class section extends jspb.Message {
+  getSec(): string;
+  setSec(value: string): section;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): section.AsObject;
+  static toObject(includeInstance: boolean, msg: section): section.AsObject;
+  static serializeBinaryToWriter(message: section, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): section;
+  static deserializeBinaryFromReader(message: section, reader: jspb.BinaryReader): section;
+}
+
+export namespace section {
+  export type AsObject = {
+    sec: string,
   }
 }
 
