@@ -60,9 +60,6 @@ export class DialogSearch {
   lecs: Section[]=[]; 
   labs: Section[]=[]; 
   discs: Section[]=[];
-  lecSuccess:boolean = true; 
-  discSuccess:boolean = true;
-  labSuccess:boolean = true;
   selectedLec = ""; 
   selectedLab = ""; 
   selectedDis = ""; 
@@ -105,18 +102,6 @@ export class DialogSearch {
       i++;
     } 
     this.cartClient.addClass(this.student.getUsername(), this.data.getCode(),sectionList );
-    // add disc and lab only if the lec succeeds
-    //console.log('lecsuccess is ', this.lecSuccess)
-    //if (this.lecSuccess == true) {
-    //  if( this.selectedLab != '') this.labSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLab );
-    //  if (this.labSuccess == true) {
-    //    if( this.selectedDis != '') this.discSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedDis );
-    //  }
-    //}
-    //this.lecSuccess= true; 
-    //this.discSuccess = true;
-    //this.labSuccess = true;
-    
     // alert main component about the dialog result. 
     this.dialogRef.close(this.selectedLec != ''||this.selectedLec != ''||this.selectedLec != '');
   }

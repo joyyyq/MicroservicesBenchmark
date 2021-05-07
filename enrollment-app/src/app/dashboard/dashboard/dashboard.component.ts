@@ -13,11 +13,12 @@ export interface PeriodicElement {
   course: string;
   name: string;
   units: number;
-  number: string;
+  //number: string;
+  section: string;
   days: string;
   time: string;
   instructor: string;
-  status: string;
+  //status: string;
 }
 
 @Component({
@@ -30,7 +31,7 @@ export class DashboardComponent implements OnInit {
   public cart:cartSingleResponse[] = [];
   public dropList:string[] = [];
   ELEMENT_DATA: PeriodicElement[] = [];
-  displayedColumns: string[] = ['select', 'position', 'course', 'name', 'units', 'number', 'days', 'time', 'instructor', 'status'];
+  displayedColumns: string[] = ['select', 'position', 'course', 'name', 'units', 'section', 'days', 'time', 'instructor'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
   loading = false;
@@ -101,8 +102,9 @@ export class DashboardComponent implements OnInit {
       this.ELEMENT_DATA = [];
       this.cart = val;
       for (let i=0; i<this.cart.length; i++) {
-        var element : PeriodicElement = { position:i+1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), status: "Enrolled",
-         number: this.cart[i].getClassnumber(), days: this.cart[i].getDays(), time: this.cart[i].getTime(), instructor:this.cart[i].getInstructor() } ;
+        var element : PeriodicElement = { position:i+1, course: this.cart[i].getCoursecode(), name: this.cart[i].getTitle(), units: this.cart[i].getCredit(), //status: "Enrolled",
+         //number: this.cart[i].getClassnumber(), 
+         section:this.cart[i].getSection(), days: this.cart[i].getDays(), time: this.cart[i].getTime(), instructor:this.cart[i].getInstructor() } ;
         this.ELEMENT_DATA.push(element);
       }
       this.dataSource.data = this.ELEMENT_DATA;
