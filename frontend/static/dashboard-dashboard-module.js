@@ -3296,8 +3296,6 @@ class DashboardSearchComponent {
         console.log("INSIDE SEARCHHHH constructor");
     }
     openDialog(class_) {
-        console.log("FROM openDialog");
-        console.log(class_);
         const dialogRef = this.dialog.open(DialogSearch, {
             data: class_
         });
@@ -3308,11 +3306,8 @@ class DashboardSearchComponent {
         });
     }
     ngAfterViewInit() {
-        console.log("INSIDE SEARCHHHH ");
-        console.log(this.classes);
     }
     search(event) {
-        console.log("INSIDE SEARCHHHH ");
         this.searchResults = [];
         let query = event.target.value;
         if (query != '') {
@@ -3352,11 +3347,12 @@ class DialogSearch {
         this.lecs = [];
         this.labs = [];
         this.discs = [];
+        this.lecSuccess = true;
+        this.discSuccess = true;
+        this.labSuccess = true;
         this.selectedLec = "";
         this.selectedLab = "";
         this.selectedDis = "";
-        console.log("FROM Dialog");
-        console.log(data);
         this.lecs = data.getSectionsList().filter(section => section.getTitle().includes("LEC"));
         this.labs = data.getSectionsList().filter(section => section.getTitle().includes("LAB"));
         this.discs = data.getSectionsList().filter(section => section.getTitle().includes("DIS"));
@@ -3372,11 +3368,20 @@ class DialogSearch {
     }
     onSubmit() {
         if (this.selectedLec != '')
-            this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLec);
-        if (this.selectedLab != '')
-            this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLab);
-        if (this.selectedDis != '')
-            this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedDis);
+            this.lecSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLec);
+        // add disc and lab only if the lec succeeds
+        console.log('lecsuccess is ', this.lecSuccess);
+        if (this.lecSuccess == true) {
+            if (this.selectedLab != '')
+                this.labSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLab);
+            if (this.labSuccess == true) {
+                if (this.selectedDis != '')
+                    this.discSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedDis);
+            }
+        }
+        this.lecSuccess = true;
+        this.discSuccess = true;
+        this.labSuccess = true;
         // alert main component about the dialog result. 
         this.dialogRef.close(this.selectedLec != '' || this.selectedLec != '' || this.selectedLec != '');
     }
@@ -3429,7 +3434,7 @@ DialogSearch.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cartClient", function() { return cartClient; });
-/* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! grpc-web */ "TxjO");
+/* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! grpc-web */ "UVcI");
 /* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(grpc_web__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _studentCart_pb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./studentCart_pb */ "/rgc");
 /* harmony import */ var _studentCart_pb__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_studentCart_pb__WEBPACK_IMPORTED_MODULE_1__);
@@ -3840,17 +3845,21 @@ class DashboardComponent {
         return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
     }
     dropSubmit() {
+        console.log(this.selection.selected.length);
         for (let item of this.selection.selected) {
-            this.cartClient.dropClass(this.studentState.getUsername(), item.course);
-        }
-        this.loadCart();
-    }
-    addSubmit(event) {
-        for (let item of this.selection.selected) {
+            console.log(item);
             this.cartClient.dropClass(this.studentState.getUsername(), item.course);
         }
         if (this.selection.selected != undefined && this.selection.selected != [])
             this.loadCart();
+        this.selection.clear();
+    }
+    addSubmit(event) {
+        //for (let item of this.selection.selected) {
+        //    this.cartClient.addClass(this.studentState.getUsername(),item.course,item.)      
+        //}
+        //if(this.selection.selected != undefined && this.selection.selected != []) this.loadCart();
+        this.loadCart();
     }
     loadCart() {
         this.cartClient.getCart(this.studentState.getUsername()).asObservable().subscribe(val => {
@@ -4058,6 +4067,7 @@ class CartClientService {
                 CartClientService.ERROR('Error code: ' + err.code + ' "' + err.message + '"');
             }
             result = response.getSuccess();
+            console.log("addclass result is", result);
         });
         return result;
     }

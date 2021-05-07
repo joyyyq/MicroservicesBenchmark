@@ -83,6 +83,7 @@ export class CartClientService {
           CartClientService.ERROR('Error code: ' + err.code + ' "' + err.message + '"');
         } 
         result = response.getSuccess();
+        console.log("addclass result is", result);
       }
     )
     return result;

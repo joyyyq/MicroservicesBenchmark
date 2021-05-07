@@ -10,7 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "classlistClient", function() { return classlistClient; });
-/* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! grpc-web */ "TxjO");
+/* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! grpc-web */ "UVcI");
 /* harmony import */ var grpc_web__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(grpc_web__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _classList_pb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./classList_pb */ "s0aR");
 /* harmony import */ var _classList_pb__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_classList_pb__WEBPACK_IMPORTED_MODULE_1__);
@@ -77,10 +77,6 @@ class ClasslistClientService {
         this.client = new _proto_ClassListServiceClientPb__WEBPACK_IMPORTED_MODULE_0__["classlistClient"]('http://localhost:8081');
     }
     getClassList(year) {
-        // if (this.classCollections[year] == undefined) {
-        //   this.classCollections[year] = this.fakeClass();
-        // } 
-        console.log("Classlist service");
         var request = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["classListRequest"];
         var result = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]([]);
         request.setYear(year);
@@ -89,62 +85,8 @@ class ClasslistClientService {
                 console.log('Error code: ' + err.code + ' "' + err.message + '"');
             }
             result.next(response.getClassesList());
-            console.log("response is", result);
         });
         return result;
-        //return this.classCollections[year]; 
-    }
-    fakeClass() {
-        let a = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["Class"]();
-        a.setCode("ECE 2300");
-        a.setNbr("2300");
-        a.setTitle("The Computing Technology Inside Your Smartphone");
-        a.setDescription('The organization of the computer system found within devices used in everyday living, such as smartphones and tablets. Computer systems are presented in a bottom up fashion, from bits to digital logic, computer organization, instruction sets, assembly language, and the connection to high-level languages. Discussion of the computing engines found in smart phones, tablets, and wearables.');
-        a.setCredit('3');
-        let b = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["Section"]();
-        b.setNumber("11324");
-        b.setTitle("LEC 001");
-        b.setInstructors("David Albonesi (dha7)");
-        b.setDays("TR");
-        let eee = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["Section"]();
-        eee.setNumber("1132d4");
-        eee.setTitle("LEC 003");
-        eee.setInstructors("David Albonesi (dha7)");
-        eee.setDays("TR");
-        let bb = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["Section"]();
-        bb.setNumber("12332");
-        bb.setTitle("LAB 002");
-        bb.setInstructors("David Albonesi (dha7)");
-        bb.setDays("TR");
-        let bbb = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["Section"]();
-        bbb.setNumber("12232");
-        bbb.setTitle("DIS 002");
-        bbb.setInstructors("David Albonesi (dha7)");
-        bbb.setDays("TR");
-        let d = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["Section"]();
-        d.setNumber("1135");
-        d.setTitle("LEC 002");
-        d.setInstructors("David Albonesi (dha7)");
-        d.setDays("TR");
-        let c = new _proto_classList_pb__WEBPACK_IMPORTED_MODULE_1__["Time"]();
-        c.setStart("11:225PM");
-        c.setEnd("12:40PM");
-        b.setTimes(c);
-        d.setTimes(c);
-        bb.setTimes(c);
-        bbb.setTimes(c);
-        eee.setTimes(c);
-        a.addSections(b);
-        a.addSections(d);
-        a.addSections(bb);
-        a.addSections(bbb);
-        a.addSections(eee);
-        let aList = [];
-        aList.push(a);
-        aList.push(a);
-        aList.push(a);
-        aList.push(a);
-        return new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](aList);
     }
 }
 ClasslistClientService.ɵfac = function ClasslistClientService_Factory(t) { return new (t || ClasslistClientService)(); };

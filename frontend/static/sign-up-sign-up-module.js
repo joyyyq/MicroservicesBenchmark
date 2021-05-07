@@ -195,7 +195,7 @@ class SignUpComponent {
         var flastname = this.signUpForm.get('last_name').value;
         let response = this.client.register(fusername, fpwd, ffirstname, flastname);
         console.log(response);
-        if (response == false) { // shouldn't have this error since already addressed usernameTaken error when user enters a username
+        if (response == false) { // shouldn't get this error since already addressed usernameTaken when user enters a username
             this.router.navigate(['/register']);
         }
         else

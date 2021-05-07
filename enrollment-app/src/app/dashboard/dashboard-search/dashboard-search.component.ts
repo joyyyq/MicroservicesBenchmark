@@ -14,7 +14,7 @@ export class DashboardSearchComponent {
   @Input() classes!: Class[];
   @Output() addClassEvent = new EventEmitter<boolean>();
   values = ''
-  searchResults: Class[] = []; 
+  searchResults: Class[] = [];
   constructor(public dialog: MatDialog, private router: Router, private route: ActivatedRoute) { 
     console.log("INSIDE SEARCHHHH constructor");
   }
@@ -59,6 +59,9 @@ export class DialogSearch {
   lecs: Section[]=[]; 
   labs: Section[]=[]; 
   discs: Section[]=[];
+  lecSuccess:boolean = true; 
+  discSuccess:boolean = true;
+  labSuccess:boolean = true;
   selectedLec = ""; 
   selectedLab = ""; 
   selectedDis = ""; 
@@ -79,9 +82,19 @@ export class DialogSearch {
   }
 
   onSubmit() {
-    if( this.selectedLec != '') this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLec );
-    if( this.selectedLab != '') this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLab );
-    if( this.selectedDis != '') this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedDis );
+    if( this.selectedLec != '') this.lecSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLec );
+    // add disc and lab only if the lec succeeds
+    console.log('lecsuccess is ', this.lecSuccess)
+    if (this.lecSuccess == true) {
+      if( this.selectedLab != '') this.labSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedLab );
+      if (this.labSuccess == true) {
+        if( this.selectedDis != '') this.discSuccess = this.cartClient.addClass(this.student.getUsername(), this.data.getCode(), this.selectedDis );
+      }
+    }
+    this.lecSuccess= true; 
+    this.discSuccess = true;
+    this.labSuccess = true;
+    
     // alert main component about the dialog result. 
     this.dialogRef.close(this.selectedLec != ''||this.selectedLec != ''||this.selectedLec != '');
   }

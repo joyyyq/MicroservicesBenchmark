@@ -77,17 +77,22 @@ export class DashboardComponent implements OnInit {
   }
 
   dropSubmit() {
+    console.log(this.selection.selected.length)
     for (let item of this.selection.selected) {
+      console.log(item)
         this.cartClient.dropClass(this.studentState.getUsername(),item.course)      
     }
-    this.loadCart();
+
+    if(this.selection.selected != undefined && this.selection.selected != []) this.loadCart();
+    this.selection.clear()
   }
 
   addSubmit(event: any) {
-    for (let item of this.selection.selected) {
-        this.cartClient.dropClass(this.studentState.getUsername(),item.course)      
-    }
-    if(this.selection.selected != undefined && this.selection.selected != []) this.loadCart();
+    //for (let item of this.selection.selected) {
+    //    this.cartClient.addClass(this.studentState.getUsername(),item.course,item.)      
+    //}
+    //if(this.selection.selected != undefined && this.selection.selected != []) this.loadCart();
+    this.loadCart();
   }
 
   loadCart() {
