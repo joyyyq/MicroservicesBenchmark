@@ -67,7 +67,7 @@ class cartService(
                     cart.append(request_1)
                     db_2.cartInfo.update_one({"userName":request.userName}, {"$set" : {"cart" : cart}}) # updating the cart of the user after adding the new class
                     print(db_2.cartInfo.find_one({"userName":request.userName}))
-                    db.classInfo.update_one( {"course_code":request.courseCode}, {"$inc" :{"size":-1} } ) # decrement size of the class
+        db.classInfo.update_one( {"course_code":request.courseCode}, {"$inc" :{"size":-1} } ) # decrement size of the class
         return classResponse(success=True)
 
     def dropClass(self, request, context):
