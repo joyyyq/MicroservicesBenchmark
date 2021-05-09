@@ -12,7 +12,7 @@ from prof_links import *
 
 base_url = "https://www.ratemyprofessors.com/"
 
-def get_data():
+def scrape_profs():
     csv_file = open("prof.csv", "w", encoding='utf-8')
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(['name', 'rating', 'wouldTakeAgain', 'levelOfDifficulty', 'topTags', 'similarProfs', 'reviews', 'num_reviews'])
@@ -24,8 +24,6 @@ def get_data():
         br.get(url)
         html = br.page_source
         soup = BeautifulSoup(html, "lxml")
-    # with open('albonesi.html', 'r') as r:
-        # soup = BeautifulSoup(r.read(), "lxml")
 
         try:
             name = soup.find('div', class_="NameTitle__Name-dowf0z-0 cfjPUG").text.strip()
@@ -118,12 +116,51 @@ def produce_plot(data, terms, terms_TF):
     plt.show()
     return top_terms
 
-def main():
-    data = get_data()
-    # print(len(data))
-    # (terms, terms_TF) = get_terms_and_TFs(data)
-    # top_terms = produce_plot(data, terms, terms_TF)
-    # print(top_terms)
+'''
+    proflist:
+        -> profInfo: all the professors with their info 
+        -> profCounts: the latest number of profs pulled from the site. 
+'''
+def update_db():
+    profs = csv.DictReader(open("prof.csv"))
+    for prof in profs:
+        data = {}
+        data["name"] = prof["name"]
+        data["wouldTakeAgain"] = prof["wouldTakeAgain"]
+        data["levelOfDifficulty"] = prof["levelOfDifficulty"]
+        data["topTags"] = prof["topTags"]
+        data["similarProfs"] = prof["similarProfs"]
+        data["reviews"] = prof["reviews"]
+        data["num_reviews"] = prof["num_reviews"]
+        db.profInfo.insert_one(data)
+    db.profCounts.insert_one({"count": len(list(profs))})
+
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20))
+    prof_pb2_grpc.add_profServicer_to_server(
+        profService(), server
+    )
+    server.add_insecure_port("0.0.0.0:5002")
+    server.start()
+    server.wait_for_termination()
 
 if __name__ == "__main__":
-    main()
+    TOTAL_ECE_PROFS=29 # Hard coded for now cause not all prof has a RMP page
+    if ( db.profCounts.count_documents({}) != TOTAL_ECE_PROFS ):
+        db.profInfo.delete_many({}) # Always reset 
+        # Run
+        init_credits()
+        scrape_profs()
+        update_db()
+    
+    serve()
+
+# def main():
+#     data = get_data()
+#     # print(len(data))
+#     # (terms, terms_TF) = get_terms_and_TFs(data)
+#     # top_terms = produce_plot(data, terms, terms_TF)
+#     # print(top_terms)
+
+# if __name__ == "__main__":
+#     main()

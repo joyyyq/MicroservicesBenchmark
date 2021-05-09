@@ -90,6 +90,16 @@ services:
       - envoymesh
     volumes:
       - ./data/wishlist:/data/db
+  mongodb-prof:
+    container_name: prof_db
+    image: mongo
+    ports:
+      - "27021:27017"
+    restart: always
+    networks:
+      - envoymesh
+    volumes:
+      - ./data/prof/:/data/db
 
 networks:
   envoymesh: {}
