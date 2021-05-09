@@ -1,0 +1,28 @@
+syntax = "proto3";
+package register;
+
+service prof {
+    rpc getProf(Request) returns (Response);
+  }
+
+message Request {
+    string name = 1;
+  }
+
+message Professor {
+    float rating = 1;
+    string name = 2;
+    string link = 3;
+}
+
+message Response {
+  string name = 1;
+  float rating = 2;
+  float wouldTakeAgain = 3;
+  float levelOfDifficulty = 4;
+  repeated string topTags = 5;
+  repeated Professor similarProfs = 6;
+  string reviews = 7;
+  int64 numReviews = 8;
+}
+
