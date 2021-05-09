@@ -80,21 +80,11 @@ services:
       - envoymesh
     volumes:
       - ./data/cart:/data/db
-  mongodb-wishlist:
-    container_name: wishlist_db
-    image: mongo
-    ports:
-      - "27020:27017"
-    restart: always
-    networks:
-      - envoymesh
-    volumes:
-      - ./data/wishlist:/data/db
   mongodb-prof:
     container_name: prof_db
     image: mongo
     ports:
-      - "27021:27017"
+      - "27020:27017"
     restart: always
     networks:
       - envoymesh

@@ -102,3 +102,19 @@ static_resources:
                 ipv4_compat: true
                 address: cart
                 port_value: 5003
+  - name: prof_service
+    connect_timeout: 1s
+    #type: STRICT_DNS
+    type: LOGICAL_DNS
+    http2_protocol_options: {}
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: prof_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                ipv4_compat: true
+                address: prof
+                port_value: 5004
