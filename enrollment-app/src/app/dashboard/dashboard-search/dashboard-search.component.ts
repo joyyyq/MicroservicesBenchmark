@@ -1,10 +1,10 @@
 import { Component, Input, Inject, EventEmitter, Output } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Class, Section} from '../../../../proto/classList_pb';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartClientService } from '../../services/cart-client.service';
-import { cartSingleResponse,section } from '../../../../proto/studentCart_pb';
 import { StudentStateService } from '../../services/student-state.service';
+import { Class, Section } from '../../../../proto/classList_pb';
+import { section } from '../../../../proto/studentCart_pb';
 
 @Component({
   selector: 'app-dashboard-search',
