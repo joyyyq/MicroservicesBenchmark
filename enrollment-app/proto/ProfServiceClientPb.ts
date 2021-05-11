@@ -36,28 +36,28 @@ export class profClient {
   }
 
   methodInfogetProf = new grpcWeb.AbstractClientBase.MethodInfo(
-    prof_pb.Response,
-    (request: prof_pb.Request) => {
+    prof_pb.profResponse,
+    (request: prof_pb.profRequest) => {
       return request.serializeBinary();
     },
-    prof_pb.Response.deserializeBinary
+    prof_pb.profResponse.deserializeBinary
   );
 
   getProf(
-    request: prof_pb.Request,
-    metadata: grpcWeb.Metadata | null): Promise<prof_pb.Response>;
+    request: prof_pb.profRequest,
+    metadata: grpcWeb.Metadata | null): Promise<prof_pb.profResponse>;
 
   getProf(
-    request: prof_pb.Request,
+    request: prof_pb.profRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: prof_pb.Response) => void): grpcWeb.ClientReadableStream<prof_pb.Response>;
+               response: prof_pb.profResponse) => void): grpcWeb.ClientReadableStream<prof_pb.profResponse>;
 
   getProf(
-    request: prof_pb.Request,
+    request: prof_pb.profRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: prof_pb.Response) => void) {
+               response: prof_pb.profResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +

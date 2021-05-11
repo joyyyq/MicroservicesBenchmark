@@ -16,8 +16,8 @@ class profStub(object):
         """
         self.getProf = channel.unary_unary(
                 '/prof.prof/getProf',
-                request_serializer=prof__pb2.Request.SerializeToString,
-                response_deserializer=prof__pb2.Response.FromString,
+                request_serializer=prof__pb2.profRequest.SerializeToString,
+                response_deserializer=prof__pb2.profResponse.FromString,
                 )
 
 
@@ -35,8 +35,8 @@ def add_profServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'getProf': grpc.unary_unary_rpc_method_handler(
                     servicer.getProf,
-                    request_deserializer=prof__pb2.Request.FromString,
-                    response_serializer=prof__pb2.Response.SerializeToString,
+                    request_deserializer=prof__pb2.profRequest.FromString,
+                    response_serializer=prof__pb2.profResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -60,7 +60,7 @@ class prof(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/prof.prof/getProf',
-            prof__pb2.Request.SerializeToString,
-            prof__pb2.Response.FromString,
+            prof__pb2.profRequest.SerializeToString,
+            prof__pb2.profResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

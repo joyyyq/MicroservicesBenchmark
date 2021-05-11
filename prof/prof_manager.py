@@ -1,13 +1,15 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
-from scipy.stats import describe
-from sklearn.feature_extraction.text import CountVectorizer
-import re
+import pymongo
+# from sklearn.feature_extraction.text import CountVectorizer
+# import matplotlib.pyplot as plt
+# import pandas as pd
+import urllib.request
 import requests
 import csv
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+import grpc
+import random
 from prof_links import *
 
 from prof_pb2 import (
@@ -17,22 +19,14 @@ from prof_pb2 import (
 )
 import prof_pb2_grpc
 
-client = pymongo.MongoClient("prof_db",27020)
+client = pymongo.MongoClient("prof_db",27017)
 db = client.prof
 
 class profService(
-    prof_pb2_grpc.proflistServicer
+    prof_pb2_grpc.profServicer
 ):
     def getProf(self, request, context):
-        # db.hello.insert_one({"count": 5}) # What is this doing?
-        prof_ = db.profInfo.find({'name'=request.name}):
-        # temp_prof = {} # TODO: is temp_prof necessary? don't think so
-        # temp_prof['name'] = prof_['name'] # should be the same as request.name
-        # temp_prof['rating'] = prof_['rating'] 
-        # temp_prof['wouldTakeAgain'] = prof_['wouldTakeAgain'] 
-        # temp_prof['levelOfDifficulty'] = prof_['levelOfDifficulty'] 
-        # temp_prof['reviews'] = str(prof_['reviews'])
-        # temp_prof['numReviews'] = prof_['numReviews']
+        prof_ = db.profInfo.find_one({'name': request.name})
         similar_profs = []
         for similar_prof_ in prof_['similarProfs']:
             temp_prof = {}
@@ -40,13 +34,8 @@ class profService(
             temp_prof['name'] = prof_['name']
             temp_prof['link'] = prof_['link']
             similar_profs.append(Professor(rating=temp_prof['rating'],name=temp_prof['name'],link=temp_prof['link']))
-
-        # return profResponse(name=temp_prof['name'],rating=temp_prof['rating'], 
-        #             wouldTakeAgain=temp_prof['wouldTakeAgain'], levelOfDifficulty=temp_prof['levelOfDifficulty'], similarProfs=temp_prof['similarProfs'], reviews=temp_prof['reviews'], numReviews=temp_prof['numReviews']
-        #         ))
         return profResponse(name=prof_['name'],rating=prof_['rating'], 
-                    wouldTakeAgain=prof_['wouldTakeAgain'], levelOfDifficulty=prof_['levelOfDifficulty'], similarProfs=prof_['similarProfs'], reviews=prof_['reviews'], numReviews=prof_['numReviews']
-                ))
+                    wouldTakeAgain=prof_['wouldTakeAgain'], levelOfDifficulty=prof_['levelOfDifficulty'], similarProfs=prof_['similarProfs'], reviews=prof_['reviews'], numReviews=prof_['numReviews'])
 
 base_url = "https://www.ratemyprofessors.com/"
 
@@ -119,40 +108,40 @@ def scrape_profs():
     csv_file.close()
     return stripped_reviews_lst
 
-def get_terms_and_TFs(data):
-    # TODO: improve on getting rid of useless common words such as class, prof. 
-    # current way is to set a max ratio threshold like .8 with scope per prof
-    # need to incorporate global info
-    vectorizer = CountVectorizer(stop_words='english')
-    doc_term_TF_matrix = vectorizer.fit_transform(data).toarray()
-    term_doc_TF_matrix = doc_term_TF_matrix.T
+# def get_terms_and_TFs(data):
+#     # TODO: improve on getting rid of useless common words such as class, prof. 
+#     # current way is to set a max ratio threshold like .8 with scope per prof
+#     # need to incorporate global info
+#     vectorizer = CountVectorizer(stop_words='english')
+#     doc_term_TF_matrix = vectorizer.fit_transform(data).toarray()
+#     term_doc_TF_matrix = doc_term_TF_matrix.T
 
-    # TF <=> term frequency <=> number of documents each term is in
-    terms_TF = np.sum(term_doc_TF_matrix, axis=1)
-    terms = vectorizer.get_feature_names()
-    num_docs = len(data)
-    terms_TF_lst = terms_TF.tolist()
-    useful_terms = [terms[i] for i in range(num_docs) if terms_TF_lst[i] < 0.5 * num_docs]
-    return (useful_terms, terms_TF[terms_TF < 0.5 * num_docs])
+#     # TF <=> term frequency <=> number of documents each term is in
+#     terms_TF = np.sum(term_doc_TF_matrix, axis=1)
+#     terms = vectorizer.get_feature_names()
+#     num_docs = len(data)
+#     terms_TF_lst = terms_TF.tolist()
+#     useful_terms = [terms[i] for i in range(num_docs) if terms_TF_lst[i] < 0.5 * num_docs]
+#     return (useful_terms, terms_TF[terms_TF < 0.5 * num_docs])
 
-def produce_plot(data, terms, terms_TF):
-    terms_terms_TF_tuple = list(zip(terms, terms_TF))
-    terms_terms_TF_tuple_sorted = sorted(terms_terms_TF_tuple, key=lambda x: -x[1])
+# def produce_plot(data, terms, terms_TF):
+#     terms_terms_TF_tuple = list(zip(terms, terms_TF))
+#     terms_terms_TF_tuple_sorted = sorted(terms_terms_TF_tuple, key=lambda x: -x[1])
  
-    num_top_terms = 20
-    # reverse the array so bars are from longest to shortest in the plot
-    top_terms_and_term_counts = terms_terms_TF_tuple_sorted[:num_top_terms][::-1]
-    top_term_counts = [term_and_count[1] for term_and_count in top_terms_and_term_counts]
-    top_terms = [term_and_count[0] for term_and_count in top_terms_and_term_counts]
+#     num_top_terms = 20
+#     # reverse the array so bars are from longest to shortest in the plot
+#     top_terms_and_term_counts = terms_terms_TF_tuple_sorted[:num_top_terms][::-1]
+#     top_term_counts = [term_and_count[1] for term_and_count in top_terms_and_term_counts]
+#     top_terms = [term_and_count[0] for term_and_count in top_terms_and_term_counts]
 
-    # TODO: store and render plot in prof's page
-    plt.rc('ytick', labelsize=5)
-    plt.barh(top_terms, top_term_counts)
-    plt.xlabel("Term Frequency")
-    plt.ylabel("Top Terms")
-    plt.title("RateMyProfessor Rating Comment Term Frequencies of the Top " + str(num_top_terms) + " Terms")
-    plt.show()
-    return top_terms
+#     # TODO: store and render plot in prof's page
+#     plt.rc('ytick', labelsize=5)
+#     plt.barh(top_terms, top_term_counts)
+#     plt.xlabel("Term Frequency")
+#     plt.ylabel("Top Terms")
+#     plt.title("RateMyProfessor Rating Comment Term Frequencies of the Top " + str(num_top_terms) + " Terms")
+#     plt.show()
+#     return top_terms
 
 '''
     proflist:

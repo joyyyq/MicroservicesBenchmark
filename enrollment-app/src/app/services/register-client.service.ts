@@ -1,8 +1,8 @@
 import * as grpcWeb from 'grpc-web';
 // Option 2: import_style=typescript
-import {registerClient} from '../../../proto/StudentRegisterServiceClientPb';
+import { registerClient } from '../../../proto/StudentRegisterServiceClientPb';
 
-import {Request, Response} from '../../../proto/studentRegister_pb';
+import { Request, Response } from '../../../proto/studentRegister_pb';
 
 import { Injectable } from '@angular/core';
 

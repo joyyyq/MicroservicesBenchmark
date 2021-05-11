@@ -2,21 +2,71 @@ import * as jspb from 'google-protobuf'
 
 
 
-export class Request extends jspb.Message {
+export class profRequest extends jspb.Message {
   getName(): string;
-  setName(value: string): Request;
+  setName(value: string): profRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Request.AsObject;
-  static toObject(includeInstance: boolean, msg: Request): Request.AsObject;
-  static serializeBinaryToWriter(message: Request, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Request;
-  static deserializeBinaryFromReader(message: Request, reader: jspb.BinaryReader): Request;
+  toObject(includeInstance?: boolean): profRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: profRequest): profRequest.AsObject;
+  static serializeBinaryToWriter(message: profRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): profRequest;
+  static deserializeBinaryFromReader(message: profRequest, reader: jspb.BinaryReader): profRequest;
 }
 
-export namespace Request {
+export namespace profRequest {
   export type AsObject = {
     name: string,
+  }
+}
+
+export class profResponse extends jspb.Message {
+  getName(): string;
+  setName(value: string): profResponse;
+
+  getRating(): number;
+  setRating(value: number): profResponse;
+
+  getWouldtakeagain(): number;
+  setWouldtakeagain(value: number): profResponse;
+
+  getLevelofdifficulty(): number;
+  setLevelofdifficulty(value: number): profResponse;
+
+  getToptagsList(): Array<string>;
+  setToptagsList(value: Array<string>): profResponse;
+  clearToptagsList(): profResponse;
+  addToptags(value: string, index?: number): profResponse;
+
+  getSimilarprofsList(): Array<Professor>;
+  setSimilarprofsList(value: Array<Professor>): profResponse;
+  clearSimilarprofsList(): profResponse;
+  addSimilarprofs(value?: Professor, index?: number): Professor;
+
+  getReviews(): string;
+  setReviews(value: string): profResponse;
+
+  getNumreviews(): number;
+  setNumreviews(value: number): profResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): profResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: profResponse): profResponse.AsObject;
+  static serializeBinaryToWriter(message: profResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): profResponse;
+  static deserializeBinaryFromReader(message: profResponse, reader: jspb.BinaryReader): profResponse;
+}
+
+export namespace profResponse {
+  export type AsObject = {
+    name: string,
+    rating: number,
+    wouldtakeagain: number,
+    levelofdifficulty: number,
+    toptagsList: Array<string>,
+    similarprofsList: Array<Professor.AsObject>,
+    reviews: string,
+    numreviews: number,
   }
 }
 
@@ -43,56 +93,6 @@ export namespace Professor {
     rating: number,
     name: string,
     link: string,
-  }
-}
-
-export class Response extends jspb.Message {
-  getName(): string;
-  setName(value: string): Response;
-
-  getRating(): number;
-  setRating(value: number): Response;
-
-  getWouldtakeagain(): number;
-  setWouldtakeagain(value: number): Response;
-
-  getLevelofdifficulty(): number;
-  setLevelofdifficulty(value: number): Response;
-
-  getToptagsList(): Array<string>;
-  setToptagsList(value: Array<string>): Response;
-  clearToptagsList(): Response;
-  addToptags(value: string, index?: number): Response;
-
-  getSimilarprofsList(): Array<Professor>;
-  setSimilarprofsList(value: Array<Professor>): Response;
-  clearSimilarprofsList(): Response;
-  addSimilarprofs(value?: Professor, index?: number): Professor;
-
-  getReviews(): string;
-  setReviews(value: string): Response;
-
-  getNumreviews(): number;
-  setNumreviews(value: number): Response;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Response.AsObject;
-  static toObject(includeInstance: boolean, msg: Response): Response.AsObject;
-  static serializeBinaryToWriter(message: Response, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Response;
-  static deserializeBinaryFromReader(message: Response, reader: jspb.BinaryReader): Response;
-}
-
-export namespace Response {
-  export type AsObject = {
-    name: string,
-    rating: number,
-    wouldtakeagain: number,
-    levelofdifficulty: number,
-    toptagsList: Array<string>,
-    similarprofsList: Array<Professor.AsObject>,
-    reviews: string,
-    numreviews: number,
   }
 }
 

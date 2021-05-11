@@ -98,7 +98,7 @@ services:
     networks:
       - envoymesh
     volumes:
-      - ./data/prof/:/data/db
+      - ./data/prof:/data/db
 
 networks:
   envoymesh: {}
