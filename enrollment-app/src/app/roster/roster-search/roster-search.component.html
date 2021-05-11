@@ -1,9 +1,9 @@
 <div class="container">
   <h2>
-    SEARCH
+    SEARCH BY COURSE
   </h2>
     <mat-form-field style=" margin-bottom: -1.25em" appearance="outline">
-        <mat-label>Search</mat-label>
+        <mat-label>Search by Course</mat-label>
         <input (input)="search($event)" matInput type="text"
             autocomplete="off" 
             required/>
@@ -15,5 +15,20 @@
         <strong>{{class.getCode()}} </strong>{{class.getTitle()}}
       </a>
     </mat-card>
-
+    <!-- <h2>
+      SEARCH BY PROFESSOR
+    </h2>
+      <mat-form-field style=" margin-bottom: -1.25em" appearance="outline">
+          <mat-label>Search by Professor</mat-label>
+          <input (input)="search($event)" matInput type="text"
+              autocomplete="off" 
+              required/>
+      </mat-form-field>
+      <mat-card *ngIf="searchResults.length != 0">
+        <a (click)="visitProf(prof.getName())"
+          class="search-card" 
+          *ngFor="let prof of searchResults">
+          <strong>{{prof.getReviews()}} </strong>{{prof.getToptags())}}
+        </a>
+      </mat-card> -->
 </div>
