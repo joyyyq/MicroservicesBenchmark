@@ -2,20 +2,14 @@ syntax = "proto3";
 package prof;
 
 service prof {
-    rpc getProf(Request) returns (Response);
-  }
+    rpc getProf(profRequest) returns (profResponse);
+}
 
-message Request {
+message profRequest {
     string name = 1;
-  }
+}
 
-message Professor {
-    float rating = 1;
-    string name = 2;
-    string link = 3;
-  }
-
-message Response {
+message profResponse {
     string name = 1;
     float rating = 2;
     float wouldTakeAgain = 3;
@@ -24,5 +18,10 @@ message Response {
     repeated Professor similarProfs = 6;
     string reviews = 7;
     int64 numReviews = 8;
-  }
+}
 
+message Professor {
+    float rating = 1;
+    string name = 2;
+    string link = 3;
+}

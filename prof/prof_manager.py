@@ -10,6 +10,44 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from prof_links import *
 
+from prof_pb2 import (
+    profRequest,
+    profResponse,
+    Professor
+)
+import prof_pb2_grpc
+
+client = pymongo.MongoClient("prof_db",27020)
+db = client.prof
+
+class profService(
+    prof_pb2_grpc.proflistServicer
+):
+    def getProf(self, request, context):
+        # db.hello.insert_one({"count": 5}) # What is this doing?
+        prof_ = db.profInfo.find({'name'=request.name}):
+        # temp_prof = {} # TODO: is temp_prof necessary? don't think so
+        # temp_prof['name'] = prof_['name'] # should be the same as request.name
+        # temp_prof['rating'] = prof_['rating'] 
+        # temp_prof['wouldTakeAgain'] = prof_['wouldTakeAgain'] 
+        # temp_prof['levelOfDifficulty'] = prof_['levelOfDifficulty'] 
+        # temp_prof['reviews'] = str(prof_['reviews'])
+        # temp_prof['numReviews'] = prof_['numReviews']
+        similar_profs = []
+        for similar_prof_ in prof_['similarProfs']:
+            temp_prof = {}
+            temp_prof['rating'] = prof_['section']
+            temp_prof['name'] = prof_['name']
+            temp_prof['link'] = prof_['link']
+            similar_profs.append(Professor(rating=temp_prof['rating'],name=temp_prof['name'],link=temp_prof['link']))
+
+        # return profResponse(name=temp_prof['name'],rating=temp_prof['rating'], 
+        #             wouldTakeAgain=temp_prof['wouldTakeAgain'], levelOfDifficulty=temp_prof['levelOfDifficulty'], similarProfs=temp_prof['similarProfs'], reviews=temp_prof['reviews'], numReviews=temp_prof['numReviews']
+        #         ))
+        return profResponse(name=prof_['name'],rating=prof_['rating'], 
+                    wouldTakeAgain=prof_['wouldTakeAgain'], levelOfDifficulty=prof_['levelOfDifficulty'], similarProfs=prof_['similarProfs'], reviews=prof_['reviews'], numReviews=prof_['numReviews']
+                ))
+
 base_url = "https://www.ratemyprofessors.com/"
 
 def scrape_profs():
