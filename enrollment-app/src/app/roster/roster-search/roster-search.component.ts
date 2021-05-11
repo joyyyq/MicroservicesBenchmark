@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Class} from '../../../../proto/classList_pb';
+import { Class } from '../../../../proto/classList_pb';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

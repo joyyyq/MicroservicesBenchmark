@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import {Class, Section, Time, classListRequest, classListResponse} from '../../../../proto/classList_pb';
+import { Class } from '../../../../proto/classList_pb';
 
 @Component({
   selector: 'app-roster-card',

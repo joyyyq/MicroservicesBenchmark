@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CartClientService } from '../../services/cart-client.service';
 import { StudentStateService } from '../../services/student-state.service';
-import { cartSingleResponse,section } from '../../../../proto/studentCart_pb';
+import { cartSingleResponse } from '../../../../proto/studentCart_pb';
 import { Class } from '../../../../proto/classList_pb';
 import { ClasslistClientService } from '../../services/classlist-client.service';
 

@@ -1,8 +1,8 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router'; 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Class, Section, Time, classListRequest, classListResponse } from '../../../../proto/classList_pb';
+import { Class } from '../../../../proto/classList_pb';
 import { ClasslistClientService } from '../../services/classlist-client.service';
 
 
