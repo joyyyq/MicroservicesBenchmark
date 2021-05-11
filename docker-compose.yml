@@ -49,6 +49,15 @@ services:
     networks:
       - envoymesh
     restart: always
+
+  prof:
+    container_name: prof
+    build: ./prof
+    ports:
+      - "5004:5004"
+    networks:
+      - envoymesh
+    restart: always
   
   mongodb-register:
     container_name: register_db

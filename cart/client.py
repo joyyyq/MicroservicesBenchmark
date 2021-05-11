@@ -1,3 +1,4 @@
+"""For local test"""
 import grpc
 from studentCart_pb2_grpc import cartStub
 channel = grpc.insecure_channel("localhost:5003")
@@ -9,23 +10,6 @@ from studentCart_pb2 import (
     cartResponse,
     section,
 )
-# request = classRequest(
-# userName= "ta326" ,courseCode="ECE 2300", section = "LEC 001")
-# response = client.addClass(request)
-# print(response)
-# request = classRequest(
-# userName= "ta326" ,courseCode="ECE 2300", section = "LAB 402")
-# response = client.addClass(request)
-# print(response)
-# request = classRequest(
-# userName= "ta326" ,courseCode="ECE 2300", section = "LAB 403")
-# response = client.addClass(request)
-# print(response)
-print("hello")
-#response = client.dropClass(request)
-#print(response)
-#cart_response = client.getCart(cart_request)
-#print(cart_response)
 request = classRequest()
 request.userName = "ta326"
 request.courseCode = "ECE 3150"
