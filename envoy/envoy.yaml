@@ -41,6 +41,13 @@ static_resources:
                   #max_stream_duration:
                   #  grpc_timeout_header_max: 0s
                   max_grpc_timeout: 2s
+              - match: { prefix: "/prof.prof/" }
+                route:
+                  cluster: prof_service
+                  #timeout: 0s
+                  #max_stream_duration:
+                  #  grpc_timeout_header_max: 0s
+                  max_grpc_timeout: 2s
               cors:
                 allow_origin_string_match:
                 - prefix: "*"

@@ -30,4 +30,21 @@ export class RosterSearchComponent implements OnInit {
       ['class/SP21/ECE/'+classNum], { relativeTo: this.route },
     );
   }
+
+  searchByProf(event: any) {
+    this.searchResults = []
+    let query = event.target.value; 
+    if (query != '') {
+      this.searchResults = this.classes.filter(
+        class_ => ( class_.getTitle().includes(query) || class_.getCode().includes(query) ));
+    }
+  }
+
+  visitProf(profName: any) {
+    this.router.navigate(
+      ['#/professor/prof/'+profName],
+    );
+  }
+
+
 }
