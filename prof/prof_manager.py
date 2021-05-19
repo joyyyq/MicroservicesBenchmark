@@ -3,13 +3,14 @@ from bs4 import BeautifulSoup
 import pymongo
 # from sklearn.feature_extraction.text import CountVectorizer
 # import matplotlib.pyplot as plt
-# import pandas as pd
+from concurrent import futures
 import urllib.request
 import requests
 import csv
 import numpy as np
 import grpc
 import random
+from concurrent import futures
 from prof_links import *
 
 from prof_pb2 import (
@@ -63,14 +64,14 @@ def scrape_profs():
             rating = "N/A"
 
         try:
-            wouldTakeAgain = soup.findAll('div', class_="FeedbackItem__FeedbackNumber-uof32n-1 kkESWs")[0].text
+            would_take_again = soup.findAll('div', class_="FeedbackItem__FeedbackNumber-uof32n-1 kkESWs")[0].text
         except:
-            wouldTakeAgain = "N/A"
+            would_take_again = "N/A"
         
         try:
-            levelOfDifficulty = soup.findAll('div', class_="FeedbackItem__FeedbackNumber-uof32n-1 kkESWs")[1].text
+            level_of_difficulty = soup.findAll('div', class_="FeedbackItem__FeedbackNumber-uof32n-1 kkESWs")[1].text
         except:
-            levelOfDifficulty = "N/A"
+            level_of_difficulty = "N/A"
 
         try:
             top_tags = soup.findAll('span', class_="Tag-bs9vf4-0 hHOVKF")
@@ -103,7 +104,7 @@ def scrape_profs():
             reviews = "N/A"
             num_reviews = 0
 
-        csv_writer.writerow([name, rating, wouldTakeAgain, levelOfDifficulty, top_tags, similar_profs, reviews, num_reviews])
+        csv_writer.writerow([name, rating, would_take_again, level_of_difficulty, top_tags, similar_profs, reviews, num_reviews])
 
     csv_file.close()
     return stripped_reviews_lst
@@ -149,16 +150,16 @@ def scrape_profs():
         -> profCounts: the latest number of profs pulled from the site. 
 '''
 def update_db():
-    profs = csv.DictReader(open("prof.csv"))
+    profs = csv.DictReader(open("prof.csv", mode='r', encoding='utf-8-sig'))
     for prof in profs:
         data = {}
         data["name"] = prof["name"]
-        data["wouldTakeAgain"] = prof["wouldTakeAgain"]
-        data["levelOfDifficulty"] = prof["levelOfDifficulty"]
-        data["topTags"] = prof["topTags"]
-        data["similarProfs"] = prof["similarProfs"]
+        data["would_take_again"] = prof["wouldTakeAgain"]
+        data["level_of_difficulty"] = prof["levelOfDifficulty"]
+        data["top_tags"] = prof["topTags"]
+        data["similar_profs"] = prof["similarProfs"]
         data["reviews"] = prof["reviews"]
-        data["num_reviews"] = prof["num_reviews"]
+        data["num_reviews"] = prof["numReviews"]
         db.profInfo.insert_one(data)
     db.profCounts.insert_one({"count": len(list(profs))})
 
@@ -176,8 +177,7 @@ if __name__ == "__main__":
     if ( db.profCounts.count_documents({}) != TOTAL_ECE_PROFS ):
         db.profInfo.delete_many({}) # Always reset 
         # Run
-        init_credits()
-        scrape_profs()
+        # scrape_profs()
         update_db()
     
     serve()
