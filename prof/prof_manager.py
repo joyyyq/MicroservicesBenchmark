@@ -15,7 +15,10 @@ from prof_links import *
 
 from prof_pb2 import (
     profRequest,
-    profResponse
+    profResponse,
+    profListRequest,
+    profListResponse,
+    Professor,
 )
 import prof_pb2_grpc
 
@@ -26,6 +29,7 @@ class profService(
     prof_pb2_grpc.profServicer
 ):
     def getProf(self, request, context):
+        prof_ = Professor(name='', rating='', wouldTakeAgain='', levelOfDifficulty='', topTags='', reviews='', numReviews='')
         prof_ = db.profInfo.find_one({'name': request.name})
         # similar_profs = []
         # for similar_prof_ in prof_['similarProfs']:
@@ -34,8 +38,15 @@ class profService(
         #     temp_prof['name'] = prof_['name']
         #     temp_prof['link'] = prof_['link']
         #     similar_profs.append(Professor(rating=temp_prof['rating'],name=temp_prof['name'],link=temp_prof['link']))
-        return profResponse(name=prof_['name'],rating=prof_['rating'], 
-                    wouldTakeAgain=prof_['would_take_again'], levelOfDifficulty=prof_['level_of_difficulty'], topTags=prof_['top_tags'], reviews=prof_['reviews'], numReviews=prof_['num_reviews'])
+        return profResponse(prof=Professor(name=prof_['name'],rating=prof_['rating'], 
+                    wouldTakeAgain=prof_['would_take_again'], levelOfDifficulty=prof_['level_of_difficulty'], topTags=prof_['top_tags'], reviews=prof_['reviews'], numReviews=prof_['num_reviews']))
+    
+    def getProfList(self, request, context):
+        profs = []
+        for prof_ in db.profInfo.find({}):
+            profs.append(Professor(name=prof_['name'],rating=prof_['rating'], 
+                    wouldTakeAgain=prof_['would_take_again'], levelOfDifficulty=prof_['level_of_difficulty'], topTags=prof_['top_tags'], reviews=prof_['reviews'], numReviews=prof_['num_reviews']))
+        return profListResponse(profs=profs)
 
 base_url = "https://www.ratemyprofessors.com/"
 
@@ -178,7 +189,6 @@ if __name__ == "__main__":
     TOTAL_ECE_PROFS=29 # Hard coded for now cause not all prof has a RMP page
     if ( db.profCounts.count_documents({}) != TOTAL_ECE_PROFS ):
         db.profInfo.delete_many({}) # Always reset 
-        # Run
         # scrape_profs()
         update_db()
     

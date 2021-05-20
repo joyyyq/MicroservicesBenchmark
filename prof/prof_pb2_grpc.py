@@ -19,12 +19,23 @@ class profStub(object):
                 request_serializer=prof__pb2.profRequest.SerializeToString,
                 response_deserializer=prof__pb2.profResponse.FromString,
                 )
+        self.getProfList = channel.unary_unary(
+                '/prof.prof/getProfList',
+                request_serializer=prof__pb2.profListRequest.SerializeToString,
+                response_deserializer=prof__pb2.profListResponse.FromString,
+                )
 
 
 class profServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def getProf(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def getProfList(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_profServicer_to_server(servicer, server):
                     servicer.getProf,
                     request_deserializer=prof__pb2.profRequest.FromString,
                     response_serializer=prof__pb2.profResponse.SerializeToString,
+            ),
+            'getProfList': grpc.unary_unary_rpc_method_handler(
+                    servicer.getProfList,
+                    request_deserializer=prof__pb2.profListRequest.FromString,
+                    response_serializer=prof__pb2.profListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +78,22 @@ class prof(object):
         return grpc.experimental.unary_unary(request, target, '/prof.prof/getProf',
             prof__pb2.profRequest.SerializeToString,
             prof__pb2.profResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def getProfList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/prof.prof/getProfList',
+            prof__pb2.profListRequest.SerializeToString,
+            prof__pb2.profListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

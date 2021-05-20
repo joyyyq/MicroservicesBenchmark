@@ -3,6 +3,7 @@ package prof;
 
 service prof {
     rpc getProf(profRequest) returns (profResponse);
+    rpc getProfList(profListRequest) returns (profListResponse);
 }
 
 message profRequest {
@@ -10,6 +11,17 @@ message profRequest {
 }
 
 message profResponse {
+    Professor prof = 1;
+}
+
+message profListRequest {
+}
+
+message profListResponse {
+    repeated Professor profs = 1;
+}
+
+message Professor {
     string name = 1;
     string rating = 2;
     string wouldTakeAgain = 3;
