@@ -75,5 +75,45 @@ export class profClient {
     this.methodInfogetProf);
   }
 
+  methodInfogetProfList = new grpcWeb.AbstractClientBase.MethodInfo(
+    prof_pb.profListResponse,
+    (request: prof_pb.profListRequest) => {
+      return request.serializeBinary();
+    },
+    prof_pb.profListResponse.deserializeBinary
+  );
+
+  getProfList(
+    request: prof_pb.profListRequest,
+    metadata: grpcWeb.Metadata | null): Promise<prof_pb.profListResponse>;
+
+  getProfList(
+    request: prof_pb.profListRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: prof_pb.profListResponse) => void): grpcWeb.ClientReadableStream<prof_pb.profListResponse>;
+
+  getProfList(
+    request: prof_pb.profListRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.Error,
+               response: prof_pb.profListResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/prof.prof/getProfList',
+        request,
+        metadata || {},
+        this.methodInfogetProfList,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/prof.prof/getProfList',
+    request,
+    metadata || {},
+    this.methodInfogetProfList);
+  }
+
 }
 

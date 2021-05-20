@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router'; 
-import {Class, Section, Time, classListRequest, classListResponse,} from '../../../../proto/classList_pb';
-import { ClasslistClientService } from '../../services/classlist-client.service';
+import { ActivatedRoute } from '@angular/router'; 
+import { Class } from '../../../../proto/classList_pb';
 
 @Component({
   selector: 'app-roster-class',
@@ -14,7 +13,7 @@ export class RosterClassComponent implements OnInit {
   classNum: string = ''; 
   class_: Class = new Class(); 
   classes: Class[] = []; 
-  constructor(private client: ClasslistClientService, private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute) {
     this.semester = this.route.snapshot.url[1].path; 
     this.group    = this.route.snapshot.url[2].path; 
     this.classNum    = this.route.snapshot.url[3].path; 
