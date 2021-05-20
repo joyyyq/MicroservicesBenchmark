@@ -20,9 +20,11 @@ import { MatCardModule } from '@angular/material/card';
 
 import { RosterClassComponent } from './roster-class/roster-class.component';
 import { RosterSearchComponent } from './roster-search/roster-search.component';
+import { RosterProfessorComponent } from './roster-professor/roster-professor.component';
+import { ProfessorCardComponent } from './professor-card/professor-card.component';
 
 @NgModule({
-  declarations: [RosterComponent, RosterCardComponent, RosterClassComponent, RosterSearchComponent],
+  declarations: [RosterComponent, RosterCardComponent, RosterClassComponent, RosterSearchComponent, RosterProfessorComponent, ProfessorCardComponent],
   imports: [
     CommonModule,
     RosterRoutingModule, 
