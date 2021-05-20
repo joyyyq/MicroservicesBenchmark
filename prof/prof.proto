@@ -14,7 +14,7 @@ message profResponse {
     string rating = 2;
     string wouldTakeAgain = 3;
     string levelOfDifficulty = 4;
-    repeated string topTags = 5;
+    string topTags = 5;
     string reviews = 6;
     string numReviews = 7;
 }

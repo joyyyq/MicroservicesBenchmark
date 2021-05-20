@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nprof.proto\x12\x04prof\"\x1b\n\x0bprofRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x95\x01\n\x0cprofResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\t\x12\x16\n\x0ewouldTakeAgain\x18\x03 \x01(\t\x12\x19\n\x11levelOfDifficulty\x18\x04 \x01(\t\x12\x0f\n\x07topTags\x18\x05 \x03(\t\x12\x0f\n\x07reviews\x18\x06 \x01(\t\x12\x12\n\nnumReviews\x18\x07 \x01(\t28\n\x04prof\x12\x30\n\x07getProf\x12\x11.prof.profRequest\x1a\x12.prof.profResponseb\x06proto3'
+  serialized_pb=b'\n\nprof.proto\x12\x04prof\"\x1b\n\x0bprofRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x95\x01\n\x0cprofResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\t\x12\x16\n\x0ewouldTakeAgain\x18\x03 \x01(\t\x12\x19\n\x11levelOfDifficulty\x18\x04 \x01(\t\x12\x0f\n\x07topTags\x18\x05 \x01(\t\x12\x0f\n\x07reviews\x18\x06 \x01(\t\x12\x12\n\nnumReviews\x18\x07 \x01(\t28\n\x04prof\x12\x30\n\x07getProf\x12\x11.prof.profRequest\x1a\x12.prof.profResponseb\x06proto3'
 )
 
 
@@ -95,8 +95,8 @@ _PROFRESPONSE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='topTags', full_name='prof.profResponse.topTags', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),

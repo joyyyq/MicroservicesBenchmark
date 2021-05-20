@@ -33,10 +33,8 @@ export class profResponse extends jspb.Message {
   getLevelofdifficulty(): string;
   setLevelofdifficulty(value: string): profResponse;
 
-  getToptagsList(): Array<string>;
-  setToptagsList(value: Array<string>): profResponse;
-  clearToptagsList(): profResponse;
-  addToptags(value: string, index?: number): profResponse;
+  getToptags(): string;
+  setToptags(value: string): profResponse;
 
   getReviews(): string;
   setReviews(value: string): profResponse;
@@ -58,7 +56,7 @@ export namespace profResponse {
     rating: string,
     wouldtakeagain: string,
     levelofdifficulty: string,
-    toptagsList: Array<string>,
+    toptags: string,
     reviews: string,
     numreviews: string,
   }

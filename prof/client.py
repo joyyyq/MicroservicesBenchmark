@@ -9,4 +9,4 @@ from prof_pb2 import (
 )
 request = profRequest(name='Christina Delimitrou')
 response = client.getProf(request)
-print(response["topTags"])
+print(response)

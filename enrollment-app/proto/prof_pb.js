@@ -49,7 +49,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.prof.profResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.prof.profResponse.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.prof.profResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -190,13 +190,6 @@ proto.prof.profRequest.prototype.setName = function(value) {
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.prof.profResponse.repeatedFields_ = [5];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -232,7 +225,7 @@ proto.prof.profResponse.toObject = function(includeInstance, msg) {
     rating: jspb.Message.getFieldWithDefault(msg, 2, ""),
     wouldtakeagain: jspb.Message.getFieldWithDefault(msg, 3, ""),
     levelofdifficulty: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    toptagsList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f,
+    toptags: jspb.Message.getFieldWithDefault(msg, 5, ""),
     reviews: jspb.Message.getFieldWithDefault(msg, 6, ""),
     numreviews: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
@@ -289,7 +282,7 @@ proto.prof.profResponse.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.addToptags(value);
+      msg.setToptags(value);
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
@@ -356,9 +349,9 @@ proto.prof.profResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getToptagsList();
+  f = message.getToptags();
   if (f.length > 0) {
-    writer.writeRepeatedString(
+    writer.writeString(
       5,
       f
     );
@@ -453,39 +446,20 @@ proto.prof.profResponse.prototype.setLevelofdifficulty = function(value) {
 
 
 /**
- * repeated string topTags = 5;
- * @return {!Array<string>}
+ * optional string topTags = 5;
+ * @return {string}
  */
-proto.prof.profResponse.prototype.getToptagsList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 5));
-};
-
-
-/**
- * @param {!Array<string>} value
- * @return {!proto.prof.profResponse} returns this
- */
-proto.prof.profResponse.prototype.setToptagsList = function(value) {
-  return jspb.Message.setField(this, 5, value || []);
+proto.prof.profResponse.prototype.getToptags = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
 /**
  * @param {string} value
- * @param {number=} opt_index
  * @return {!proto.prof.profResponse} returns this
  */
-proto.prof.profResponse.prototype.addToptags = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 5, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.prof.profResponse} returns this
- */
-proto.prof.profResponse.prototype.clearToptagsList = function() {
-  return this.setToptagsList([]);
+proto.prof.profResponse.prototype.setToptags = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
