@@ -26,7 +26,8 @@
         <h3>{{ section.getTitle() }}</h3> 
         <h3>Location: TBD</h3>
         <h3>{{ section.getTimes()!.getStart() }} - {{ section.getTimes()!.getEnd() }}</h3>
-        <h3>{{ section.getInstructors() }}</h3>
+        <!-- <h3>{{ section.getInstructors() }}</h3> -->
+        <h3><a (click)="visitProf(section.getInstructors())" class="search-card">{{ section.getInstructors() }}</a></h3>
       </div>
     </div>
   </mat-expansion-panel>

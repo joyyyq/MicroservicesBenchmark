@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Class } from '../../../../proto/classList_pb';
+import { Professor } from '../../../../proto/prof_pb';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -9,9 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RosterSearchComponent implements OnInit {
   @Input() classes: Class[];
-  values = ''
-  searchResults: Class[] = []; 
-  constructor(private router: Router, private route: ActivatedRoute) { this.classes = [];}
+  @Input() profs: Professor[];
+  searchResults: Class[] = [];
+  searchProfResults: Professor[] = [];
+  constructor(private router: Router, private route: ActivatedRoute) { this.classes = []; this.profs = [];}
 
   ngOnInit(): void {
   }
@@ -31,20 +33,19 @@ export class RosterSearchComponent implements OnInit {
     );
   }
 
-  searchByProf(event: any) {
-    this.searchResults = []
+  searchProf(event: any) {
+    this.searchProfResults = []
     let query = event.target.value; 
     if (query != '') {
-      this.searchResults = this.classes.filter(
-        class_ => ( class_.getTitle().includes(query) || class_.getCode().includes(query) ));
+      this.searchProfResults = this.profs.filter(
+        prof_ => ( prof_.getName().includes(query) ));
     }
   }
 
   visitProf(profName: any) {
     this.router.navigate(
-      ['#/professor/prof/'+profName],
+      ['prof/'+profName], { relativeTo: this.route },
     );
   }
-
 
 }

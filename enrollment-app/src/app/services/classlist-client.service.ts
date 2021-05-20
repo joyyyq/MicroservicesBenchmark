@@ -1,7 +1,7 @@
 import * as grpcWeb from 'grpc-web';
 import { Injectable } from '@angular/core';
-import {classlistClient} from '../../../proto/ClassListServiceClientPb';
-import {Class, classListRequest, classListResponse,} from '../../../proto/classList_pb';
+import { classlistClient } from '../../../proto/ClassListServiceClientPb';
+import { Class, classListRequest, classListResponse } from '../../../proto/classList_pb';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

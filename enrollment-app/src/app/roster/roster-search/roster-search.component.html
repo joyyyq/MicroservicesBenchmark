@@ -15,20 +15,20 @@
         <strong>{{class.getCode()}} </strong>{{class.getTitle()}}
       </a>
     </mat-card>
-    <!-- <h2>
-      SEARCH BY PROFESSOR
-    </h2>
-      <mat-form-field style=" margin-bottom: -1.25em" appearance="outline">
-          <mat-label>Search by Professor</mat-label>
-          <input (input)="search($event)" matInput type="text"
-              autocomplete="off" 
+  <h2>
+    SEARCH BY PROFESSOR
+  </h2>
+    <mat-form-field style=" margin-bottom: -1.25em" appearance="outline">
+        <mat-label>Search by Professor</mat-label>
+        <input (input)="searchProf($event)" matInput type="text"
+              autocomplete="off"
               required/>
-      </mat-form-field>
-      <mat-card *ngIf="searchResults.length != 0">
-        <a (click)="visitProf(prof.getName())"
+    </mat-form-field>
+    <mat-card *ngIf="searchProfResults.length != 0">
+      <a (click)="visitProf(prof.getName())"
           class="search-card" 
-          *ngFor="let prof of searchResults">
-          <strong>{{prof.getReviews()}} </strong>{{prof.getToptags())}}
-        </a>
-      </mat-card> -->
+          *ngFor="let prof of searchProfResults">
+        <strong>{{prof.getRating()}} </strong>{{prof.getLevelofdifficulty()}}
+      </a>
+    </mat-card>
 </div>
