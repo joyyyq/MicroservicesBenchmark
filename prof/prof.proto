@@ -11,17 +11,10 @@ message profRequest {
 
 message profResponse {
     string name = 1;
-    float rating = 2;
-    float wouldTakeAgain = 3;
-    float levelOfDifficulty = 4;
+    string rating = 2;
+    string wouldTakeAgain = 3;
+    string levelOfDifficulty = 4;
     repeated string topTags = 5;
-    repeated Professor similarProfs = 6;
-    string reviews = 7;
-    int64 numReviews = 8;
-}
-
-message Professor {
-    float rating = 1;
-    string name = 2;
-    string link = 3;
+    string reviews = 6;
+    string numReviews = 7;
 }

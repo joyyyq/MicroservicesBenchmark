@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nprof.proto\x12\x04prof\"\x1b\n\x0bprofRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\xbc\x01\n\x0cprofResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\x02\x12\x16\n\x0ewouldTakeAgain\x18\x03 \x01(\x02\x12\x19\n\x11levelOfDifficulty\x18\x04 \x01(\x02\x12\x0f\n\x07topTags\x18\x05 \x03(\t\x12%\n\x0csimilarProfs\x18\x06 \x03(\x0b\x32\x0f.prof.Professor\x12\x0f\n\x07reviews\x18\x07 \x01(\t\x12\x12\n\nnumReviews\x18\x08 \x01(\x03\"7\n\tProfessor\x12\x0e\n\x06rating\x18\x01 \x01(\x02\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04link\x18\x03 \x01(\t28\n\x04prof\x12\x30\n\x07getProf\x12\x11.prof.profRequest\x1a\x12.prof.profResponseb\x06proto3'
+  serialized_pb=b'\n\nprof.proto\x12\x04prof\"\x1b\n\x0bprofRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x95\x01\n\x0cprofResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\t\x12\x16\n\x0ewouldTakeAgain\x18\x03 \x01(\t\x12\x19\n\x11levelOfDifficulty\x18\x04 \x01(\t\x12\x0f\n\x07topTags\x18\x05 \x03(\t\x12\x0f\n\x07reviews\x18\x06 \x01(\t\x12\x12\n\nnumReviews\x18\x07 \x01(\t28\n\x04prof\x12\x30\n\x07getProf\x12\x11.prof.profRequest\x1a\x12.prof.profResponseb\x06proto3'
 )
 
 
@@ -74,22 +74,22 @@ _PROFRESPONSE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='rating', full_name='prof.profResponse.rating', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='wouldTakeAgain', full_name='prof.profResponse.wouldTakeAgain', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='levelOfDifficulty', full_name='prof.profResponse.levelOfDifficulty', index=3,
-      number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -101,23 +101,16 @@ _PROFRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='similarProfs', full_name='prof.profResponse.similarProfs', index=5,
-      number=6, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='reviews', full_name='prof.profResponse.reviews', index=6,
-      number=7, type=9, cpp_type=9, label=1,
+      name='reviews', full_name='prof.profResponse.reviews', index=5,
+      number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='numReviews', full_name='prof.profResponse.numReviews', index=7,
-      number=8, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
+      name='numReviews', full_name='prof.profResponse.numReviews', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -134,59 +127,11 @@ _PROFRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=50,
-  serialized_end=238,
+  serialized_end=199,
 )
 
-
-_PROFESSOR = _descriptor.Descriptor(
-  name='Professor',
-  full_name='prof.Professor',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='rating', full_name='prof.Professor.rating', index=0,
-      number=1, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='prof.Professor.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='link', full_name='prof.Professor.link', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=240,
-  serialized_end=295,
-)
-
-_PROFRESPONSE.fields_by_name['similarProfs'].message_type = _PROFESSOR
 DESCRIPTOR.message_types_by_name['profRequest'] = _PROFREQUEST
 DESCRIPTOR.message_types_by_name['profResponse'] = _PROFRESPONSE
-DESCRIPTOR.message_types_by_name['Professor'] = _PROFESSOR
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 profRequest = _reflection.GeneratedProtocolMessageType('profRequest', (_message.Message,), {
@@ -203,13 +148,6 @@ profResponse = _reflection.GeneratedProtocolMessageType('profResponse', (_messag
   })
 _sym_db.RegisterMessage(profResponse)
 
-Professor = _reflection.GeneratedProtocolMessageType('Professor', (_message.Message,), {
-  'DESCRIPTOR' : _PROFESSOR,
-  '__module__' : 'prof_pb2'
-  # @@protoc_insertion_point(class_scope:prof.Professor)
-  })
-_sym_db.RegisterMessage(Professor)
-
 
 
 _PROF = _descriptor.ServiceDescriptor(
@@ -219,8 +157,8 @@ _PROF = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=297,
-  serialized_end=353,
+  serialized_start=201,
+  serialized_end=257,
   methods=[
   _descriptor.MethodDescriptor(
     name='getProf',

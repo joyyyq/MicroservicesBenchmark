@@ -15,8 +15,7 @@ from prof_links import *
 
 from prof_pb2 import (
     profRequest,
-    profResponse,
-    Professor
+    profResponse
 )
 import prof_pb2_grpc
 
@@ -28,15 +27,15 @@ class profService(
 ):
     def getProf(self, request, context):
         prof_ = db.profInfo.find_one({'name': request.name})
-        similar_profs = []
-        for similar_prof_ in prof_['similarProfs']:
-            temp_prof = {}
-            temp_prof['rating'] = prof_['section']
-            temp_prof['name'] = prof_['name']
-            temp_prof['link'] = prof_['link']
-            similar_profs.append(Professor(rating=temp_prof['rating'],name=temp_prof['name'],link=temp_prof['link']))
+        # similar_profs = []
+        # for similar_prof_ in prof_['similarProfs']:
+        #     temp_prof = {}
+        #     temp_prof['rating'] = prof_['section']
+        #     temp_prof['name'] = prof_['name']
+        #     temp_prof['link'] = prof_['link']
+        #     similar_profs.append(Professor(rating=temp_prof['rating'],name=temp_prof['name'],link=temp_prof['link']))
         return profResponse(name=prof_['name'],rating=prof_['rating'], 
-                    wouldTakeAgain=prof_['wouldTakeAgain'], levelOfDifficulty=prof_['levelOfDifficulty'], similarProfs=prof_['similarProfs'], reviews=prof_['reviews'], numReviews=prof_['numReviews'])
+                    wouldTakeAgain=prof_['would_take_again'], levelOfDifficulty=prof_['level_of_difficulty'], topTags=prof_['top_tags'], reviews=prof_['reviews'], numReviews=prof_['num_reviews'])
 
 base_url = "https://www.ratemyprofessors.com/"
 
@@ -76,8 +75,10 @@ def scrape_profs():
         try:
             top_tags = soup.findAll('span', class_="Tag-bs9vf4-0 hHOVKF")
             top_tags = [tag.text.strip() for tag in top_tags]
+            top_tags = '; '.join(set(top_tags))
         except:
-            top_tags = []
+            # top_tags = []
+            top_tags = ""
 
         try:
             similar_profs = []
@@ -154,6 +155,7 @@ def update_db():
     for prof in profs:
         data = {}
         data["name"] = prof["name"]
+        data["rating"] = prof["rating"]
         data["would_take_again"] = prof["wouldTakeAgain"]
         data["level_of_difficulty"] = prof["levelOfDifficulty"]
         data["top_tags"] = prof["topTags"]

@@ -24,30 +24,25 @@ export class profResponse extends jspb.Message {
   getName(): string;
   setName(value: string): profResponse;
 
-  getRating(): number;
-  setRating(value: number): profResponse;
+  getRating(): string;
+  setRating(value: string): profResponse;
 
-  getWouldtakeagain(): number;
-  setWouldtakeagain(value: number): profResponse;
+  getWouldtakeagain(): string;
+  setWouldtakeagain(value: string): profResponse;
 
-  getLevelofdifficulty(): number;
-  setLevelofdifficulty(value: number): profResponse;
+  getLevelofdifficulty(): string;
+  setLevelofdifficulty(value: string): profResponse;
 
   getToptagsList(): Array<string>;
   setToptagsList(value: Array<string>): profResponse;
   clearToptagsList(): profResponse;
   addToptags(value: string, index?: number): profResponse;
 
-  getSimilarprofsList(): Array<Professor>;
-  setSimilarprofsList(value: Array<Professor>): profResponse;
-  clearSimilarprofsList(): profResponse;
-  addSimilarprofs(value?: Professor, index?: number): Professor;
-
   getReviews(): string;
   setReviews(value: string): profResponse;
 
-  getNumreviews(): number;
-  setNumreviews(value: number): profResponse;
+  getNumreviews(): string;
+  setNumreviews(value: string): profResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): profResponse.AsObject;
@@ -60,39 +55,12 @@ export class profResponse extends jspb.Message {
 export namespace profResponse {
   export type AsObject = {
     name: string,
-    rating: number,
-    wouldtakeagain: number,
-    levelofdifficulty: number,
+    rating: string,
+    wouldtakeagain: string,
+    levelofdifficulty: string,
     toptagsList: Array<string>,
-    similarprofsList: Array<Professor.AsObject>,
     reviews: string,
-    numreviews: number,
-  }
-}
-
-export class Professor extends jspb.Message {
-  getRating(): number;
-  setRating(value: number): Professor;
-
-  getName(): string;
-  setName(value: string): Professor;
-
-  getLink(): string;
-  setLink(value: string): Professor;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Professor.AsObject;
-  static toObject(includeInstance: boolean, msg: Professor): Professor.AsObject;
-  static serializeBinaryToWriter(message: Professor, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Professor;
-  static deserializeBinaryFromReader(message: Professor, reader: jspb.BinaryReader): Professor;
-}
-
-export namespace Professor {
-  export type AsObject = {
-    rating: number,
-    name: string,
-    link: string,
+    numreviews: string,
   }
 }
 
