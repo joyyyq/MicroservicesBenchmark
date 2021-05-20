@@ -1,0 +1,19 @@
+.title-container {
+    display: flex;
+    flex-direction: row;
+    background: #f2f2f2;
+    font-size: 1.18em;
+    font-weight: 300;
+    background: rgba(0,0,0,0.05);
+    border-left: 3px solid #b31b1b;
+    padding: 0.5em 66px 0.5em 0.75em;
+  }
+  
+  .title-code {
+    width: 18%;
+    height: 100%;
+    text-align: left;
+    padding-right: 0.5em;
+    font-weight: bold;
+    float: left;
+  }
