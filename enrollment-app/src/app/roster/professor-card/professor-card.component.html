@@ -1,17 +1,19 @@
 
 <h3 class="title-container"> 
-    <div class="title-code">
-      {{ prof.getName() }} 
-    </div>
-    {{ prof.getRating() }} 
-  </h3>
+    <div class="title-code"> Professor {{ prof.getName() }} </div>
+    <div class="title-rating"> Overal Rating: {{ prof.getRating() }} </div>
+</h3>
   
   <h3>
-    {{ prof.getWouldtakeagain() }} 
+    Would take again: {{ prof.getWouldtakeagain() }} 
   </h3>
   
-  <h3> {{ prof.getLevelofdifficulty() }}  </h3>
-  <h3> {{ prof.getToptags() }}  </h3>
-  <h3> {{ prof.getReviews() }}  </h3>
-  <h3> {{ prof.getNumreviews() }}  </h3>
-  
+  <h3> Level of Difficulty {{ prof.getLevelofdifficulty() }} </h3>
+  <h3> Top Tags: {{ prof.getToptags() }} </h3>
+  <h3> Number of Reviews: {{ prof.getNumreviews() }} </h3>
+  <h3> Reviews: </h3>
+  <div class="reviews"> 
+    <div *ngFor="let review of reviews">
+      <h3> {{ review }}</h3>
+    </div>
+  </div>

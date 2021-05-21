@@ -11,10 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RosterCardComponent implements OnInit {
   @Input() class: Class;
 
-  constructor(private router: Router, private route: ActivatedRoute) { this.class = new Class();}
+  constructor(private router: Router) { this.class = new Class(); }
 
   ngOnInit(): void {
-    // console.log(this.class);
+    console.log(this.class);
   }
 
   visitProf(profName: string) {
@@ -22,7 +22,7 @@ export class RosterCardComponent implements OnInit {
     profName = profName.substr(0,idx)
     console.log(profName)
     this.router.navigate(
-      ['prof/'+profName], { relativeTo: this.route },
+      ['roster/prof/'+profName], 
     );
   }
 }
