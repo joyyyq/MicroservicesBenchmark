@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Class } from '../../../../proto/classList_pb';
 import { Professor } from '../../../../proto/prof_pb';
 import { ActivatedRoute, Router } from '@angular/router';
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 
 @Component({
   selector: 'app-roster-search',
@@ -37,12 +38,14 @@ export class RosterSearchComponent implements OnInit {
     this.searchProfResults = []
     let query = event.target.value; 
     if (query != '') {
+      console.log(this.profs)
       this.searchProfResults = this.profs.filter(
         prof_ => ( prof_.getName().includes(query) ));
     }
   }
 
   visitProf(profName: any) {
+    console.log(profName)
     this.router.navigate(
       ['prof/'+profName], { relativeTo: this.route },
     );

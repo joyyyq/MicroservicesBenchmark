@@ -28,7 +28,7 @@
       <a (click)="visitProf(prof.getName())"
           class="search-card" 
           *ngFor="let prof of searchProfResults">
-        <strong>{{prof.getRating()}} </strong>{{prof.getLevelofdifficulty()}}
+        <strong>{{prof.getName()}}</strong>
       </a>
     </mat-card>
 </div>
