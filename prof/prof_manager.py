@@ -29,7 +29,6 @@ class profService(
     prof_pb2_grpc.profServicer
 ):
     def getProf(self, request, context):
-        prof_ = Professor(name='', rating='', wouldTakeAgain='', levelOfDifficulty='', topTags='', reviews='', numReviews='')
         prof_ = db.profInfo.find_one({'name': request.name})
         # similar_profs = []
         # for similar_prof_ in prof_['similarProfs']:

@@ -16,7 +16,7 @@ from classList_pb2 import (
     classListResponse,
     Class, 
     Section, 
-    Time
+    Time,
 )
 import classList_pb2_grpc
 

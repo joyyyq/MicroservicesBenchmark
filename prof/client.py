@@ -10,13 +10,15 @@ from prof_pb2 import (
     profListResponse,
     Professor,
 )
-request = profRequest(name='Christina Delimitrou')
-response = client.getProf(request)
-print(response)
 
 request = profListRequest()
 response = client.getProfList(request)
 print(response)
+
+request = profRequest(name='Christina Delimitrou')
+response = client.getProf(request)
+print(response)
+
 
 # for prof in response: 
 #     print(prof["name"])
