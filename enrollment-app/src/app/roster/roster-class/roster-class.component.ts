@@ -16,7 +16,7 @@ export class RosterClassComponent implements OnInit {
   constructor(private route: ActivatedRoute) {
     this.semester = this.route.snapshot.url[1].path; 
     this.group    = this.route.snapshot.url[2].path; 
-    this.classNum    = this.route.snapshot.url[3].path; 
+    this.classNum = this.route.snapshot.url[3].path; 
     this.route.data.subscribe((r) => console.log(r));
     this.classes = this.route.snapshot.data['classes'];
     console.log(this.classes);

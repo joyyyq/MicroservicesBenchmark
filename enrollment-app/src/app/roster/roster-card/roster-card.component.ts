@@ -10,11 +10,15 @@ import { Router } from '@angular/router';
 
 export class RosterCardComponent implements OnInit {
   @Input() class: Class;
+  recommendationsString: string = '';
+  recommendations: Array<String> = [];
 
   constructor(private router: Router) { this.class = new Class(); }
 
   ngOnInit(): void {
     console.log(this.class);
+    this.recommendationsString = this.class.getRecommendation();
+    this.recommendations = this.recommendationsString.split(';');
   }
 
   visitProf(profName: string) {
