@@ -22,6 +22,7 @@ message Class {
   string credit  = 5; 
   string description  = 6; 
   repeated Section sections = 7; 
+  string recommendation = 8;
 }
 
 message Section {

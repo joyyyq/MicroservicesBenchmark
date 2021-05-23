@@ -8,7 +8,7 @@ import time
 import requests
 import random
 from concurrent import futures
-
+import csv
 import grpc
 
 from classList_pb2 import (
@@ -31,13 +31,6 @@ class classlistService(
         db.hello.insert_one({"count": 5})
         classes = []
         for class_ in db.classInfo.find({}):
-            temp_class = {}
-            temp_class['title'] = class_['titles'] 
-            temp_class['code'] = class_['course_code'] 
-            temp_class['subject'] = class_['subject'] 
-            temp_class['nbr'] = class_['nbr'] 
-            temp_class['credit'] = str(class_['credit'])
-            temp_class['description'] = class_['description']
             sections = [] 
             for section_ in class_['course_info']:
                 temp_section = {}
@@ -53,9 +46,8 @@ class classlistService(
                     times=temp_section['times']
                 ))
 
-            classes.append(Class(title=temp_class['title'],code=temp_class['code'], 
-                    subject=temp_class['subject'], nbr=temp_class['nbr'], credit=temp_class['credit'], 
-                    description=temp_class['description'],sections=sections
+            classes.append(Class(title=class_['titles'],code=class_['course_code'], 
+                    subject=class_['subject'], nbr=class_['nbr'], credit=str(class_['credit']), description=class_['description'], sections=sections, recommendation=class_['recommendation']
                 ))
 
         return classListResponse(classes=classes)
@@ -71,9 +63,9 @@ instructors = []
 section = []
 course_code = [] # ECE 120
 descriptions = []
-data_catalog_nbr =[]  # number part 1210
-data_subject = []    # subject field ECE
-class_numbers = []    # unique number 34343
+data_catalog_nbr = [] # number part 1210
+data_subject = [] # subject field ECE
+class_numbers = [] # unique number 34343
 credit = [] # 3 credits
 times = [] # 6-9
 days = [] # M-W
@@ -116,7 +108,6 @@ def scrape_classes():
             title.append(titl.string)
             #print(titl.string)
         titles.append(title)
-
 
         section_1 = []
         for sec in node.select("div > div > ul[class='section section-last'] "):
@@ -168,10 +159,11 @@ def scrape_classes():
         -> classInfo: all the classes with their info 
         -> classCounts: the latest number of classes pulled from the site. 
 '''
-def update_db():
-    data = {}
-    # insert into db
-    for j in range(0,TOTAL_ECE_CLASSES):
+def update_db(): # insert into db
+    recommend = csv.DictReader(open("recommend.csv", mode='r', encoding='utf-8-sig'))
+    # for j in range(0,TOTAL_ECE_CLASSES):
+    for j, title in enumerate(recommend):
+        data = {}
         data["titles"] = titles[j][0]
         data["course_code"] = course_code[j]
         data["subject"] = data_subject[j]
@@ -189,8 +181,8 @@ def update_db():
             course_info.append(new_course)
         data["course_info"] = course_info
         data["size"] = 10
-        db.classInfo.insert_one(data)
-        data = {}
+        data["recommendation"] = title["recommendation"]
+        db.classInfo.insert_one(data)    
     
     # insert the total number of classes 
     db.classCounts.insert_one({'count': len(data_subject)})
@@ -206,12 +198,12 @@ def serve():
 
 if __name__ == "__main__":
     TOTAL_ECE_CLASSES=scrape_num_class()
-    if ( db.classCounts.count_documents({}) != TOTAL_ECE_CLASSES ):
-        # Always reset 
-        db.classInfo.delete_many({})
-        # Run 
-        init_credits()
-        scrape_classes()
-        update_db()
+    # if ( db.classCounts.count_documents({}) != TOTAL_ECE_CLASSES ):
+    # Always reset 
+    db.classInfo.delete_many({})
+    # Run 
+    init_credits()
+    scrape_classes()
+    update_db()
     
     serve()

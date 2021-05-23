@@ -6,8 +6,8 @@ from classList_pb2 import (
     classListRequest,
     classListResponse,
     Class, 
-    Section, 
-    Time
+    Section,
+    Time,
 )
 request = classListRequest(year='')
 response = client.getClassList(request)
