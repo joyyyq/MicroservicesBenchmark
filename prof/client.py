@@ -18,9 +18,3 @@ print(response)
 request = profRequest(name='Christina Delimitrou')
 response = client.getProf(request)
 print(response)
-
-
-# for prof in response: 
-#     print(prof["name"])
-#     # if prof["name"] == "David Albonesi":
-#     #     print("yes!")
