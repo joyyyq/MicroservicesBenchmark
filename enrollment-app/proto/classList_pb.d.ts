@@ -64,6 +64,9 @@ export class Class extends jspb.Message {
   clearSectionsList(): Class;
   addSections(value?: Section, index?: number): Section;
 
+  getRecommendation(): string;
+  setRecommendation(value: string): Class;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Class.AsObject;
   static toObject(includeInstance: boolean, msg: Class): Class.AsObject;
@@ -81,6 +84,7 @@ export namespace Class {
     credit: string,
     description: string,
     sectionsList: Array<Section.AsObject>,
+    recommendation: string,
   }
 }
 

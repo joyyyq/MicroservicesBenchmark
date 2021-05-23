@@ -2,6 +2,7 @@
 /**
  * @fileoverview
  * @enhanceable
+ * @suppress {missingRequire} reports error on implicit type usages.
  * @suppress {messageConventions} JS Compiler reports an error if a variable or
  *     field starts with 'MSG_' and isn't a translatable message.
  * @public
@@ -460,7 +461,8 @@ proto.classlist.Class.toObject = function(includeInstance, msg) {
     credit: jspb.Message.getFieldWithDefault(msg, 5, ""),
     description: jspb.Message.getFieldWithDefault(msg, 6, ""),
     sectionsList: jspb.Message.toObjectList(msg.getSectionsList(),
-    proto.classlist.Section.toObject, includeInstance)
+    proto.classlist.Section.toObject, includeInstance),
+    recommendation: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -525,6 +527,10 @@ proto.classlist.Class.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.classlist.Section;
       reader.readMessage(value,proto.classlist.Section.deserializeBinaryFromReader);
       msg.addSections(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRecommendation(value);
       break;
     default:
       reader.skipField();
@@ -603,6 +609,13 @@ proto.classlist.Class.serializeBinaryToWriter = function(message, writer) {
       7,
       f,
       proto.classlist.Section.serializeBinaryToWriter
+    );
+  }
+  f = message.getRecommendation();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
     );
   }
 };
@@ -751,6 +764,24 @@ proto.classlist.Class.prototype.addSections = function(opt_value, opt_index) {
  */
 proto.classlist.Class.prototype.clearSectionsList = function() {
   return this.setSectionsList([]);
+};
+
+
+/**
+ * optional string recommendation = 8;
+ * @return {string}
+ */
+proto.classlist.Class.prototype.getRecommendation = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.classlist.Class} returns this
+ */
+proto.classlist.Class.prototype.setRecommendation = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
