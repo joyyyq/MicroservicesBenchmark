@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Class } from '../../../../proto/classList_pb';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-roster-card',

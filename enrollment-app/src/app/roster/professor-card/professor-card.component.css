@@ -1,8 +1,8 @@
 .title-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background: #f2f2f2;
-    font-size: 1.18em;
+    font-size: 1.6em;
     font-weight: 300;
     background: rgba(0,0,0,0.05);
     border-left: 3px solid #b31b1b;
@@ -10,7 +10,6 @@
   }
   
   .title-code {
-    /* width: 18%; */
     height: 100%;
     text-align: left;
     padding-right: 0.5em;
@@ -19,6 +18,26 @@
   }
 
   .title-rating {
-    float: right;
     font-weight: bold;
+    color: blue;
   }
+
+.number {
+    display: flex;
+    color: blue;
+    font-size: 1.6em;
+}
+
+.keywords {
+    display: flex;
+    flex-direction: row;
+}
+
+  .flex-item {
+    flex: 33%;
+  }
+
+.tags {
+  color: blue;
+  font-size: 1.3em;
+}

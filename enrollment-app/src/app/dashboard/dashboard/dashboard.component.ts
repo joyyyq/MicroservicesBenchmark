@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit {
     private cartClient: CartClientService,
     private classlistClient: ClasslistClientService,
     private studentState: StudentStateService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +48,6 @@ export class DashboardComponent implements OnInit {
       this.classes = val;
       console.log(this.classes);
     })  
-    var username = this.studentState.getUsername();
     this.loadCart();
   }
   
