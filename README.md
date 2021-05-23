@@ -7,3 +7,17 @@ Supported actions:
 - get class recommendation based on students' preference
 - enroll in a courses given the new added class is not at fully capacity and does not conflict with any existing ones
 - check reviews/comments from previous stduents who took the class
+
+## Run the suite
+```
+./build frontend.sh
+```
+This will build/deploy all the Angular components inside enrollment-app.
+```
+docker-compose build
+```
+This will set up all the needed libraries with the correct version number for you. (phew, what a relief!)
+```
+docker-compose up
+```
+This will actually run the services. Now you can access the frontend with localhost:5000 and play with the backend services and mongoDb in Docker dashboard.
