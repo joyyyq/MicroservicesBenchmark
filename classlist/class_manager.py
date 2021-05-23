@@ -198,12 +198,12 @@ def serve():
 
 if __name__ == "__main__":
     TOTAL_ECE_CLASSES=scrape_num_class()
-    # if ( db.classCounts.count_documents({}) != TOTAL_ECE_CLASSES ):
-    # Always reset 
-    db.classInfo.delete_many({})
-    # Run 
-    init_credits()
-    scrape_classes()
-    update_db()
+    if ( db.classCounts.count_documents({}) != TOTAL_ECE_CLASSES ):
+        # Always reset 
+        db.classInfo.delete_many({})
+        # Run 
+        init_credits()
+        scrape_classes()
+        update_db()
     
     serve()

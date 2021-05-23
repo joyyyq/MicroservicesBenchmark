@@ -47,7 +47,7 @@ def get_ranked_courses(course: str, sim_matrix: np.ndarray):
     course_score_lst = sorted(course_score_lst, key=lambda x: -x[1])
     return course_score_lst
 
-def get_top(query: str, sim_matrix: np.ndarray, k=7): # TODO: render in Angular frontend
+def get_top(query: str, sim_matrix: np.ndarray, k=7):
     """Print the k most and least similar courses to a query course, given a similarity matrix"""
     course_score_lst = get_ranked_courses(query, sim_matrix)
     
@@ -59,11 +59,10 @@ def get_top(query: str, sim_matrix: np.ndarray, k=7): # TODO: render in Angular 
     # for (course, score) in course_score_lst[:k]:
     #     print("%.3f %s" % (score, course))
 
-
-query1 = "The Computing Technology Inside Your Smartphone" # TODO: placeholder for user input
+# query1 = "The Computing Technology Inside Your Smartphone"
 # query2 = "Introduction to Circuits for Electrical and Computer Engineers"
 # test1 = get_cos_sim(query1, query1, course_term_tfidf_matrix)
-# print(test1)
+# print(test1) # Sanity check: expect 1 since they are the same
 # test2 = get_cos_sim(query1, query2, course_term_tfidf_matrix)
 # print(test2)
 course_sims_cos = build_course_sims_cos(course_term_tfidf_matrix)
@@ -72,9 +71,9 @@ course_sims_cos = build_course_sims_cos(course_term_tfidf_matrix)
 # result = get_top(query1, course_sims_cos)
 # print(result)
 num_courses = len(course_index_to_title)
-csv_file = open("recommand.csv", "w", encoding='utf-8')
+csv_file = open("recommend.csv", "w", encoding='utf-8')
 csv_writer = csv.writer(csv_file)
-csv_writer.writerow(['index', 'title', 'recommandation'])
+csv_writer.writerow(['index', 'title', 'recommendation'])
 for i in range(num_courses):
     title = course_index_to_title[i]
     result = get_top(title, course_sims_cos)
