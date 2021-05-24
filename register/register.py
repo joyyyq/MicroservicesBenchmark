@@ -14,11 +14,11 @@ import studentRegister_pb2_grpc
 
 client = pymongo.MongoClient("register_db",27017)
 client_2 = pymongo.MongoClient("cart_db",27017)
-client_3 = pymongo.MongoClient("wishlist_db",27017)
+# client_3 = pymongo.MongoClient("wishlist_db",27017)
 db = client.register
 salt = bcrypt.gensalt()
 db_2 = client_2.cart
-db_3 = client_3.wishlist
+# db_3 = client_3.wishlist
 
 class registerService(
     studentRegister_pb2_grpc.registerServicer
@@ -48,9 +48,9 @@ class registerService(
         hashed = bcrypt.hashpw(request.password.encode('utf-8'), salt)
         request1 = {'userName':request.userName, 'password':hashed, 'firstName':request.firstName, 'lastName': request.lastName, }
         request2 = {'userName':request.userName, 'cart':[],}
-        request3 = {'userName':request.userName, 'wishlist':[],}
+        # request3 = {'userName':request.userName, 'wishlist':[],}
         db_2.cartInfo.insert_one(request2)
-        db_3.wishlistInfo.insert_one(request3)
+        # db_3.wishlistInfo.insert_one(request3)
         db.studentInfo.insert_one(request1)
         return Response(success=True)
     
