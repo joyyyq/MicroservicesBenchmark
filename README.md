@@ -22,7 +22,12 @@ docker-compose up
 ```
 This will actually run the services. Now you can access the frontend with localhost:5000 and play with the backend services and mongoDb in Docker dashboard.
 
+## App Walkthrough
+### Roster Page
 ![Roster Page](https://github.com/joyhuan/MicroservicesBenchmark/blob/main/images/roster_page.png)
+### Search Page
 ![Search Page](https://github.com/joyhuan/MicroservicesBenchmark/blob/main/images/search.png)
+### Course Page
 ![Course Page](https://github.com/joyhuan/MicroservicesBenchmark/blob/main/images/course_page.png)
+### Professor Page
 ![Professor Page](https://github.com/joyhuan/MicroservicesBenchmark/blob/main/images/prof_page.png)
