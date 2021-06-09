@@ -21,3 +21,8 @@ This will set up all the needed libraries with the correct version number for yo
 docker-compose up
 ```
 This will actually run the services. Now you can access the frontend with localhost:5000 and play with the backend services and mongoDb in Docker dashboard.
+
+![Roster Page](https://octodex.github.com/images/roster_page.png)
+![Search Page](https://octodex.github.com/images/search.png)
+![Course Page](https://octodex.github.com/images/course_page.png)
+![Professor Page](https://octodex.github.com/images/prof_page.png)
