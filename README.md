@@ -10,9 +10,11 @@ Supported actions:
 
 ## Run the suite
 ```
-./build frontend.sh
+./build-frontend.sh
 ```
 This will build/deploy all the Angular components inside enrollment-app.
+
+Run `cd enrollment-app` and `ng serve --open` will get the app up running. The default address you'll be directed to is https://localhost:4200/ and you can navigate from there.
 ```
 docker-compose build
 ```
